@@ -1,0 +1,41 @@
+{
+	"codeLens.enable": true,
+	"diagnostic.errorSign": " ",
+	"diagnostic.warningSign": " ",
+	"diagnostic.infoSign": " ",
+
+	"suggest.completionItemKindLabels": {
+		"unit": " ",
+		"class": "פּ",
+		"color": " ",
+		"constant": " ",
+		"enum": " ",
+		"enumMember": " ",
+		"event": "",
+		"field": " ",
+		"file": " ",
+		"folder": " ",
+		"function": " ",
+		"interface": " ",
+		"keyword": " ",
+		"method": "  ",
+		"module": "  ",
+		"operator": "",
+		"property": " ",
+		"snippet": " ",
+		"struct": " ",
+		"text": "",
+		"value": " ",
+		"variable": " "
+
+	},
+
+	"languageserver": {
+
+	},
+
+	"clangd.path": "/home/sandvich/.config/coc/extensions/coc-clangd-data/install/10.0.0/clangd_10.0.0/bin/clangd",
+	"clangd.fallbackFlags" : ["-xc"],
+
+	"suggest.asciiCharactersOnly": false
+}
