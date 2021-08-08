@@ -99,7 +99,7 @@ function highlight_overrides()
     command(string.format("hi CursorLine guibg=%s", base_colors.bg0_alt))
 
     command(string.format("hi semshiParameter guifg=%s", base_colors.blue))
-    command(string.format("hi semshiParameter gui=Underline guifg=%s", base_colors.blue))
+    command(string.format("hi semshiParameterUnused gui=Underline guifg=%s", base_colors.blue))
     command(string.format("hi semshiSelected guibg=%s", base_colors.bg2))
     command(string.format("hi semshiImported guifg=%s", base_colors.yellow))
     command(string.format("hi semshiBuiltin guifg=%s", base_colors.yellow))

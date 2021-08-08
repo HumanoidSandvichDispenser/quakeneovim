@@ -51,6 +51,7 @@ Plug 'honza/vim-snippets'
 Plug 'godlygeek/tabular'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/goyo.vim'
+Plug 'wfxr/minimap.vim'
 
 " Language Support
 let g:polyglot_disabled = [ 'python', 'py', 'vimrc', 'sh', 'js', 'json', 'ts' ] " Semshi has better support for python files
@@ -60,6 +61,7 @@ Plug 'lervag/vimtex'
 Plug 'numirias/semshi'
 Plug 'moll/vim-node'
 Plug 'rafcamlet/coc-nvim-lua' " Nvim lua support for CoC
+Plug 'OmniSharp/omnisharp-vim' " Omnisharp (C#)
 
 " Search StackOverflow
 Plug 'hienvd/vim-stackoverflow'
@@ -275,8 +277,6 @@ autocmd FileType *.json autocmd InsertEnter * set conceallevel=0
 autocmd FileType *.json autocmd InsertLeave * set conceallevel=1
 "autocmd ColorScheme * call HighlightOverrides()
 autocmd User Startified setlocal cursorline
-
-vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 
 set mouse=a
 
