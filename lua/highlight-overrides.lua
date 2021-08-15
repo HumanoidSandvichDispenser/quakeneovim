@@ -6,9 +6,28 @@
 -- Distributed under terms of the MIT license.
 --
 
+local xresources = require("xresources")
+
 local command = vim.api.nvim_command
 
-local function get_base_colors(colorscheme)
+local function get_base_colors()
+    return {
+        bg0 = xresources.get("background"),
+        bg0_alt = xresources.get("background-alt"),
+        bg1 = xresources.get("background1"),
+        bg2 = xresources.get("background2"),
+        bg3 = xresources.get("background3"),
+        bg4 = xresources.get("background4"),
+        fg = xresources.get("foreground"),
+        red = xresources.get("color9"),
+        green = xresources.get("color10"),
+        yellow = xresources.get("color11"),
+        blue = xresources.get("color12"),
+        purple = xresources.get("color13"),
+        aqua = xresources.get("color14"),
+        orange = xresources.get("orange"),
+    }
+    --[[
     if colorscheme == "tokyonight" then
         return {
             bg0 = "#1a1b26",
@@ -25,6 +44,23 @@ local function get_base_colors(colorscheme)
             purple = "#ad8ee6",
             aqua = "#8ec07c",
             orange = "#FF9E64",
+        }
+    elseif colorscheme == "gruvbox" then
+        return {
+            bg0 = "#282828",
+            bg0_alt = "#323130",
+            bg1 = "#3c3836",
+            bg2 = "#504945",
+            bg3 = "#665C54",
+            bg4 = "#7C6F64",
+            fg = "#FBF1C7",
+            red = "#FB4934",
+            green = "#B8BB26",
+            yellow = "#FABD2F",
+            blue = "#83A598",
+            purple = "#D3869B",
+            aqua = "#8EC07C",
+            orange = "#FE8019",
         }
     else
         return {
@@ -44,6 +80,7 @@ local function get_base_colors(colorscheme)
             orange = "#FE8019",
         }
     end
+    ]]
 end
 
 local function get_highlight_info(name)
@@ -57,8 +94,7 @@ local function highlight_link(destination, source)
 end
 
 function highlight_lualine()
-    local colorscheme = vim.api.nvim_get_var("colors_name")
-    local base_colors = get_base_colors(colorscheme)
+    local base_colors = get_base_colors()
 
     local theme = {
         normal = {
@@ -89,13 +125,14 @@ function highlight_lualine()
 end
 
 function highlight_overrides()
-    local colorscheme = vim.api.nvim_get_var("colors_name")
-    local base_colors = get_base_colors(colorscheme)
+    local base_colors = get_base_colors()
 
     command(string.format("hi Pmenu guibg=%s", base_colors.bg0_alt))
     command(string.format("hi PmenuSel guifg=%s guibg=%s gui=italic", base_colors.fg, base_colors.bg1))
     command("hi Comment gui=italic")
 
+    command(string.format("hi LineNr guibg=%s", base_colors.bg0))
+    command(string.format("hi CursorLineNr guibg=%s", base_colors.bg0_alt))
     command(string.format("hi CursorLine guibg=%s", base_colors.bg0_alt))
 
     command(string.format("hi semshiParameter guifg=%s", base_colors.blue))
@@ -106,9 +143,11 @@ function highlight_overrides()
     command(string.format("hi semshiAttribute guifg=%s", base_colors.blue))
     command(string.format("hi semshiSelf guifg=%s", base_colors.red))
 
-    command(string.format("hi GitGutterAdd guifg=%s", base_colors.green))
-    command(string.format("hi GitGutterChange guifg=%s", base_colors.blue))
-    command(string.format("hi GitGutterDelete guifg=%s", base_colors.red))
+    command(string.format("hi GitGutterAdd guifg=%s guibg=%s", base_colors.green, base_colors.bg0))
+    command(string.format("hi GitGutterChange guifg=%s guibg=%s", base_colors.blue, base_colors.bg0))
+    command(string.format("hi GitGutterDelete guifg=%s guibg=%s", base_colors.red, base_colors.bg0))
+
+    command(string.format("hi VertSplit guifg=%s guibg=%s", base_colors.bg1, base_colors.bg0))
 
     highlight_link("SignColumn", "Normal")
 

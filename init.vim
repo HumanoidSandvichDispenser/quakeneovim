@@ -12,6 +12,7 @@ Plug 'sainnhe/gruvbox-material'
 Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 Plug 'joshdick/onedark.vim'
 Plug 'ghifarit53/tokyonight-vim'
+Plug 'easysid/mod8.vim'
 Plug 'mhinz/neovim-remote'
 
 " Templates for new files
@@ -21,9 +22,6 @@ Plug 'aperezdc/vim-template'
 Plug 'Yggdroot/indentLine'
 
 " Project drawer
-Plug 'scrooloose/nerdtree'
-Plug 'Nopik/vim-nerdtree-direnter'
-Plug 'jistr/vim-nerdtree-tabs'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'kyazdani42/nvim-tree.lua'
@@ -49,9 +47,6 @@ Plug 'honza/vim-snippets'
 
 " Auto tabbing / Alignment
 Plug 'godlygeek/tabular'
-Plug 'junegunn/vim-easy-align'
-Plug 'junegunn/goyo.vim'
-Plug 'wfxr/minimap.vim'
 
 " Language Support
 let g:polyglot_disabled = [ 'python', 'py', 'vimrc', 'sh', 'js', 'json', 'ts' ] " Semshi has better support for python files
@@ -69,12 +64,12 @@ Plug 'hienvd/vim-stackoverflow'
 " Other Utilities
 Plug 'ryanoasis/vim-devicons' " Icons
 Plug 'kyazdani42/nvim-web-devicons' " Colored icons
-Plug 'psliwka/vim-smoothie' " Smooth scrolling
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'idanarye/vim-vebugger' " Debugger
 Plug 'mhinz/vim-startify' " Startup screen
 Plug 'https://github.com/JMcKiern/vim-shoot', { 'do': '\"./install.py\" geckodriver' } " Code screenshotter
 Plug 'justinmk/vim-sneak' " Sneak mode
+Plug 'chrisbra/Colorizer'
 
 call plug#end()
 
@@ -196,9 +191,6 @@ let g:nvim_tree_auto_close = 1
 let g:nvim_tree_lsp_diagnostics = 1
 luafile $DOTFILES/nvim-tree-keybindings.lua
 
-" Scrolling
-let g:smoothie_base_speed = 10
-
 " Sneak Configuration
 let g:sneak#label = 1
 let g:sneak#s_next = 1
@@ -240,6 +232,8 @@ imap <C-a> <C-O>I
 inoremap <C-e> <C-O>A
 inoremap <C-b> <Left>
 inoremap <C-f> <Right>
+inoremap <C-n> <C-O>j
+inoremap <C-p> <C-O>k
 inoremap <C-BS> <C-O>diW
 
 " Plugin Shortcuts
@@ -248,7 +242,6 @@ map <silent> <space>e :CocCommand explorer<CR>
 map <silent> <space>f :Files<CR>
 map <silent> <space>t :NvimTreeToggle<CR>
 nnoremap <silent> K :call ShowDocumentation()<CR>
-nnoremap <silent> m :Goyo<CR>
 
 if !exists('g:vscode')
     nnoremap <silent> <Right> :BufferNext<CR>
@@ -314,4 +307,4 @@ endfunction
 
 " Load Configs
 source ~/local.vimrc
-source /tmp/colorscheme.vim
+source /var/tmp/colorscheme.vim
