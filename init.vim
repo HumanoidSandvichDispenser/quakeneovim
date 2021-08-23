@@ -13,7 +13,7 @@ Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 Plug 'joshdick/onedark.vim'
 Plug 'ghifarit53/tokyonight-vim'
 Plug 'easysid/mod8.vim'
-Plug 'mhinz/neovim-remote'
+Plug 'EdenEast/nightfox.nvim'
 
 " Templates for new files
 Plug 'aperezdc/vim-template'
