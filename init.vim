@@ -19,7 +19,7 @@ Plug 'EdenEast/nightfox.nvim'
 Plug 'aperezdc/vim-template'
 
 " Show indents
-Plug 'Yggdroot/indentLine'
+Plug 'lukas-reineke/indent-blankline.nvim'
 
 " Project drawer
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -123,7 +123,7 @@ let g:cpp_member_variable_highlight = 1
 let g:cpp_class_scope_highlight = 1
 let g:cpp_class_decl_highlight = 1
 let g:cpp_concepts_highlight = 1
-let g:vimtex_compiler_method = 'latexrun'
+let g:vimtex_compiler_method = 'latexmk'
 let g:semshi#excluded_hl_groups = [ 'local', 'unresolved' ]
 
 " Gutter Configuration
@@ -250,7 +250,13 @@ if !exists('g:vscode')
     nnoremap <silent> <S-Left> :BufferMovePrevious<CR>
 endif
 
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <silent><expr> <Tab>
+\   pumvisible() ? "\<C-n>" :
+\   coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+\   <SID>check_back_space() ? "\<TAB>" :
+\   coc#refresh()
+let g:coc_snippet_next = '<tab>'
+
 inoremap <expr> <Down> pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <Up> pumvisible() ? "\<C-p>" : "\<Up>"
@@ -278,6 +284,10 @@ set mouse=a
 "endif
 
 " Functions
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 function! CloseBuffer()
     BD " Delete buffer, preserve windows
