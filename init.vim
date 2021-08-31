@@ -150,7 +150,8 @@ let g:coc_global_extensions = [
 \   'coc-rls',
 \   'coc-discord-neovim',
 \   'coc-explorer',
-\   'coc-lua'
+\   'coc-lua',
+\   'coc-prettier'
 \]
 
 highlight CocErrorHighlight ctermfg=1
@@ -189,7 +190,7 @@ highlight StartifyHeader ctermfg=7
 let g:nvim_tree_indent_markers = 1
 let g:nvim_tree_auto_close = 1
 let g:nvim_tree_lsp_diagnostics = 1
-luafile $DOTFILES/nvim-tree-keybindings.lua
+call luaeval('require("nvim-tree-config")')
 
 " Sneak Configuration
 let g:sneak#label = 1
