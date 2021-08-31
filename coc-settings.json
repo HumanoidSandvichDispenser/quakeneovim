@@ -39,9 +39,9 @@
 
 	"suggest.asciiCharactersOnly": false,
 
-    "omnisharp.path": "~/.cache/omnisharp-vim/omnisharp-roslyn",
-
     "snippets.ultisnips.directories": [
-        "UltiSnips",
+        "UltiSnips"
     ],
+
+    "diagnostic.checkCurrentLine": true
 }

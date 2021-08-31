@@ -227,14 +227,14 @@ map <silent> <space>j <C-w><C-j><CR>
 map <silent> <space>k <C-w><C-k><CR>
 map <silent> <space>l <C-w><C-l><CR>
 
-" Emacs Insert Bindings
-imap <C-a> <C-O>I
-inoremap <C-e> <C-O>A
+" Emacs and standard editors insert bindings
+imap <C-a> <C-o>I
+inoremap <C-e> <C-o>A
 inoremap <C-b> <Left>
 inoremap <C-f> <Right>
-inoremap <C-n> <C-O>j
-inoremap <C-p> <C-O>k
-inoremap <C-BS> <C-O>diW
+inoremap <C-n> <C-o>j
+inoremap <C-p> <C-o>k
+inoremap <C-h> <C-w>
 
 " Plugin Shortcuts
 map <silent> <C-n> :NERDTreeTabsToggle<CR>

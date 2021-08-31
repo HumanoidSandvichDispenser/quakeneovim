@@ -154,6 +154,27 @@ function highlight_overrides()
     command(string.format("hi StartifyHeader guifg=%s", base_colors.green))
     command(string.format("hi StartifySection guifg=%s", base_colors.blue))
 
+    command(string.format("hi BufferCurrent guifg=%s guibg=%s", base_colors.fg, base_colors.bg1))
+    command(string.format("hi BufferCurrentIndex guifg=%s guibg=%s", base_colors.fg, base_colors.bg1))
+    command(string.format("hi BufferCurrentMod guifg=%s guibg=%s", base_colors.fg, base_colors.bg1))
+    command(string.format("hi BufferCurrentTarget guifg=%s guibg=%s", base_colors.fg, base_colors.bg1))
+    command(string.format("hi BufferCurrentSign guifg=%s guibg=%s", base_colors.fg, base_colors.bg1))
+
+    command(string.format("hi BufferVisible guifg=%s guibg=%s", base_colors.fg, base_colors.bg0))
+    command(string.format("hi BufferVisibleIndex guifg=%s guibg=%s", base_colors.fg, base_colors.bg0))
+    command(string.format("hi BufferVisibleMod guifg=%s guibg=%s", base_colors.fg, base_colors.bg0))
+    command(string.format("hi BufferVisibleTarget guifg=%s guibg=%s", base_colors.fg, base_colors.bg0))
+    command(string.format("hi BufferVisibleSign guifg=%s guibg=%s", base_colors.fg, base_colors.bg0))
+
+    command(string.format("hi BufferInactive guifg=%s guibg=%s", base_colors.bg2, base_colors.bg0))
+    command(string.format("hi BufferInactiveIndex guifg=%s guibg=%s", base_colors.bg2, base_colors.bg0))
+    command(string.format("hi BufferInactiveMod guifg=%s guibg=%s", base_colors.bg2, base_colors.bg0))
+    command(string.format("hi BufferInactiveTarget guifg=%s guibg=%s", base_colors.bg2, base_colors.bg0))
+    command(string.format("hi BufferInactiveSign guifg=%s guibg=%s", base_colors.bg2, base_colors.bg0))
+
+    command(string.format("hi BufferTabpages guibg=%s", base_colors.bg0))
+    command(string.format("hi BufferTabpageFill guibg=%s", base_colors.bg0))
+
     highlight_lualine()
 end
 
