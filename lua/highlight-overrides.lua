@@ -18,6 +18,7 @@ local function get_base_colors()
         bg2 = xresources.get("background2"),
         bg3 = xresources.get("background3"),
         bg4 = xresources.get("background4"),
+        bg_dark = xresources.get("background-dark"),
         fg = xresources.get("foreground"),
         red = xresources.get("color9"),
         green = xresources.get("color10"),
@@ -125,9 +126,10 @@ function highlight_lualine()
 end
 
 function highlight_overrides()
-    local base_colors = get_base_colors()
+    base_colors = get_base_colors()
+    BaseColors = base_colors
 
-    command(string.format("hi Pmenu guibg=%s", base_colors.bg0_alt))
+    command(string.format("hi Pmenu guibg=%s", base_colors.bg_dark))
     command(string.format("hi PmenuSel guifg=%s guibg=%s gui=italic", base_colors.fg, base_colors.bg1))
     command("hi Comment gui=italic")
 
@@ -172,11 +174,25 @@ function highlight_overrides()
     command(string.format("hi BufferInactiveTarget guifg=%s guibg=%s", base_colors.bg2, base_colors.bg0))
     command(string.format("hi BufferInactiveSign guifg=%s guibg=%s", base_colors.bg2, base_colors.bg0))
 
+    command(string.format("hi NvimTreeFolderIcon guifg=%s", base_colors.blue))
+    command(string.format("hi NvimTreeFolderName guifg=%s", base_colors.blue))
+    command(string.format("hi NvimTreeOpenedFolderName guifg=%s", base_colors.blue))
+    command(string.format("hi NvimTreeEmptyFolderName guifg=%s", base_colors.blue))
+    command(string.format("hi NvimTreeIndentMarker guifg=%s", base_colors.bg3))
+    command(string.format("hi NvimTreeRootFolder guifg=%s", base_colors.bg3))
+
+    --[[command(string.format("hi NvimTreeVertSplit guifg=%s guibg=%s", base_colors.bg_dark, base_colors.bg_dark))
+    command(string.format("hi NvimTreeNormal guibg=%s", base_colors.bg_dark))
+    command(string.format("hi NvimTreeStatuslineNc guifg=%s guibg=%s", base_colors.bg0_alt, base_colors.bg0_alt))]]
+
     command(string.format("hi BufferTabpages guibg=%s", base_colors.bg0))
     command(string.format("hi BufferTabpageFill guibg=%s", base_colors.bg0))
 
+    command(string.format("hi LualineSeparator guifg=%s guibg=%s", base_colors.bg4, base_colors.bg2))
     highlight_lualine()
 end
+
+BaseColors = get_base_colors()
 
 return {
     highlight_overrides = highlight_overrides,
