@@ -29,7 +29,6 @@ local function filename()
 end
 
 function lualine_config.set_colorscheme(colorscheme)
-    print(string.format("setting colorscheme to %s", colorscheme))
     require("lualine").setup({
         options = {
             icons_enabled = true,
@@ -60,7 +59,8 @@ function lualine_config.set_colorscheme(colorscheme)
 end
 
 function lualine_config.init()
-    lualine_config.set_colorscheme("gruvbox")
+    --lualine_config.set_colorscheme("gruvbox")
+    require("lua.highlight-overrides").highlight_lualine()
 end
 
 return lualine_config
