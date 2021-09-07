@@ -9,7 +9,8 @@
 local Xresources = {}
 
 function Xresources.get(key)
-   local command = io.popen("xrdb -query | grep " .. key .. " -m 1 | cut -f 2")
+    --local command = io.popen("xrdb -query | grep " .. key .. " -m 1 | cut -f 2")
+    local command = io.popen("xgetres " .. key)
    return command:read("*l")
 end
 

@@ -21,22 +21,31 @@ local function readonly()
     return isReadonly and "  " or ""
 end
 
-local function filename()
+local function filename(prefix)
+    if not prefix then
+        prefix = ""
+    end
+
     local file = vim.fn.expand("%:t")
     if (file == "") then
         file = "[untitled]"
     end
 
-    return file .. readonly() .. modified()
+    return prefix .. file .. readonly() .. modified()
 end
+
+local function pwd()
+    return vim.api.nvim_exec("pwd", true)
+end
+
 
 function lualine_config.set_colorscheme(colorscheme)
     require("lualine").setup({
         options = {
             icons_enabled = true,
             theme = colorscheme,
-            component_separators = {"%#LualineSeparator#|", "%#LualineSeparator#|"},
-            section_separators = {"", ""},
+            component_separators = { "|", "|" },
+            section_separators = { "", "" },
         },
         sections = {
             lualine_a = {"mode"},
@@ -62,15 +71,15 @@ function lualine_config.set_colorscheme(colorscheme)
                     symbols = { added = "+", modified = "~", removed = "-" } -- changes diff symbols
                 }
             },
-            lualine_x = {"encoding", "fileformat", "filetype"},
-            lualine_y = {"progress"},
-            lualine_z = {"location"}
+            lualine_x = { "encoding", "fileformat", "filetype" },
+            lualine_y = { "progress" },
+            lualine_z = { "location" }
         },
         inactive_sections = {
            lualine_a = {},
            lualine_b = {},
-           lualine_c = {"filename"},
-           lualine_x = {"location"},
+           lualine_c = { "filename" },
+           lualine_x = { "location" },
            lualine_y = {},
            lualine_z = {}
         },
@@ -84,7 +93,7 @@ end
 
 function lualine_config.init()
     --lualine_config.set_colorscheme("gruvbox")
-    require("lua.highlight-overrides").highlight_lualine()
+    require("highlight-overrides").highlight_lualine()
 end
 
 return lualine_config

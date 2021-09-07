@@ -13,7 +13,7 @@ Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 Plug 'joshdick/onedark.vim'
 Plug 'ghifarit53/tokyonight-vim'
 Plug 'easysid/mod8.vim'
-Plug 'EdenEast/nightfox.nvim'
+Plug 'franbach/miramare'
 
 " Templates for new files
 Plug 'aperezdc/vim-template'
@@ -28,6 +28,7 @@ Plug 'kyazdani42/nvim-tree.lua'
 
 " Status line
 Plug 'hoob3rt/lualine.nvim'
+"Plug 'glepnir/galaxyline.nvim'
 Plug 'romgrk/barbar.nvim'
 Plug 'qpkorr/vim-bufkill' " Kill buffer without removing split
 
@@ -95,8 +96,9 @@ set title
 set titlestring="[VIM] %t"
 set termguicolors
 set cursorline
-set guifont=Iosevka:h11
+set guifont="Iosevka Sandvich:h11"
 set list lcs=tab:▏\ 
+set fillchars+=eob:*
 "set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %{noscrollbar#statusline()}
 
 " Syntax highlighting
@@ -113,6 +115,7 @@ let g:loaded_python_provider = 0
 let g:indentLine_color_term = 8
 let g:indentLine_char = '┆'
 let g:indentLine_color_gui = '#504945'
+let g:indent_blankline_filetype_exclude = [ 'man', 'startify', 'NvimTree', 'dashboard' ]
 
 " Language
 let g:vim_markdown_conceal_code_blocks = 1
@@ -170,21 +173,28 @@ let g:startify_bookmarks = [
 \	{ 'f': '$HOME/.config/vifm/vifmrc' },
 \   { 'x': '$HOME/.Xresources' },
 \]
-let s:startify_ascii_header = [
-\   '                                        ▟▙            ',
-\   '                                        ▝▘            ',
-\   '██▃▅▇█▆▖  ▗▟████▙▖   ▄████▄   ██▄  ▄██  ██  ▗▟█▆▄▄▆█▙▖',
-\   '██▛▔ ▝██  ██▄▄▄▄██  ██▛▔▔▜██  ▝██  ██▘  ██  ██▛▜██▛▜██',
-\   '██    ██  ██▀▀▀▀▀▘  ██▖  ▗██   ▜█▙▟█▛   ██  ██  ██  ██',
-\   '██    ██  ▜█▙▄▄▄▟▊  ▀██▙▟██▀   ▝████▘   ██  ██  ██  ██',
-\   '▀▀    ▀▀   ▝▀▀▀▀▀     ▀▀▀▀       ▀▀     ▀▀  ▀▀  ▀▀  ▀▀',
-\   '',
+"let s:startify_ascii_header = [
+"\   '                                        ▟▙            ',
+"\   '                                        ▝▘            ',
+"\   '██▃▅▇█▆▖  ▗▟████▙▖   ▄████▄   ██▄  ▄██  ██  ▗▟█▆▄▄▆█▙▖',
+"\   '██▛▔ ▝██  ██▄▄▄▄██  ██▛▔▔▜██  ▝██  ██▘  ██  ██▛▜██▛▜██',
+"\   '██    ██  ██▀▀▀▀▀▘  ██▖  ▗██   ▜█▙▟█▛   ██  ██  ██  ██',
+"\   '██    ██  ▜█▙▄▄▄▟▊  ▀██▙▟██▀   ▝████▘   ██  ██  ██  ██',
+"\   '▀▀    ▀▀   ▝▀▀▀▀▀     ▀▀▀▀       ▀▀     ▀▀  ▀▀  ▀▀  ▀▀',
+"\   '',
+"\]
+"let g:startify_custom_header = startify#center(s:startify_ascii_header)
+""startify#fortune#cowsay('', '─','│','╭','╮','╯','╰')
+"let g:webdevicons_enable_startify = 1
+"let g:startify_padding_left = 8
+"let g:startify_files_number = 5
+"let g:startify_center = 72
+let g:startify_lists = [
+\   { 'type': 'bookmarks', 'header': ['          Bookmarks'] },
+\   { 'type': 'sessions',  'header': ['          Sessions' ] },
+\   { 'type': 'files',     'header': ['          Recent Files'] },
 \]
-let g:startify_custom_header = map(s:startify_ascii_header +
-\ startify#fortune#quote(), '"   ".v:val')
-"startify#fortune#cowsay('', '─','│','╭','╮','╯','╰')
-let g:webdevicons_enable_startify = 1
-highlight StartifyHeader ctermfg=7
+call luaeval('require("startify-config")')
 
 " Nvim Tree
 let g:nvim_tree_indent_markers = 1
@@ -197,6 +207,7 @@ let g:sneak#label = 1
 let g:sneak#s_next = 1
 let g:sneak#prompt = 'sneak>'
 
+let mapleader=" "
 map <S-Down> <C-E>
 map <S-Up> <C-Y>
 map <ScrollWheelUp> 3<C-Y>
@@ -223,10 +234,6 @@ noremap <silent> j gj
 noremap <silent> k gk
 inoremap jj <Esc>
 nnoremap Q gqq
-map <silent> <space>h <C-w><C-h><CR>
-map <silent> <space>j <C-w><C-j><CR>
-map <silent> <space>k <C-w><C-k><CR>
-map <silent> <space>l <C-w><C-l><CR>
 
 " Emacs and standard editors insert bindings
 imap <C-a> <C-o>I
@@ -239,9 +246,10 @@ inoremap <C-h> <C-w>
 
 " Plugin Shortcuts
 map <silent> <C-n> :NERDTreeTabsToggle<CR>
-map <silent> <space>e :CocCommand explorer<CR>
-map <silent> <space>f :Files<CR>
-map <silent> <space>t :NvimTreeToggle<CR>
+map <silent> <leader>e :CocCommand explorer<CR>
+map <silent> <leader>f :Files<CR>
+map <silent> <leader>t :NvimTreeToggle<CR>
+
 nnoremap <silent> K :call ShowDocumentation()<CR>
 
 if !exists('g:vscode')
@@ -315,6 +323,9 @@ function! SetColorscheme(scheme)
     execute 'colorscheme ' . a:scheme
     call HighlightOverrides()
 endfunction
+
+"call luaeval('require("galaxyline-config")')
+call luaeval('require("lualine-config").init()')
 
 " Load Configs
 source ~/local.vimrc

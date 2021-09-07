@@ -8,6 +8,38 @@
 
 local tree_cb = require('nvim-tree.config').nvim_tree_callback
 
+vim.g.nvim_tree_indent_markers = 0
+vim.g.nvim_tree_group_empty = 1
+
+vim.g.nvim_tree_show_icons = {
+    git = 0,
+    folders = 1,
+    files = 1,
+    folder_arrows = 1,
+}
+
+vim.g.nvim_tree_icons = {
+    default = "",
+    symlink = "",
+    git = {
+        unstaged = "",
+        staged = "",
+        unmerged = "",
+        renamed = "",
+        untracked = "",
+        deleted = "",
+        ignored = "",
+    },
+    folder = {
+        default = " ",
+        open = " ",
+        symlink = " ",
+        empty = " ",
+        empty_open = " ",
+        symlink_open = " ",
+    }
+}
+
 vim.g.nvim_tree_bindings = {
     { key = "h",                            cb = tree_cb("dir_up") },
     { key = "l",                            cb = tree_cb("cd")},
@@ -44,3 +76,5 @@ vim.g.nvim_tree_bindings = {
     { key = "q",                            cb = tree_cb("close") },
     { key = "g?",                           cb = tree_cb("toggle_help") },
 }
+
+
