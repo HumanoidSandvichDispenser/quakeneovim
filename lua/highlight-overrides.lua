@@ -64,7 +64,6 @@ function highlight_lualine()
             a = { fg = base_colors.fg, bg = base_colors.fg, gui = 'bold' },
             b = { fg = base_colors.fg, bg = base_colors.bg3 },
             c = { fg = base_colors.fg, bg = base_colors.bg1 },
-            z = { fg = base_colors.fg, bg = base_colors.bg1 }
         }
     }
 

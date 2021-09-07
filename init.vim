@@ -67,7 +67,8 @@ Plug 'ryanoasis/vim-devicons' " Icons
 Plug 'kyazdani42/nvim-web-devicons' " Colored icons
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'idanarye/vim-vebugger' " Debugger
-Plug 'mhinz/vim-startify' " Startup screen
+"Plug 'mhinz/vim-startify' " Startup screen
+Plug 'goolord/alpha-nvim'
 Plug 'https://github.com/JMcKiern/vim-shoot', { 'do': '\"./install.py\" geckodriver' } " Code screenshotter
 Plug 'justinmk/vim-sneak' " Sneak mode
 Plug 'chrisbra/Colorizer'
@@ -194,7 +195,8 @@ let g:startify_lists = [
 \   { 'type': 'sessions',  'header': ['          Sessions' ] },
 \   { 'type': 'files',     'header': ['          Recent Files'] },
 \]
-call luaeval('require("startify-config")')
+"call luaeval('require("startify-config")')
+call luaeval('require("alpha-config").init()')
 
 " Nvim Tree
 let g:nvim_tree_indent_markers = 1
