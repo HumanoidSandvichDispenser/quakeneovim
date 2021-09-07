@@ -76,12 +76,12 @@ function lualine_config.set_colorscheme(colorscheme)
             lualine_z = { "location" }
         },
         inactive_sections = {
-           lualine_a = {},
-           lualine_b = {},
-           lualine_c = { "filename" },
-           lualine_x = { "location" },
-           lualine_y = {},
-           lualine_z = {}
+           lualine_a = { },
+           lualine_b = { filename },
+           lualine_c = { },
+           lualine_x = { },
+           lualine_y = { "location" },
+           lualine_z = { }
         },
         tabline = {},
         extensions = {

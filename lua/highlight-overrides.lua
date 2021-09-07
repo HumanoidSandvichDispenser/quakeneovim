@@ -47,23 +47,24 @@ function highlight_lualine()
 
     local theme = {
         normal = {
-            a = {fg = base_colors.bg1, bg = base_colors.fg, gui = 'bold'},
-            b = {fg = base_colors.fg, bg = base_colors.bg3},
-            c = {fg = base_colors.gray, bg = base_colors.bg1}
+            a = { fg = base_colors.bg1, bg = base_colors.fg, gui = 'bold' },
+            b = { fg = base_colors.fg, bg = base_colors.bg3 },
+            c = { fg = base_colors.gray, bg = base_colors.bg1 }
         },
         insert = {
-            a = {fg = base_colors.bg0, bg = base_colors.green, gui = 'bold'},
+            a = { fg = base_colors.bg0, bg = base_colors.green, gui = 'bold' },
         },
         visual = {
-            a = {fg = base_colors.bg0, bg = base_colors.purple, gui = 'bold'},
+            a = { fg = base_colors.bg0, bg = base_colors.purple, gui = 'bold' },
         },
         replace = {
-            a = {fg = base_colors.bg0, bg = base_colors.red, gui = 'bold'},
+            a = { fg = base_colors.bg0, bg = base_colors.red, gui = 'bold' },
         },
         inactive = {
-            a = {fg = base_colors.fg, bg = base_colors.bg1, gui = 'bold'},
-            b = {fg = base_colors.fg, bg = base_colors.bg1},
-            c = {fg = base_colors.fg, bg = base_colors.bg2}
+            a = { fg = base_colors.fg, bg = base_colors.fg, gui = 'bold' },
+            b = { fg = base_colors.fg, bg = base_colors.bg3 },
+            c = { fg = base_colors.fg, bg = base_colors.bg1 },
+            z = { fg = base_colors.fg, bg = base_colors.bg1 }
         }
     }
 
