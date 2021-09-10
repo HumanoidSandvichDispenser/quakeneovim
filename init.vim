@@ -6,10 +6,8 @@ call plug#begin()
 " ALL PLUGINS
 
 " Themes
-Plug 'arcticicestudio/nord-vim'
-Plug 'morhetz/gruvbox'
-Plug 'sainnhe/gruvbox-material'
-Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+Plug 'rktjmp/lush.nvim'
+Plug 'ellisonleao/gruvbox.nvim'
 Plug 'joshdick/onedark.vim'
 Plug 'ghifarit53/tokyonight-vim'
 Plug 'easysid/mod8.vim'
@@ -27,14 +25,15 @@ Plug 'junegunn/fzf.vim'
 Plug 'kyazdani42/nvim-tree.lua'
 
 " Status line
-Plug 'hoob3rt/lualine.nvim'
-"Plug 'glepnir/galaxyline.nvim'
+"Plug 'hoob3rt/lualine.nvim'
+Plug 'glepnir/galaxyline.nvim'
 Plug 'romgrk/barbar.nvim'
 Plug 'qpkorr/vim-bufkill' " Kill buffer without removing split
 
 " Git
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+"Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-signify'
 Plug 'christoomey/vim-conflicted'
 
 " Autocomplete
@@ -58,9 +57,6 @@ Plug 'numirias/semshi'
 Plug 'moll/vim-node'
 Plug 'rafcamlet/coc-nvim-lua' " Nvim lua support for CoC
 Plug 'OmniSharp/omnisharp-vim' " Omnisharp (C#)
-
-" Search StackOverflow
-Plug 'hienvd/vim-stackoverflow'
 
 " Other Utilities
 Plug 'ryanoasis/vim-devicons' " Icons
@@ -113,10 +109,7 @@ let g:gruvbox_invert_selection = 0
 let g:loaded_python_provider = 0
 
 " Indent guides
-let g:indentLine_color_term = 8
-let g:indentLine_char = '┆'
-let g:indentLine_color_gui = '#504945'
-let g:indent_blankline_filetype_exclude = [ 'man', 'startify', 'NvimTree', 'dashboard' ]
+call luaeval('require("indent-line-config").init()')
 
 " Language
 let g:vim_markdown_conceal_code_blocks = 1
@@ -228,7 +221,7 @@ nmap <silent> <C-/> :noh<CR>
 "noremap <C-q> <C-w><C-w>
 noremap <silent> ZW :call CloseBuffer()<CR>
 noremap <silent> ZT :enew<CR>
-noremap <silent> <Esc><Esc> :Startify<CR>
+noremap <silent> <Esc><Esc> :Alpha<CR>
 
 " Remappings
 nmap ; :
@@ -281,10 +274,8 @@ autocmd FileType c nnoremap <F5> :w <bar> exec '!gcc '.shellescape('%').' -o '.s
 autocmd FileType cpp nnoremap <F5> :w <bar> exec '!g++ '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 autocmd FileType tex nnoremap <F5> :VimtexCompile<CR>
 autocmd BufWrite *.tex VimtexCompile
-autocmd FileType *.tex autocmd InsertEnter * set conceallevel=0
-autocmd FileType *.tex autocmd InsertLeave * set conceallevel=1
-autocmd FileType *.json autocmd InsertEnter * set conceallevel=0
-autocmd FileType *.json autocmd InsertLeave * set conceallevel=1
+autocmd InsertEnter * set conceallevel=0
+autocmd InsertLeave * set conceallevel=1
 "autocmd ColorScheme * call HighlightOverrides()
 autocmd User Startified setlocal cursorline
 
@@ -326,8 +317,8 @@ function! SetColorscheme(scheme)
     call HighlightOverrides()
 endfunction
 
-"call luaeval('require("galaxyline-config")')
-call luaeval('require("lualine-config").init()')
+call luaeval('require("galaxyline-config")')
+"call luaeval('require("lualine-config").init()')
 
 " Load Configs
 source ~/local.vimrc

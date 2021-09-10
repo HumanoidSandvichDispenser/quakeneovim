@@ -7,6 +7,7 @@
 --
 
 local utils = require("utils")
+local colorscheme = require("highlight-overrides").BaseColors
 
 local header_text = [[
               ▓▓▓▓  ▓▓▓▓    
@@ -22,10 +23,20 @@ local header = {
     type = "text",
     val = utils.split(header_text, "\n"),
     opts = {
-        hl = "Type"
+        hl = "StartifyHeader"
         -- wrap = "overflow";
     }
 }
+
+local function icon(fn)
+    if pcall(require, 'nvim-web-devicons') then
+        local nvim_web_devicons = require('nvim-web-devicons')
+        local ext = fn:match("^.+(%..+)$"):sub(2)
+        return nvim_web_devicons.get_icon(fn, ext, { default = true })
+    else
+        return '', nil
+    end
+end
 
 local function button(sc, txt, keybind)
     local sc_ = sc:gsub("%s", ""):gsub("SPC", "<leader>")
@@ -36,7 +47,8 @@ local function button(sc, txt, keybind)
         cursor = 0,
         -- width = 50,
         align_shortcut = "left",
-        hl_shortcut = "Number",
+        hl = { { "StartifyPath", 0, 1 } },
+        --hl_shortcut = "StartifyNumber",
         shrink_margin = false,
     }
     if keybind then
@@ -58,11 +70,12 @@ local function mru(start, cwd)
     vim.cmd("rshada")
     local oldfiles = {}
     for _,v in pairs(vim.v.oldfiles) do
-        if #oldfiles == 10 then break end
+        if #oldfiles == 8 then break end
         local cwd_cond
-        if not cwd
-            then cwd_cond = true
-            else cwd_cond = vim.fn.filereadable(v) == 1
+        if not cwd then
+            cwd_cond = true
+        else
+            cwd_cond = vim.fn.filereadable(v) == 1
         end
         if (vim.fn.filereadable(v) == 1) and cwd_cond then
             oldfiles[#oldfiles+1] = v
@@ -70,25 +83,16 @@ local function mru(start, cwd)
     end
 
     local tbl = {}
-    local function icon(fn)
-        if pcall(require, 'nvim-web-devicons')
-        then
-            local nvim_web_devicons = require('nvim-web-devicons')
-            local ext = fn:match("^.+(%..+)$"):sub(2)
-            return nvim_web_devicons.get_icon(fn, ext, { default = true })
-        else
-            return '', nil
-        end
-    end
     for i, fn in pairs(oldfiles) do
         local ico, hl = icon(fn)
         local short_fn
-        if cwd
-            then short_fn = vim.fn.fnamemodify(fn, ':.')
-            else short_fn = vim.fn.fnamemodify(fn, ':~')
+        if cwd then
+            short_fn = vim.fn.fnamemodify(fn, ":.")
+        else
+            short_fn = vim.fn.fnamemodify(fn, ":~")
         end
-        local file_button = button(tostring(i+start-1), ico .. '  ' .. short_fn , ":e " .. fn .. " <CR>")
-        if hl then file_button.opts.hl = { { hl, 0, 1 } } end -- starts at val and not shortcut
+        local file_button = button(tostring(i + start - 1), ico .. "  " .. short_fn , ":e " .. fn .. " <CR>")
+        --if hl then file_button.opts.hl = { { hl, 0, 1 } } end -- starts at val and not shortcut
         tbl[#tbl+1] = file_button
     end
     return {
@@ -99,6 +103,42 @@ local function mru(start, cwd)
     }
 end
 
+--[[
+\	{ 'v': '$DOTFILES/.config/nvim/init.vim' },
+\	{ 'z': '$DOTFILES/.zshrc' },
+\	{ 's': '$HOME/.config/sxhkd/sxhkdrc' },
+\	{ 'b': '$HOME/.config/bspwm/bspwmrc' },
+\	{ 'd': '$HOME/.config/dunst/dunstrc' },
+\	{ 'f': '$HOME/.config/vifm/vifmrc' },
+\   { 'x': '$HOME/.Xresources' },
+--]]
+
+local function bookmarks()
+    local bookmarks_table = {
+        { "v", "  neovim config", "$DOTFILES/.config/nvim/init.vim" },
+        { "z", "  zshrc", "$DOTFILES/.zshrc" },
+        { "b", "  bspwm config", "$DOTFILES/.config/bspwm/bspwmrc" },
+        { "s", "  sxhkd config", "$DOTFILES/.config/sxhkd/sxhkdrc" },
+        { "x", "  xresources", "$DOTFILES/.Xresources" },
+    }
+
+    local bookmarks_buttons = { }
+
+    -- bookmark[1] = key to press
+    -- bookmark[2] = title of bookmark
+    -- bookmark[3] = path to bookmark
+    for _, bookmark in pairs(bookmarks_table) do
+        local file_button = button(bookmark[1], bookmark[2], ":e " .. bookmark[3] .. " <CR>")
+        --file_button.opts.hl = { { "StartifyPath", 0, 2 } }
+        bookmarks_buttons[#bookmarks_buttons + 1] = file_button
+    end
+
+    return {
+        type = "group",
+        val = bookmarks_buttons,
+        opts = { }
+    }
+end
 
 local section = {
     header = header,
@@ -109,17 +149,18 @@ local opts = {
         {type = "padding", val = 2},
         section.header,
         {type = "padding", val = 2},
-        button("e", "New file", ":ene <BAR> startinsert <CR>"),
+        button("e", "  New file", ":ene <BAR> startinsert <CR>"),
         {type = "padding", val = 1},
-        {type = "text", val = "MRU", opts = { hl = "Comment" }},
+        {type = "text", val = "  Bookmarks", opts = { hl = "StartifySection" }},
+        {type = "padding", val = 1},
+        bookmarks(),
+        {type = "padding", val = 1},
+        {type = "text", val = "  Recent Files", opts = { hl = "StartifySection" }},
         {type = "padding", val = 1},
         mru(0),
         {type = "padding", val = 1},
-        {type = "text", val = "MRU " .. vim.fn.getcwd() , opts = { hl = "Comment" }},
-        {type = "padding", val = 1},
-        mru(10, vim.fn.getcwd()),
-        {type = "padding", val = 1},
-        button("q", "Quit", ":q <CR>"),
+        button("<Esc>", "  Close", ":BD <CR>"),
+        button("q", "  Quit", ":q <CR>"),
     },
     opts = {
         margin = 3,
