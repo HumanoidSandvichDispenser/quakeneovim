@@ -31,7 +31,10 @@ local header = {
 local function icon(fn)
     if pcall(require, 'nvim-web-devicons') then
         local nvim_web_devicons = require('nvim-web-devicons')
-        local ext = fn:match("^.+(%..+)$"):sub(2)
+        local ext = fn:match("^.+(%..+)$")
+        if ext then
+            ext = ext:sub(2)
+        end
         return nvim_web_devicons.get_icon(fn, ext, { default = true })
     else
         return '', nil

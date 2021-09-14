@@ -8,7 +8,7 @@ call plug#begin()
 " Themes
 Plug 'rktjmp/lush.nvim'
 Plug 'ellisonleao/gruvbox.nvim'
-Plug 'joshdick/onedark.vim'
+Plug 'navarasu/onedark.nvim'
 Plug 'ghifarit53/tokyonight-vim'
 Plug 'easysid/mod8.vim'
 Plug 'franbach/miramare'
@@ -67,6 +67,7 @@ Plug 'idanarye/vim-vebugger' " Debugger
 Plug 'goolord/alpha-nvim'
 Plug 'https://github.com/JMcKiern/vim-shoot', { 'do': '\"./install.py\" geckodriver' } " Code screenshotter
 Plug 'justinmk/vim-sneak' " Sneak mode
+Plug 'tpope/vim-surround' " Surround
 Plug 'chrisbra/Colorizer'
 
 call plug#end()
@@ -157,38 +158,7 @@ highlight CocErrorHighlight ctermfg=1
 "source $DOTFILES/lightline-config.vim
 source $DOTFILES/barbar-config.vim
 
-" Startify
-let g:startify_bookmarks = [
-\	{ 'v': '$DOTFILES/.config/nvim/init.vim' },
-\	{ 'z': '$DOTFILES/.zshrc' },
-\	{ 's': '$HOME/.config/sxhkd/sxhkdrc' },
-\	{ 'b': '$HOME/.config/bspwm/bspwmrc' },
-\	{ 'd': '$HOME/.config/dunst/dunstrc' },
-\	{ 'f': '$HOME/.config/vifm/vifmrc' },
-\   { 'x': '$HOME/.Xresources' },
-\]
-"let s:startify_ascii_header = [
-"\   '                                        ▟▙            ',
-"\   '                                        ▝▘            ',
-"\   '██▃▅▇█▆▖  ▗▟████▙▖   ▄████▄   ██▄  ▄██  ██  ▗▟█▆▄▄▆█▙▖',
-"\   '██▛▔ ▝██  ██▄▄▄▄██  ██▛▔▔▜██  ▝██  ██▘  ██  ██▛▜██▛▜██',
-"\   '██    ██  ██▀▀▀▀▀▘  ██▖  ▗██   ▜█▙▟█▛   ██  ██  ██  ██',
-"\   '██    ██  ▜█▙▄▄▄▟▊  ▀██▙▟██▀   ▝████▘   ██  ██  ██  ██',
-"\   '▀▀    ▀▀   ▝▀▀▀▀▀     ▀▀▀▀       ▀▀     ▀▀  ▀▀  ▀▀  ▀▀',
-"\   '',
-"\]
-"let g:startify_custom_header = startify#center(s:startify_ascii_header)
-""startify#fortune#cowsay('', '─','│','╭','╮','╯','╰')
-"let g:webdevicons_enable_startify = 1
-"let g:startify_padding_left = 8
-"let g:startify_files_number = 5
-"let g:startify_center = 72
-let g:startify_lists = [
-\   { 'type': 'bookmarks', 'header': ['          Bookmarks'] },
-\   { 'type': 'sessions',  'header': ['          Sessions' ] },
-\   { 'type': 'files',     'header': ['          Recent Files'] },
-\]
-"call luaeval('require("startify-config")')
+" Alpha Menu
 call luaeval('require("alpha-config").init()')
 
 " Nvim Tree
@@ -214,11 +184,8 @@ map <ScrollWheelRight> 3zl
 map <C-s> :w<CR>
 map <silent> ` :VBGtoggleBreakpointThisLine<CR>
 map <silent> <S-`> :VBGclearBreakpints<CR>
-"nmap <silent> <S-Left>  :tabmove -1<CR>
-"nmap <silent> <S-Right> :tabmove +1<CR>
 
 nmap <silent> <C-/> :noh<CR>
-"noremap <C-q> <C-w><C-w>
 noremap <silent> ZW :call CloseBuffer()<CR>
 noremap <silent> ZT :enew<CR>
 noremap <silent> <Esc><Esc> :Alpha<CR>
@@ -276,14 +243,9 @@ autocmd FileType tex nnoremap <F5> :VimtexCompile<CR>
 autocmd BufWrite *.tex VimtexCompile
 autocmd InsertEnter * set conceallevel=0
 autocmd InsertLeave * set conceallevel=1
-"autocmd ColorScheme * call HighlightOverrides()
 autocmd User Startified setlocal cursorline
 
 set mouse=a
-
-"if !has('gui_running')
-"   set t_Co=256
-"endif
 
 " Functions
 function! s:check_back_space() abort

@@ -8,6 +8,8 @@
 
 local galaxyline = require("galaxyline")
 local condition = require("galaxyline.condition")
+local vcs = require("galaxyline.provider_vcs")
+local fileinfo = require("galaxyline.provider_fileinfo")
 local colors = require("highlight-overrides").BaseColors
 
 local function mode_alias(m)
@@ -54,11 +56,11 @@ local current_working_dir = {
     CWD = {
         separator = " ",
         icon = "פּ ",
-        separator_highlight = { colors.bg2, colors.bg1 } ,
-        highlight = {colors.white, colors.bg2},
+        highlight = { colors.white, colors.bg2 },
+        separator_highlight = { colors.bg2, colors.bg1 },
         provider = function()
-          local dirname = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
-          return dirname .. " "
+            local dirname = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+            return dirname .. " "
         end,
     }
 }
@@ -71,11 +73,34 @@ local file_icon = {
     }
 }
 
+local file_path = {
+    FilePath = {
+        separator = "",
+        highlight = { colors.gray, colors.bg1 },
+        separator_highlight = { colors.bg1, colors.bg1 },
+        condition = function()
+            return condition.hide_in_width() and condition.buffer_not_empty()
+        end,
+        provider = function()
+            return vim.fn.expand("%:p:h") .. "/"
+        end,
+    }
+}
+
 local file_name = {
     FileName = {
-        provider = "FileName",
-        condition = condition.buffer_not_empty,
+        --provider = "FileName",
+        separator = "",
         highlight = { colors.gray, colors.bg1 },
+        separator_highlight = { colors.bg1, colors.bg1 },
+        provider = function()
+            local current_file_name = fileinfo.get_current_file_name()
+            if not current_file_name or current_file_name == "" then
+                return "No buffer "
+            else
+                return current_file_name
+            end
+        end,
         --separator_highlight = { colors.bg1, colors.bg },
         --separator = "  ",
     }
@@ -84,8 +109,26 @@ local file_name = {
 local file_size = {
     FileSize = {
         provider = "FileSize",
-        condition = condition.buffer_not_empty,
+        separator = "",
         highlight = { colors.gray, colors.bg1 },
+        separator_highlight = { colors.bg1, colors.bg1 },
+        condition = function()
+            return condition.buffer_not_empty() and condition.hide_in_width()
+        end,
+    }
+}
+
+local file_type = {
+    FileType = {
+        separator = "",
+        highlight = { colors.gray, colors.bg1 },
+        separator_highlight = { colors.bg1, colors.bg1 },
+        condition = function()
+            return condition.buffer_not_empty() and condition.hide_in_width()
+        end,
+        provider = function()
+            return vim.bo.filetype
+        end,
     }
 }
 
@@ -94,9 +137,11 @@ local diff_add = {
         icon = "+",
         separator = "",
         provider = "DiffAdd",
-        condition = condition.hide_in_width,
+        condition = function()
+            return condition.hide_in_width() and condition.check_git_workspace()
+        end,
         highlight = { colors.green, colors.bg1 },
-        separator_highlight = { colors.green, colors.bg1 },
+        separator_highlight = { colors.bg1, colors.bg1 },
     }
 }
 
@@ -105,9 +150,11 @@ local diff_modified = {
         icon = "~",
         separator = "",
         provider = "DiffModified",
-        condition = condition.hide_in_width,
-        highlight = {colors.blue, colors.bg1},
-        separator_highlight = { colors.green, colors.bg1 },
+        condition = function()
+            return condition.hide_in_width() and condition.check_git_workspace()
+        end,
+        highlight = { colors.blue, colors.bg1 },
+        separator_highlight = { colors.bg1, colors.bg1 },
     }
 }
 
@@ -116,50 +163,90 @@ local diff_remove = {
         icon = "-",
         separator = "",
         provider = "DiffRemove",
-        condition = condition.hide_in_width,
-        highlight = {colors.red, colors.bg1},
-        separator_highlight = { colors.green, colors.bg1 },
-    }
-}
-
-local file_type = {
-    FileType = {
-        highlight = { colors.gray, colors.bg1 },
-        provider = function()
-          local buf = require("galaxyline.provider_buffer")
-          return string.lower(buf.get_buffer_filetype())
+        highlight = { colors.red, colors.bg1 },
+        separator_highlight = { colors.bg1, colors.bg1 },
+        condition = function()
+            return condition.hide_in_width() and condition.check_git_workspace()
         end,
     }
 }
 
 local git_branch = {
     GitBranch = {
-        icon = " ",
-        separator = "  ",
+        icon = "  ",
+        separator = "",
         condition = condition.check_git_workspace,
-        highlight = {colors.aqua, colors.bg},
-        provider = "GitBranch",
+        highlight = "GalaxyViMode",
+        separator_highlight = "GalaxyViModeReverse",
+        provider = function()
+            return vcs.get_git_branch() .. " "
+        end,
+    }
+}
+
+-- right separator; without this component, the separator will belong to
+-- diff_add, which may only render IF vim is in a git repository, and the
+-- window is long enough.
+local git_branch_right_separator = {
+    GitBranchRightSeparator = {
+        icon = " ",
+        condition = condition.check_git_workspace,
+        separator = " ",
+        separator_highlight = "GalaxyViModeReverseBg1",
+        provider = function() return nil end
+    }
+}
+
+-- only display if the git branch component is visible (when
+-- condition.check_git_workspace is true)
+local file_position_separator = {
+    FilePositionSeparator = {
+        separator = "",
+        separator_highlight = { colors.bg2, colors.bg1 },
+        condition = condition.check_git_workspace,
+        provider = function() return nil end
+    }
+}
+
+local file_position = {
+    FilePosition = {
+        highlight = { colors.fg, colors.bg2 },
+        provider = function()
+            return " " .. vim.fn.col(".") .. ":" .. vim.fn.line(".") .. " "
+        end
     }
 }
 
 local file_location = {
     FileLocation = {
-        icon = " ",
-        separator = " ",
-        separator_highlight = {colors.bg_dark, colors.bg},
-        highlight = {colors.gray, colors.bg_dark},
-        provider = function()
+        icon = "  ",
+        separator = "",
+        separator_highlight = "GalaxyViModeReverse",
+        highlight = "GalaxyViMode",
+        --[[provider = function()
             local current_line = vim.fn.line(".")
             local total_lines = vim.fn.line("$")
 
             if current_line == 1 then
-                return "Top"
+                return "Top "
             elseif current_line == total_lines then
-                return "Bot"
+                return "Bot "
             end
 
             local percent, _ = math.modf((current_line / total_lines) * 100)
-            return "" .. percent .. "%"
+            return percent .. "% "
+        end,]]
+        provider = "LinePercent"
+    }
+}
+
+local file_encoding = {
+    FileEncoding = {
+        separator = " ",
+        separator_highlight = { colors.bg2, colors.bg1 },
+        highlight = { colors.fg, colors.bg2 },
+        provider = function()
+            return fileinfo.get_file_encode() .. " "
         end,
     }
 }
@@ -180,6 +267,10 @@ local vi_mode = {
             --vim.api.nvim_command("hi GalaxyViModeReverse guifg=" .. color)
             vim.api.nvim_command(string.format("hi GalaxyViMode guibg=%s", color))
             vim.api.nvim_command(string.format("hi GalaxyViModeReverse guifg=%s guibg=%s", color, colors.bg2))
+            vim.api.nvim_command(string.format("hi GalaxyViModeBg1 guifg=%s guibg=%s", colors.bg1, color))
+            vim.api.nvim_command(string.format("hi GalaxyViModeBg2 guifg=%s guibg=%s", colors.bg2, color))
+            vim.api.nvim_command(string.format("hi GalaxyViModeReverseBg1 guifg=%s guibg=%s", color, colors.bg1))
+            vim.api.nvim_command(string.format("hi GalaxyViModeReverseBg2 guifg=%s guibg=%s", color, colors.bg2))
             return " " .. mode .. " "
         end,
     }
@@ -191,13 +282,17 @@ galaxyline.section.left = {
     file_icon,
     file_name,
     file_size,
-    file_type,
+    file_type
 }
 
 galaxyline.section.right = {
+    file_encoding,
     git_branch,
+    git_branch_right_separator,
     diff_add,
     diff_modified,
     diff_remove,
+    file_position_separator,
+    file_position,
     file_location,
 }
