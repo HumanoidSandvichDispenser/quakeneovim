@@ -49,14 +49,15 @@ Plug 'honza/vim-snippets'
 Plug 'godlygeek/tabular'
 
 " Language Support
-let g:polyglot_disabled = [ 'python', 'py', 'vimrc', 'sh', 'js', 'json', 'ts' ] " Semshi has better support for python files
+let g:polyglot_disabled = [ 'python', 'py', 'vimrc', 'sh', 'js', 'json', 'ts', 'md' ] " Semshi has better support for python files
 Plug 'sheerun/vim-polyglot'
 Plug 'plasticboy/vim-markdown'
 Plug 'lervag/vimtex'
 Plug 'numirias/semshi'
-Plug 'moll/vim-node'
 Plug 'rafcamlet/coc-nvim-lua' " Nvim lua support for CoC
 Plug 'OmniSharp/omnisharp-vim' " Omnisharp (C#)
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
 
 " Other Utilities
 Plug 'ryanoasis/vim-devicons' " Icons
@@ -69,6 +70,7 @@ Plug 'https://github.com/JMcKiern/vim-shoot', { 'do': '\"./install.py\" geckodri
 Plug 'justinmk/vim-sneak' " Sneak mode
 Plug 'tpope/vim-surround' " Surround
 Plug 'chrisbra/Colorizer'
+Plug 'kristijanhusak/orgmode.nvim' " Orgmode for Neovim
 
 call plug#end()
 
@@ -148,7 +150,6 @@ let g:coc_global_extensions = [
 \   'coc-rls',
 \   'coc-discord-neovim',
 \   'coc-explorer',
-\   'coc-lua',
 \   'coc-prettier'
 \]
 

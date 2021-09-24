@@ -142,6 +142,9 @@ function highlight_overrides()
     command(string.format("hi StartifyFile guifg=%s gui=italic", base_colors.accent))
     command(string.format("hi StartifyPath guifg=%s", base_colors.bg4))
     command(string.format("hi StartifySlash guifg=%s", base_colors.bg4))
+
+    command(string.format("hi Accent guifg=%s", base_colors.accent))
+    command(string.format("hi Gray guifg=%s", base_colors.gray))
 end
 
 BaseColors = get_base_colors()

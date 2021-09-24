@@ -23,7 +23,9 @@ local header = {
     type = "text",
     val = utils.split(header_text, "\n"),
     opts = {
-        hl = "StartifyHeader"
+        hl = "StartifyHeader",
+        position = "center",
+        width = 72,
         -- wrap = "overflow";
     }
 }
@@ -45,10 +47,10 @@ local function button(sc, txt, keybind)
     local sc_ = sc:gsub("%s", ""):gsub("SPC", "<leader>")
 
     local opts = {
-        position = "left",
+        position = "center",
         shortcut = ""..sc.." ",
         cursor = 0,
-        -- width = 50,
+        width = 72,
         align_shortcut = "left",
         hl = { { "StartifyPath", 0, 1 } },
         --hl_shortcut = "StartifyNumber",
@@ -118,11 +120,13 @@ end
 
 local function bookmarks()
     local bookmarks_table = {
-        { "v", "  neovim config", "$DOTFILES/.config/nvim/init.vim" },
-        { "z", "  zshrc", "$DOTFILES/.zshrc" },
-        { "b", "  bspwm config", "$DOTFILES/.config/bspwm/bspwmrc" },
-        { "s", "  sxhkd config", "$DOTFILES/.config/sxhkd/sxhkdrc" },
-        { "x", "  xresources", "$DOTFILES/.Xresources" },
+        { "v", "  neovim config", ":e $DOTFILES/.config/nvim/init.vim" },
+        { "z", "  zshrc", ":e $DOTFILES/.zshrc" },
+        { "b", "  bspwm config", ":e $DOTFILES/.config/bspwm/bspwmrc" },
+        { "s", "  sxhkd config", ":e $DOTFILES/.config/sxhkd/sxhkdrc" },
+        { "x", "  xresources", ":e $DOTFILES/.Xresources" },
+        { "f", "  search files", ":Files" },
+        { "r", "﬍  ripgrep", ":Rg" },
     }
 
     local bookmarks_buttons = { }
@@ -131,7 +135,7 @@ local function bookmarks()
     -- bookmark[2] = title of bookmark
     -- bookmark[3] = path to bookmark
     for _, bookmark in pairs(bookmarks_table) do
-        local file_button = button(bookmark[1], bookmark[2], ":e " .. bookmark[3] .. " <CR>")
+        local file_button = button(bookmark[1], bookmark[2], bookmark[3] .. " <CR>")
         --file_button.opts.hl = { { "StartifyPath", 0, 2 } }
         bookmarks_buttons[#bookmarks_buttons + 1] = file_button
     end
@@ -149,20 +153,36 @@ local section = {
 
 local opts = {
     layout = {
-        {type = "padding", val = 2},
+        { type = "padding", val = 2 },
         section.header,
-        {type = "padding", val = 2},
+        { type = "padding", val = 2 },
         button("e", "  New file", ":ene <BAR> startinsert <CR>"),
-        {type = "padding", val = 1},
-        {type = "text", val = "  Bookmarks", opts = { hl = "StartifySection" }},
-        {type = "padding", val = 1},
+        { type = "padding", val = 1 },
+        {
+            type = "text",
+            val = "  Bookmarks",
+            opts = {
+                hl = "StartifySection",
+                position = "center",
+                width = 4,
+            }
+        },
+        { type = "padding", val = 1 },
         bookmarks(),
-        {type = "padding", val = 1},
-        {type = "text", val = "  Recent Files", opts = { hl = "StartifySection" }},
-        {type = "padding", val = 1},
+        { type = "padding", val = 1 },
+        {
+            type = "text",
+            val = "  Recent Files",
+            opts = {
+                hl = "StartifySection",
+                position = "center",
+                width = 80
+            }
+        },
+        { type = "padding", val = 1 },
         mru(0),
-        {type = "padding", val = 1},
-        button("<Esc>", "  Close", ":BD <CR>"),
+        { type = "padding", val = 1 },
+        --button("<Esc>", "  Close", ":BD <CR>"),
         button("q", "  Quit", ":q <CR>"),
     },
     opts = {
