@@ -146,6 +146,11 @@ alpha_config.menus = {
             menu.padding({ }, 2),
 
             menu.button(utils.deepcopy(default_opts),
+                "", "New File", "e", "e", ":enew"),
+
+            menu.padding({ }, 1),
+
+            menu.button(utils.deepcopy(default_opts),
                 "", "Bookmarks", "b", "b", ":lua require('alpha-config').start('bookmarks')<CR>"),
 
             menu.padding({ }, 1),

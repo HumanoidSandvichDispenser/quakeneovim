@@ -44,5 +44,9 @@
         "UltiSnips"
     ],
 
-    "diagnostic.checkCurrentLine": true
+    "diagnostic.checkCurrentLine": true,
+
+    "Lua.diagnostics.globals": [
+        "vim"
+    ]
 }

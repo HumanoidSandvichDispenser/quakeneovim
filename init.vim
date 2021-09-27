@@ -50,7 +50,7 @@ Plug 'godlygeek/tabular'
 
 " Language Support
 let g:polyglot_disabled = [ 'python', 'py', 'vimrc', 'sh', 'js', 'json', 'ts', 'md' ] " Semshi has better support for python files
-Plug 'sheerun/vim-polyglot'
+"Plug 'sheerun/vim-polyglot'
 Plug 'plasticboy/vim-markdown'
 Plug 'lervag/vimtex'
 Plug 'numirias/semshi'
@@ -58,6 +58,7 @@ Plug 'rafcamlet/coc-nvim-lua' " Nvim lua support for CoC
 Plug 'OmniSharp/omnisharp-vim' " Omnisharp (C#)
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 
 " Other Utilities
 Plug 'ryanoasis/vim-devicons' " Icons
@@ -271,7 +272,7 @@ endfunction
 
 " Highlight Overrides
 function! HighlightOverrides()
-    call luaeval('require("highlight-overrides").highlight_overrides()')
+    lua require("highlight-overrides").highlight_overrides()
     call BarbarHighlight()
 endfunction
 
@@ -280,7 +281,8 @@ function! SetColorscheme(scheme)
     call HighlightOverrides()
 endfunction
 
-call luaeval('require("galaxyline-config")')
+lua require("galaxyline-config")
+lua require("treesitter-config")
 "call luaeval('require("lualine-config").init()')
 
 " Load Configs
