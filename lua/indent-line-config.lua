@@ -19,8 +19,16 @@ let g:indent_blankline_filetype_exclude = [ 'man', 'startify', 'NvimTree', 'dash
 function indent_line_config.init()
     require("indent_blankline").setup({
         char = "│",
-        filetype_exclude = { "man", "startify", "NvimTree", "dashboard", "alpha" },
-        show_end_of_line = true
+        filetype_exclude = {
+            "man",
+            "startify",
+            "NvimTree",
+            "dashboard",
+            "alpha",
+            "calendar"
+        },
+        show_end_of_line = true,
+        show_current_context = true,
     })
 end
 

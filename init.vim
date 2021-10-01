@@ -71,7 +71,8 @@ Plug 'https://github.com/JMcKiern/vim-shoot', { 'do': '\"./install.py\" geckodri
 Plug 'justinmk/vim-sneak' " Sneak mode
 Plug 'tpope/vim-surround' " Surround
 Plug 'chrisbra/Colorizer'
-Plug 'kristijanhusak/orgmode.nvim' " Orgmode for Neovim
+Plug 'kristijanhusak/orgmode.nvim', { 'branch': 'tree-sitter' } " Orgmode for Neovim
+"Plug 'itchyny/calendar.vim'
 
 call plug#end()
 
@@ -200,12 +201,12 @@ inoremap jj <Esc>
 nnoremap Q gqq
 
 " Emacs and standard editors insert bindings
-imap <C-a> <C-o>I
-inoremap <C-e> <C-o>A
+imap <C-a> <Home>
+inoremap <C-e> <End>
 inoremap <C-b> <Left>
 inoremap <C-f> <Right>
-inoremap <C-n> <C-o>j
-inoremap <C-p> <C-o>k
+inoremap <C-n> <Down>
+inoremap <C-p> <Up>
 inoremap <C-h> <C-w>
 
 " Plugin Shortcuts
@@ -283,6 +284,7 @@ endfunction
 
 lua require("galaxyline-config")
 lua require("treesitter-config")
+lua require("orgmode-config")
 "call luaeval('require("lualine-config").init()')
 
 " Load Configs

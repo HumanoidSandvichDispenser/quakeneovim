@@ -146,7 +146,7 @@ alpha_config.menus = {
             menu.padding({ }, 2),
 
             menu.button(utils.deepcopy(default_opts),
-                "", "New File", "e", "e", ":enew"),
+                "", "New File", "e", "e", ":enew<CR>"),
 
             menu.padding({ }, 1),
 
