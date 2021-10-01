@@ -49,11 +49,11 @@ Plug 'honza/vim-snippets'
 Plug 'godlygeek/tabular'
 
 " Language Support
-let g:polyglot_disabled = [ 'python', 'py', 'vimrc', 'sh', 'js', 'json', 'ts', 'md' ] " Semshi has better support for python files
+"let g:polyglot_disabled = [ 'python', 'py', 'vimrc', 'sh', 'js', 'json', 'ts', 'md' ] " Semshi has better support for python files
 "Plug 'sheerun/vim-polyglot'
 Plug 'plasticboy/vim-markdown'
 Plug 'lervag/vimtex'
-Plug 'numirias/semshi'
+"Plug 'numirias/semshi'
 Plug 'rafcamlet/coc-nvim-lua' " Nvim lua support for CoC
 Plug 'OmniSharp/omnisharp-vim' " Omnisharp (C#)
 Plug 'vim-pandoc/vim-pandoc'
