@@ -22,6 +22,7 @@ local function mode_alias(m)
         [""] = "V-BLOCK",
         V = "V-LINE",
         v = "VISUAL",
+        s = "SELECT",
     }
 
     return alias[m] or ""
@@ -33,6 +34,7 @@ local function mode_color(m)
         insert =  colors.green,
         visual =  colors.blue,
         replace =  colors.purple,
+        select = colors.aqua,
     }
 
     local color = {
@@ -44,6 +46,7 @@ local function mode_color(m)
         [""] = mode_colors.visual,
         V = mode_colors.visual,
         v = mode_colors.visual,
+        s = mode_colors.select
     }
 
     return color[m] or colors.bg2
@@ -262,6 +265,7 @@ local vi_mode = {
         provider = function()
             local m = vim.fn.mode() or vim.fn.visualmode()
             local mode = mode_alias(m)
+            if not mode then mode = "MODE" .. m:upper() end
             local color = mode_color(m)
             --vim.api.nvim_command("hi GalaxyViMode guibg=" .. color)
             --vim.api.nvim_command("hi GalaxyViModeReverse guifg=" .. color)

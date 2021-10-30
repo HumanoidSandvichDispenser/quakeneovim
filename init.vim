@@ -114,7 +114,7 @@ let g:gruvbox_invert_selection = 0
 let g:loaded_python_provider = 0
 
 " Indent guides
-call luaeval('require("indent-line-config").init()')
+lua require("indent-line-config").init()
 
 " Language
 let g:vim_markdown_conceal_code_blocks = 1
@@ -127,6 +127,7 @@ let g:cpp_class_decl_highlight = 1
 let g:cpp_concepts_highlight = 1
 let g:vimtex_compiler_method = 'latexmk'
 let g:semshi#excluded_hl_groups = [ 'local', 'unresolved' ]
+let g:OmniSharp_server_use_mono = 1
 
 " Gutter Configuration
 let g:gitgutter_sign_added = '▐'
@@ -152,7 +153,8 @@ let g:coc_global_extensions = [
 \   'coc-rls',
 \   'coc-discord-neovim',
 \   'coc-explorer',
-\   'coc-prettier'
+\   'coc-prettier',
+\   'coc-vetur'
 \]
 
 highlight CocErrorHighlight ctermfg=1
@@ -162,13 +164,13 @@ highlight CocErrorHighlight ctermfg=1
 source $DOTFILES/barbar-config.vim
 
 " Alpha Menu
-call luaeval('require("alpha-config").init()')
+lua require("alpha-config").init()
 
 " Nvim Tree
 let g:nvim_tree_indent_markers = 1
 let g:nvim_tree_auto_close = 1
 let g:nvim_tree_lsp_diagnostics = 1
-call luaeval('require("nvim-tree-config")')
+lua require("nvim-tree-config")
 
 " Sneak Configuration
 let g:sneak#label = 1
@@ -252,8 +254,8 @@ set mouse=a
 
 " Functions
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 function! CloseBuffer()
@@ -285,7 +287,6 @@ endfunction
 lua require("galaxyline-config")
 lua require("treesitter-config")
 lua require("orgmode-config")
-"call luaeval('require("lualine-config").init()')
 
 " Load Configs
 source ~/local.vimrc

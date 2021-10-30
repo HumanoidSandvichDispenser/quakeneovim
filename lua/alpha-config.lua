@@ -115,6 +115,12 @@ function alpha_config.mru(start, cwd)
         else
             short_fn = vim.fn.fnamemodify(fn, ":~")
         end
+        local fn_length = short_fn:len() 
+        local MAX_LEN = 52
+        if fn_length > MAX_LEN then
+            local trim_len = fn_length - MAX_LEN
+            short_fn = "..." .. short_fn:sub(3 + trim_len, fn_length)
+        end
         local index_keymap = tostring(i - 1)
         --local file_button = button(tostring(i + start - 1), ico .. "  " .. short_fn , ":e " .. fn .. " <CR>")
         local file_button = menu.button(utils.deepcopy(default_opts),

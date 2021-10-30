@@ -34,11 +34,11 @@
 
 	},
 
-	/*"clangd.path": "/home/sandvich/.config/coc/extensions/coc-clangd-data/install/12.0.1/clangd_12.0.1/bin/clangd",*/
 	"clangd.path": "/home/sandvich/.config/coc/extensions/coc-clangd-data/install/12.0.1/clangd_12.0.1/bin/clangd",
 	"clangd.fallbackFlags" : ["-xc"],
 
 	"suggest.asciiCharactersOnly": false,
+    "suggest.floatEnable": true,
 
     "snippets.ultisnips.directories": [
         "UltiSnips"
@@ -48,5 +48,16 @@
 
     "Lua.diagnostics.globals": [
         "vim"
-    ]
+    ],
+
+    "javascript.suggest.autoImports": true,
+    "typescript.suggest.autoImports": true,
+
+    "javascript.referencesCodeLens.enable": true
+
+    "coc.source.OmniSharp.enable": true,
+    "coc.source.OmniSharp.triggerCharacters": 2,
+
+    "vetur.format.options.tabSize": 4,
+    "vetur.languageFeatures.codeActions": true
 }
