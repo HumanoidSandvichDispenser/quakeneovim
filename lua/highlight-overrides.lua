@@ -152,5 +152,6 @@ BaseColors = get_base_colors()
 return {
     highlight_overrides = highlight_overrides,
     highlight_lualine = highlight_lualine,
+    GetBaseColors = get_base_colors,
     BaseColors = BaseColors
 }

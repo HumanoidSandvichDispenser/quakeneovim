@@ -67,7 +67,7 @@ function alpha_config.bookmarks()
     bookmarks_buttons[#bookmarks_buttons + 1] =
         menu.button(
             utils.deepcopy(default_opts),
-            "", "Back", "h", "h", ":lua require('alpha-config').start('startup')<CR>"
+            "", "Back", "h", "h", ":bd | lua require('alpha-config').start('startup')<CR>"
         )
 
     return {
@@ -133,7 +133,7 @@ function alpha_config.mru(start, cwd)
     tbl[#tbl + 1] =
         menu.button(
             utils.deepcopy(default_opts),
-            "", "Back", "h", "h", ":lua require('alpha-config').start('startup')<CR>"
+            "", "Back", "h", "h", ":bd | lua require('alpha-config').start('startup')<CR>"
         )
 
     return {
@@ -157,12 +157,12 @@ alpha_config.menus = {
             menu.padding({ }, 1),
 
             menu.button(utils.deepcopy(default_opts),
-                "", "Bookmarks", "b", "b", ":lua require('alpha-config').start('bookmarks')<CR>"),
+                "", "Bookmarks", "b", "b", ":bd | lua require('alpha-config').start('bookmarks')<CR>"),
 
             menu.padding({ }, 1),
 
             menu.button(utils.deepcopy(default_opts),
-                "", "Recent Files", "r", "r", ":lua require('alpha-config').start('recentfiles')<CR>"),
+                "", "Recent Files", "r", "r", ":bd | lua require('alpha-config').start('recentfiles')<CR>"),
 
             menu.padding({ }, 1),
 

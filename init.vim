@@ -27,6 +27,7 @@ Plug 'kyazdani42/nvim-tree.lua'
 " Status line
 "Plug 'hoob3rt/lualine.nvim'
 Plug 'glepnir/galaxyline.nvim'
+Plug 'famiu/feline.nvim'
 Plug 'romgrk/barbar.nvim'
 Plug 'qpkorr/vim-bufkill' " Kill buffer without removing split
 
