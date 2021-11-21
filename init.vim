@@ -74,6 +74,7 @@ Plug 'tpope/vim-surround' " Surround
 Plug 'chrisbra/Colorizer'
 Plug 'kristijanhusak/orgmode.nvim', { 'branch': 'tree-sitter' } " Orgmode for Neovim
 "Plug 'itchyny/calendar.vim'
+Plug 'jbyuki/instant.nvim'
 
 call plug#end()
 
