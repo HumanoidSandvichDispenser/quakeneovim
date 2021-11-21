@@ -67,7 +67,8 @@ Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'idanarye/vim-vebugger' " Debugger
 "Plug 'mhinz/vim-startify' " Startup screen
 Plug 'goolord/alpha-nvim'
-Plug 'https://github.com/JMcKiern/vim-shoot', { 'do': '\"./install.py\" geckodriver' } " Code screenshotter
+"Plug 'https://github.com/JMcKiern/vim-shoot', { 'do': '\"./install.py\" geckodriver' } " Code screenshotter
+Plug 'superevilmegaco/Screenshot.nvim'
 Plug 'justinmk/vim-sneak' " Sneak mode
 Plug 'tpope/vim-surround' " Surround
 Plug 'chrisbra/Colorizer'
@@ -216,6 +217,7 @@ map <silent> <C-n> :NERDTreeTabsToggle<CR>
 map <silent> <leader>e :CocCommand explorer<CR>
 map <silent> <leader>f :Files<CR>
 map <silent> <leader>t :NvimTreeToggle<CR>
+map <silent> <leader>h :CocCommand clangd.switchSourceHeader<CR>
 
 nnoremap <silent> K :call ShowDocumentation()<CR>
 
