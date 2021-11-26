@@ -73,7 +73,7 @@ Plug 'superevilmegaco/Screenshot.nvim'
 Plug 'justinmk/vim-sneak' " Sneak mode
 Plug 'tpope/vim-surround' " Surround
 Plug 'chrisbra/Colorizer'
-Plug 'kristijanhusak/orgmode.nvim', { 'branch': 'tree-sitter' } " Orgmode for Neovim
+"Plug 'kristijanhusak/orgmode.nvim' " Orgmode for Neovim
 "Plug 'itchyny/calendar.vim'
 Plug 'jbyuki/instant.nvim'
 
@@ -290,7 +290,7 @@ endfunction
 
 lua require("galaxyline-config")
 lua require("treesitter-config")
-lua require("orgmode-config")
+"lua require("orgmode-config")
 
 " Load Configs
 source ~/local.vimrc
