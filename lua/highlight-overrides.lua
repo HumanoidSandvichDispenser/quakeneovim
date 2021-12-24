@@ -10,6 +10,11 @@ local xresources = require("xresources")
 
 local command = vim.api.nvim_command
 
+function SetColorscheme(colorscheme)
+    command(string.format("colorscheme %s", colorscheme))
+    highlight_overrides()
+end
+
 local function get_base_colors()
     return {
         bg0 = xresources.get("background"),
@@ -42,36 +47,12 @@ local function highlight_link(destination, source)
     command(string.format("hi! link %s %s", destination, source))
 end
 
-function highlight_lualine()
-    local base_colors = get_base_colors()
-
-    local theme = {
-        normal = {
-            a = { fg = base_colors.bg1, bg = base_colors.fg, gui = 'bold' },
-            b = { fg = base_colors.fg, bg = base_colors.bg3 },
-            c = { fg = base_colors.gray, bg = base_colors.bg1 }
-        },
-        insert = {
-            a = { fg = base_colors.bg0, bg = base_colors.green, gui = 'bold' },
-        },
-        visual = {
-            a = { fg = base_colors.bg0, bg = base_colors.purple, gui = 'bold' },
-        },
-        replace = {
-            a = { fg = base_colors.bg0, bg = base_colors.red, gui = 'bold' },
-        },
-        inactive = {
-            a = { fg = base_colors.fg, bg = base_colors.fg, gui = 'bold' },
-            b = { fg = base_colors.fg, bg = base_colors.bg3 },
-            c = { fg = base_colors.fg, bg = base_colors.bg1 },
-        }
-    }
-
-    require("lualine-config").set_colorscheme(theme)
-end
-
 function highlight_overrides()
-    base_colors = get_base_colors()
+    -- themes are conditionally loaded; requiring onedarkpro may raise an error
+    -- if our current theme is not onedark
+    --pcall(override_onedark)
+
+    local base_colors = get_base_colors()
     BaseColors = base_colors
 
     command(string.format("hi Pmenu guibg=%s", base_colors.bg0_alt))
@@ -103,19 +84,19 @@ function highlight_overrides()
 
     command(string.format("hi BufferCurrent guifg=%s guibg=%s", base_colors.fg, base_colors.bg1))
     command(string.format("hi BufferCurrentIndex guifg=%s guibg=%s", base_colors.fg, base_colors.bg1))
-    command(string.format("hi BufferCurrentMod guifg=%s guibg=%s", base_colors.fg, base_colors.bg1))
+    command(string.format("hi BufferCurrentMod guifg=%s guibg=%s", base_colors.red, base_colors.bg1))
     command(string.format("hi BufferCurrentTarget guifg=%s guibg=%s", base_colors.fg, base_colors.bg1))
     command(string.format("hi BufferCurrentSign guifg=%s guibg=%s", base_colors.fg, base_colors.bg1))
 
     command(string.format("hi BufferVisible guifg=%s guibg=%s", base_colors.fg, base_colors.bg0))
     command(string.format("hi BufferVisibleIndex guifg=%s guibg=%s", base_colors.fg, base_colors.bg0))
-    command(string.format("hi BufferVisibleMod guifg=%s guibg=%s", base_colors.fg, base_colors.bg0))
+    command(string.format("hi BufferVisibleMod guifg=%s guibg=%s gui=italic", base_colors.fg, base_colors.bg0))
     command(string.format("hi BufferVisibleTarget guifg=%s guibg=%s", base_colors.fg, base_colors.bg0))
     command(string.format("hi BufferVisibleSign guifg=%s guibg=%s", base_colors.fg, base_colors.bg0))
 
     command(string.format("hi BufferInactive guifg=%s guibg=%s", base_colors.bg2, base_colors.bg0))
     command(string.format("hi BufferInactiveIndex guifg=%s guibg=%s", base_colors.bg2, base_colors.bg0))
-    command(string.format("hi BufferInactiveMod guifg=%s guibg=%s", base_colors.bg2, base_colors.bg0))
+    command(string.format("hi BufferInactiveMod guifg=%s guibg=%s gui=italic", base_colors.bg2, base_colors.bg0))
     command(string.format("hi BufferInactiveTarget guifg=%s guibg=%s", base_colors.bg2, base_colors.bg0))
     command(string.format("hi BufferInactiveSign guifg=%s guibg=%s", base_colors.bg2, base_colors.bg0))
 
@@ -145,13 +126,17 @@ function highlight_overrides()
 
     command(string.format("hi Accent guifg=%s", base_colors.accent))
     command(string.format("hi Gray guifg=%s", base_colors.gray))
+
+    command(string.format("hi SignifyLineAdd guifg=%s guibg=%s", base_colors.green, base_colors.bg0))
+    command(string.format("hi SignifyLineChange guifg=%s guibg=%s", base_colors.blue, base_colors.bg0))
+    command(string.format("hi SignifyLineDelete guifg=%s guibg=%s", base_colors.red, base_colors.bg0))
 end
 
 BaseColors = get_base_colors()
 
 return {
     highlight_overrides = highlight_overrides,
-    highlight_lualine = highlight_lualine,
     GetBaseColors = get_base_colors,
-    BaseColors = BaseColors
+    BaseColors = BaseColors,
+    SetColorscheme = SetColorscheme
 }

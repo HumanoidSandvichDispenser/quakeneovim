@@ -178,7 +178,13 @@ local git_branch = {
     GitBranch = {
         icon = "  ",
         separator = "",
-        condition = condition.check_git_workspace,
+        --condition = condition.check_git_workspace,
+        condition = function()
+            if vcs.get_git_branch() ~= nil then
+                return condition.check_git_workspace
+            end
+            return false
+        end,
         highlight = "GalaxyViMode",
         separator_highlight = "GalaxyViModeReverse",
         provider = function()
@@ -215,7 +221,7 @@ local file_position = {
     FilePosition = {
         highlight = { colors.fg, colors.bg2 },
         provider = function()
-            return " " .. vim.fn.col(".") .. ":" .. vim.fn.line(".") .. " "
+            return " " .. vim.fn.line(".") .. ":" .. vim.fn.col(".") .. " "
         end
     }
 }

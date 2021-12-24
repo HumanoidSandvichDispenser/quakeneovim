@@ -48,6 +48,16 @@ require("nvim-tree").setup({
                 { key = "g?",                           cb = tree_cb("toggle_help") },
             }
         }
+    },
+    auto_close = false,
+    diagnostics = {
+        enable = true,
+        icons = {
+            hint = "",
+            info = "",
+            warning = "",
+            error = "",
+        }
     }
 })
 

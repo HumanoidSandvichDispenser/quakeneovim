@@ -2,82 +2,76 @@ set nocompatible              " be iMproved, required
 
 filetype off                  " required
 
-call plug#begin()
-" ALL PLUGINS
+lua require("plugins") -- packer plugins
 
-" Themes
-Plug 'rktjmp/lush.nvim'
-Plug 'ellisonleao/gruvbox.nvim'
-Plug 'navarasu/onedark.nvim'
-Plug 'ghifarit53/tokyonight-vim'
-Plug 'easysid/mod8.vim'
-Plug 'franbach/miramare'
-
-" Templates for new files
-Plug 'aperezdc/vim-template'
-
-" Show indents
-Plug 'lukas-reineke/indent-blankline.nvim'
-
-" Project drawer
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'kyazdani42/nvim-tree.lua'
-
-" Status line
-"Plug 'hoob3rt/lualine.nvim'
-Plug 'glepnir/galaxyline.nvim'
-Plug 'famiu/feline.nvim'
-Plug 'romgrk/barbar.nvim'
-Plug 'qpkorr/vim-bufkill' " Kill buffer without removing split
-
-" Git
-Plug 'tpope/vim-fugitive'
-"Plug 'airblade/vim-gitgutter'
-Plug 'mhinz/vim-signify'
-Plug 'christoomey/vim-conflicted'
-
-" Autocomplete
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'Quramy/tsuquyomi'
-Plug 'williamboman/vim-import-ts'
-
-" Snippets
-"Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-
-" Auto tabbing / Alignment
-Plug 'godlygeek/tabular'
-
-" Language Support
-"let g:polyglot_disabled = [ 'python', 'py', 'vimrc', 'sh', 'js', 'json', 'ts', 'md' ] " Semshi has better support for python files
-"Plug 'sheerun/vim-polyglot'
-Plug 'plasticboy/vim-markdown'
-Plug 'lervag/vimtex'
-"Plug 'numirias/semshi'
-Plug 'rafcamlet/coc-nvim-lua' " Nvim lua support for CoC
-Plug 'OmniSharp/omnisharp-vim' " Omnisharp (C#)
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
-
-" Other Utilities
-Plug 'ryanoasis/vim-devicons' " Icons
-Plug 'kyazdani42/nvim-web-devicons' " Colored icons
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'idanarye/vim-vebugger' " Debugger
-"Plug 'mhinz/vim-startify' " Startup screen
-Plug 'goolord/alpha-nvim'
-"Plug 'https://github.com/JMcKiern/vim-shoot', { 'do': '\"./install.py\" geckodriver' } " Code screenshotter
-Plug 'superevilmegaco/Screenshot.nvim'
-Plug 'justinmk/vim-sneak' " Sneak mode
-Plug 'tpope/vim-surround' " Surround
-Plug 'chrisbra/Colorizer'
-Plug 'kristijanhusak/orgmode.nvim', { 'branch': 'tree-sitter' } " Orgmode for Neovim
-"Plug 'itchyny/calendar.vim'
-Plug 'jbyuki/instant.nvim'
-
-call plug#end()
+"call plug#begin()
+"" ALL PLUGINS
+"
+"" Themes
+"Plug 'rktjmp/lush.nvim'
+"Plug 'ellisonleao/gruvbox.nvim'
+"Plug 'navarasu/onedark.nvim'
+"Plug 'ghifarit53/tokyonight-vim'
+"Plug 'easysid/mod8.vim'
+"Plug 'franbach/miramare'
+"
+"" Templates for new files
+"Plug 'aperezdc/vim-template'
+"
+"" Show indents
+"Plug 'lukas-reineke/indent-blankline.nvim'
+"
+"" Project drawer
+"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+"Plug 'junegunn/fzf.vim'
+"Plug 'kyazdani42/nvim-tree.lua'
+"
+"" Status line
+"Plug 'glepnir/galaxyline.nvim'
+"Plug 'romgrk/barbar.nvim'
+"Plug 'qpkorr/vim-bufkill' " Kill buffer without removing split
+"
+"" Git
+"Plug 'tpope/vim-fugitive'
+"Plug 'mhinz/vim-signify'
+"Plug 'christoomey/vim-conflicted'
+"
+"" Autocomplete
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'Quramy/tsuquyomi'
+"Plug 'williamboman/vim-import-ts'
+"
+"" Snippets
+""Plug 'SirVer/ultisnips'
+"Plug 'honza/vim-snippets'
+"
+"" Auto tabbing / Alignment
+"Plug 'godlygeek/tabular'
+"
+"" Language Support
+""let g:polyglot_disabled = [ 'python', 'py', 'vimrc', 'sh', 'js', 'json', 'ts', 'md' ] " Semshi has better support for python files
+""Plug 'sheerun/vim-polyglot'
+"Plug 'plasticboy/vim-markdown'
+"Plug 'lervag/vimtex'
+""Plug 'numirias/semshi'
+"Plug 'rafcamlet/coc-nvim-lua' " Nvim lua support for CoC
+"Plug 'OmniSharp/omnisharp-vim' " Omnisharp (C#)
+"Plug 'vim-pandoc/vim-pandoc'
+"Plug 'vim-pandoc/vim-pandoc-syntax'
+"Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+"
+"" Other Utilities
+"Plug 'ryanoasis/vim-devicons' " Icons
+"Plug 'kyazdani42/nvim-web-devicons' " Colored icons
+"Plug 'goolord/alpha-nvim'
+"Plug 'superevilmegaco/Screenshot.nvim'
+"Plug 'justinmk/vim-sneak' " Sneak mode
+"Plug 'chrisbra/Colorizer'
+"Plug 'kristijanhusak/orgmode.nvim', { 'branch': 'tree-sitter' } " Orgmode for Neovim
+""Plug 'itchyny/calendar.vim'
+"Plug 'jbyuki/instant.nvim'
+"
+"call plug#end()
 
 filetype plugin indent on    " required
 
@@ -117,7 +111,7 @@ let g:gruvbox_invert_selection = 0
 let g:loaded_python_provider = 0
 
 " Indent guides
-lua require("indent-line-config").init()
+"lua require("indent-line-config").init()
 
 " Language
 let g:vim_markdown_conceal_code_blocks = 1
@@ -133,8 +127,8 @@ let g:semshi#excluded_hl_groups = [ 'local', 'unresolved' ]
 let g:OmniSharp_server_use_mono = 1
 
 " Gutter Configuration
-let g:gitgutter_sign_added = '▐'
-let g:gitgutter_sign_modified = '▐'
+let g:signify_sign_add = '▐'
+let g:signify_sign_change = '▐'
 let g:gitgutter_sign_removed = '▁'
 let g:gitgutter_sign_removed_first_line = '▔'
 let g:gitgutter_sign_removed_above_and_below = '🮀'
@@ -162,18 +156,8 @@ let g:coc_global_extensions = [
 
 highlight CocErrorHighlight ctermfg=1
 
-" Lightline configuration
-"source $DOTFILES/lightline-config.vim
-source $DOTFILES/barbar-config.vim
-
-" Alpha Menu
-lua require("alpha-config").init()
-
 " Nvim Tree
 let g:nvim_tree_indent_markers = 1
-let g:nvim_tree_auto_close = 1
-let g:nvim_tree_lsp_diagnostics = 1
-lua require("nvim-tree-config")
 
 " Sneak Configuration
 let g:sneak#label = 1
@@ -200,6 +184,7 @@ noremap <silent> <Esc><Esc> :Alpha<CR>
 
 " Remappings
 nmap ; :
+nnoremap Y yy
 noremap <silent> j gj
 noremap <silent> k gk
 inoremap jj <Esc>
@@ -284,14 +269,16 @@ function! HighlightOverrides()
 endfunction
 
 function! SetColorscheme(scheme)
-    execute 'colorscheme ' . a:scheme
+    "execute 'colorscheme ' . a:scheme
     call HighlightOverrides()
 endfunction
 
-lua require("galaxyline-config")
-lua require("treesitter-config")
-lua require("orgmode-config")
+"lua require("galaxyline-config")
+"lua require("feline-config")
+"lua require("treesitter-config")
+"lua require("orgmode-config")
 
 " Load Configs
-source ~/local.vimrc
-source /var/tmp/colorscheme.vim
+luafile /var/tmp/colorscheme.lua
+"source ~/local.vimrc
+"source /var/tmp/colorscheme.vim

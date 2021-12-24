@@ -6,9 +6,12 @@
 -- Distributed under terms of the MIT license.
 --
 
-local highlight_overrides = require("highlight-overrides")
+if not pcall(require, "feline") then
+    return
+end
 
-local colors = highlight_overrides.GetBaseColors()
+local colors = require("highlight-overrides").BaseColors
+colors.cyan = colors.aqua
 
 local vi_mode_colors = {
     NORMAL = colors.green,
@@ -18,8 +21,8 @@ local vi_mode_colors = {
     BLOCK = colors.blue,
     REPLACE = colors.violet,
     ['V-REPLACE'] = colors.violet,
-    ENTER = colors.aqua,
-    MORE = colors.aqua,
+    ENTER = colors.cyan,
+    MORE = colors.cyan,
     SELECT = colors.orange,
     COMMAND = colors.green,
     SHELL = colors.green,
@@ -44,8 +47,8 @@ local lsp = require 'feline.providers.lsp'
 local vi_mode_utils = require 'feline.providers.vi_mode'
 
 local lsp_get_diag = function(str)
-  local count = vim.lsp.diagnostic.get_count(0, str)
-  return (count > 0) and ' '..count..' ' or ''
+    local count = vim.lsp.diagnostic.get_count(0, str)
+    return (count > 0) and ' '..count..' ' or ''
 end
 
 -- LuaFormatter off
@@ -126,7 +129,7 @@ local comps = {
             provider = 'position',
             left_sep = ' ',
             hl = {
-                fg = colors.aqua,
+                fg = colors.cyan,
                 -- style = 'bold'
             }
         },
@@ -195,7 +198,7 @@ local comps = {
             -- left_sep = ' ',
             enabled = function() return lsp.diagnostics_exist('Hint') end,
             hl = {
-                fg = colors.aqua
+                fg = colors.cyan
             }
         },
     },
@@ -291,7 +294,8 @@ table.insert(components.active[3], comps.vi_mode.right)
   end
 }) ]]
 
-require("feline").setup({
+-- require'feline'.setup {}
+require('feline').setup({
     colors = { bg = colors.bg, fg = colors.fg },
     components = components,
     vi_mode_colors = vi_mode_colors,
@@ -302,7 +306,7 @@ require("feline").setup({
             'fugitive',
             'fugitiveblame'
         },
-        buftypes = {'terminal'},
-        bufnames = {}
+        buftypes = { 'terminal' },
+        bufnames = { }
     }
 })
