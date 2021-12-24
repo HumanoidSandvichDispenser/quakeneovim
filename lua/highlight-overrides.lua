@@ -9,11 +9,27 @@
 local xresources = require("xresources")
 
 local command = vim.api.nvim_command
+local colorscheme_loaded = false
 
-function SetColorscheme(colorscheme)
-    command(string.format("colorscheme %s", colorscheme))
-    highlight_overrides()
-end
+local base_colors = {
+    bg0 = xresources.get("background"),
+    bg0_alt = xresources.get("background-alt"),
+    bg1 = xresources.get("background1"),
+    bg2 = xresources.get("background2"),
+    bg3 = xresources.get("background3"),
+    bg4 = xresources.get("background4"),
+    bg_dark = xresources.get("background-dark"),
+    fg = xresources.get("foreground"),
+    gray = xresources.get("color8"),
+    red = xresources.get("color9"),
+    green = xresources.get("color10"),
+    yellow = xresources.get("color11"),
+    blue = xresources.get("color12"),
+    purple = xresources.get("color13"),
+    aqua = xresources.get("color14"),
+    orange = xresources.get("orange"),
+    accent = xresources.get("accent")
+}
 
 local function get_base_colors()
     return {
@@ -47,13 +63,9 @@ local function highlight_link(destination, source)
     command(string.format("hi! link %s %s", destination, source))
 end
 
-function highlight_overrides()
-    -- themes are conditionally loaded; requiring onedarkpro may raise an error
-    -- if our current theme is not onedark
-    --pcall(override_onedark)
-
-    local base_colors = get_base_colors()
-    BaseColors = base_colors
+local function highlight_overrides()
+    --local base_colors = get_base_colors()
+    --BaseColors = base_colors
 
     command(string.format("hi Pmenu guibg=%s", base_colors.bg0_alt))
     command(string.format("hi PmenuSel guifg=%s guibg=%s gui=italic", base_colors.bg0, base_colors.accent))
@@ -132,11 +144,18 @@ function highlight_overrides()
     command(string.format("hi SignifyLineDelete guifg=%s guibg=%s", base_colors.red, base_colors.bg0))
 end
 
-BaseColors = get_base_colors()
+function SetColorscheme(colorscheme)
+    if colorscheme_loaded then
+        return
+    end
+    colorscheme_loaded = true
+    command(string.format("colorscheme %s", colorscheme))
+    highlight_overrides()
+end
 
 return {
     highlight_overrides = highlight_overrides,
     GetBaseColors = get_base_colors,
-    BaseColors = BaseColors,
+    BaseColors = base_colors,
     SetColorscheme = SetColorscheme
 }

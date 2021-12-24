@@ -2,86 +2,15 @@ set nocompatible              " be iMproved, required
 
 filetype off                  " required
 
-lua require("plugins") -- packer plugins
-
-"call plug#begin()
-"" ALL PLUGINS
-"
-"" Themes
-"Plug 'rktjmp/lush.nvim'
-"Plug 'ellisonleao/gruvbox.nvim'
-"Plug 'navarasu/onedark.nvim'
-"Plug 'ghifarit53/tokyonight-vim'
-"Plug 'easysid/mod8.vim'
-"Plug 'franbach/miramare'
-"
-"" Templates for new files
-"Plug 'aperezdc/vim-template'
-"
-"" Show indents
-"Plug 'lukas-reineke/indent-blankline.nvim'
-"
-"" Project drawer
-"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-"Plug 'junegunn/fzf.vim'
-"Plug 'kyazdani42/nvim-tree.lua'
-"
-"" Status line
-"Plug 'glepnir/galaxyline.nvim'
-"Plug 'romgrk/barbar.nvim'
-"Plug 'qpkorr/vim-bufkill' " Kill buffer without removing split
-"
-"" Git
-"Plug 'tpope/vim-fugitive'
-"Plug 'mhinz/vim-signify'
-"Plug 'christoomey/vim-conflicted'
-"
-"" Autocomplete
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"Plug 'Quramy/tsuquyomi'
-"Plug 'williamboman/vim-import-ts'
-"
-"" Snippets
-""Plug 'SirVer/ultisnips'
-"Plug 'honza/vim-snippets'
-"
-"" Auto tabbing / Alignment
-"Plug 'godlygeek/tabular'
-"
-"" Language Support
-""let g:polyglot_disabled = [ 'python', 'py', 'vimrc', 'sh', 'js', 'json', 'ts', 'md' ] " Semshi has better support for python files
-""Plug 'sheerun/vim-polyglot'
-"Plug 'plasticboy/vim-markdown'
-"Plug 'lervag/vimtex'
-""Plug 'numirias/semshi'
-"Plug 'rafcamlet/coc-nvim-lua' " Nvim lua support for CoC
-"Plug 'OmniSharp/omnisharp-vim' " Omnisharp (C#)
-"Plug 'vim-pandoc/vim-pandoc'
-"Plug 'vim-pandoc/vim-pandoc-syntax'
-"Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
-"
-"" Other Utilities
-"Plug 'ryanoasis/vim-devicons' " Icons
-"Plug 'kyazdani42/nvim-web-devicons' " Colored icons
-"Plug 'goolord/alpha-nvim'
-"Plug 'superevilmegaco/Screenshot.nvim'
-"Plug 'justinmk/vim-sneak' " Sneak mode
-"Plug 'chrisbra/Colorizer'
-"Plug 'kristijanhusak/orgmode.nvim', { 'branch': 'tree-sitter' } " Orgmode for Neovim
-""Plug 'itchyny/calendar.vim'
-"Plug 'jbyuki/instant.nvim'
-"
-"call plug#end()
-
 filetype plugin indent on    " required
 
-"source $DOTFILES/statusline.nvim
+lua require("plugins") -- packer plugins
 
 set ruler
 set number
 set showcmd
 set encoding=utf-8
-set laststatus=2
+set laststatus=0 " This will be set to 2 before feline is loaded
 set expandtab
 set tabstop=4
 set shiftwidth=4
@@ -91,39 +20,27 @@ set breakindent
 set timeoutlen=250
 set hidden
 set clipboard^=unnamed,unnamedplus
-set title
-set titlestring="[VIM] %t"
 set termguicolors
 set cursorline
 set guifont="Iosevka Sandvich:h11"
 set list lcs=tab:▏\ 
 set fillchars+=eob:*
-"set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %{noscrollbar#statusline()}
 
-" Syntax highlighting
 syntax on
-
-let g:gruvbox_sign_column = "bg0"
-let g:gruvbox_italicize_comments = 1
-let g:gruvbox_italicize_strings = 1
-let g:gruvbox_invert_selection = 0
 
 let g:loaded_python_provider = 0
 
-" Indent guides
-"lua require("indent-line-config").init()
-
 " Language
-let g:vim_markdown_conceal_code_blocks = 1
-let g:vim_markdown_folding_disabled = 1
-let g:vim_markdown_conceal_code_blocks = 0
-let g:vim_markdown_folding_disabled = 1
-let g:cpp_member_variable_highlight = 1
-let g:cpp_class_scope_highlight = 1
-let g:cpp_class_decl_highlight = 1
-let g:cpp_concepts_highlight = 1
+"let g:vim_markdown_conceal_code_blocks = 1
+"let g:vim_markdown_folding_disabled = 1
+"let g:vim_markdown_conceal_code_blocks = 0
+"let g:vim_markdown_folding_disabled = 1
+"let g:cpp_member_variable_highlight = 1
+"let g:cpp_class_scope_highlight = 1
+"let g:cpp_class_decl_highlight = 1
+"let g:cpp_concepts_highlight = 1
 let g:vimtex_compiler_method = 'latexmk'
-let g:semshi#excluded_hl_groups = [ 'local', 'unresolved' ]
+"let g:semshi#excluded_hl_groups = [ 'local', 'unresolved' ]
 let g:OmniSharp_server_use_mono = 1
 
 " Gutter Configuration
@@ -174,8 +91,6 @@ map <ScrollWheelRight> 3zl
 
 " Editor shortcuts
 map <C-s> :w<CR>
-map <silent> ` :VBGtoggleBreakpointThisLine<CR>
-map <silent> <S-`> :VBGclearBreakpints<CR>
 
 nmap <silent> <C-/> :noh<CR>
 noremap <silent> ZW :call CloseBuffer()<CR>
@@ -206,8 +121,11 @@ map <silent> <leader>f :Files<CR>
 map <silent> <leader>t :NvimTreeToggle<CR>
 map <silent> <leader>h :CocCommand clangd.switchSourceHeader<CR>
 
+" ShowDocumentation includes both native nvim and LSP documentation
 nnoremap <silent> K :call ShowDocumentation()<CR>
 
+" There is a VS Code extension that runs a hidden instance of neovim for
+" editing, and these keys may mess up the hidden buffers.
 if !exists('g:vscode')
     nnoremap <silent> <Right> :BufferNext<CR>
     nnoremap <silent> <Left> :BufferPrevious<CR>
@@ -222,22 +140,17 @@ inoremap <silent><expr> <Tab>
 \   coc#refresh()
 let g:coc_snippet_next = '<tab>'
 
+" The following keys will be mapped to their normal function unless a pmenu is
+" visible; if so, map it to previous and next items in the pmenu
 inoremap <expr> <Down> pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <Up> pumvisible() ? "\<C-p>" : "\<Up>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Autocommands
-autocmd FileType nerdtree noremap <buffer> <Left> <nop>
-autocmd FileType nerdtree noremap <buffer> <Right> <nop>
-autocmd FileType python nnoremap <F5> :w <bar> exec '!python '.shellescape('%')<CR>
-autocmd FileType c nnoremap <F5> :w <bar> exec '!gcc '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
-autocmd FileType cpp nnoremap <F5> :w <bar> exec '!g++ '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
-autocmd FileType tex nnoremap <F5> :VimtexCompile<CR>
 autocmd BufWrite *.tex VimtexCompile
 autocmd InsertEnter * set conceallevel=0
 autocmd InsertLeave * set conceallevel=1
-autocmd User Startified setlocal cursorline
 
 set mouse=a
 
@@ -262,23 +175,5 @@ function! ShowDocumentation()
     endif
 endfunction
 
-" Highlight Overrides
-function! HighlightOverrides()
-    lua require("highlight-overrides").highlight_overrides()
-    call BarbarHighlight()
-endfunction
-
-function! SetColorscheme(scheme)
-    "execute 'colorscheme ' . a:scheme
-    call HighlightOverrides()
-endfunction
-
-"lua require("galaxyline-config")
-"lua require("feline-config")
-"lua require("treesitter-config")
-"lua require("orgmode-config")
-
-" Load Configs
+" This file is automatically generated by the colorscheme picker
 luafile /var/tmp/colorscheme.lua
-"source ~/local.vimrc
-"source /var/tmp/colorscheme.vim

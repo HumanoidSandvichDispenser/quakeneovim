@@ -19,15 +19,35 @@ local function plugins(use)
 
     use("rktjmp/lush.nvim")
 
-    use("ellisonleao/gruvbox.nvim")
+    use({
+        "ellisonleao/gruvbox.nvim",
+        opt = true,
+        as = "gruvbox"
+    })
 
-    use("navarasu/onedark.nvim")
+    use({
+        "navarasu/onedark.nvim",
+        opt = true,
+        as = "onedark"
+    })
 
-    use("ghifarit53/tokyonight-vim")
+    use({
+        "ghifarit53/tokyonight-vim",
+        opt = true,
+        as = "tokyonight"
+    })
 
-    use("easysid/mod8.vim")
+    use({
+        "easysid/mod8.vim",
+        opt = true,
+        as = "mod8"
+    })
 
-    use("franbach/miramare")
+    use({
+        "franbach/miramare",
+        opt = true,
+        as = "miramare"
+    })
 
     -- Templates for new files
     use("aperezdc/vim-template")
@@ -61,6 +81,10 @@ local function plugins(use)
 
     use({
         "feline-nvim/feline.nvim",
+        opt = true,
+        setup = function()
+            --vim.o.laststatus = 2
+        end,
         config = function()
             require("feline-config")
         end
@@ -69,7 +93,7 @@ local function plugins(use)
     use({
         "romgrk/barbar.nvim",
         opt = true,
-        event = "BufReadPre",
+        event = "WinEnter",
         -- setup() instead of config() since the bufferline will appear before the config is loaded
         setup = function()
             require("barbar-config")
@@ -88,7 +112,8 @@ local function plugins(use)
     -- Autocomplete
     use({
         "neoclide/coc.nvim",
-        branch = "release"
+        branch = "release",
+        event = "BufRead"
     })
 
     use("Quramy/tsuquyomi")
@@ -126,6 +151,7 @@ local function plugins(use)
 
     use({
         "nvim-treesitter/nvim-treesitter",
+        event = "BufRead",
         config = function()
             require("treesitter-config")
         end
@@ -153,12 +179,18 @@ local function plugins(use)
     use("jbyuki/instant.nvim")
 end
 
+-- delayed lazy loading
+vim.fn.timer_start(100, function()
+    vim.o.laststatus = 2
+    packer.loader("feline.nvim")
+end)
+
 return packer.startup({
     plugins,
     config = {
         profile = {
             enable = true,
-            threshold = 1
+            threshold = 0
         }
     }
 })
