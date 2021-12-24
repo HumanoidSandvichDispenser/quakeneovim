@@ -53,8 +53,16 @@ local function plugins(use)
     -- Status line
     use({
         "glepnir/galaxyline.nvim",
+        disable = true,
         config = function()
             require("galaxyline-config")
+        end
+    })
+
+    use({
+        "feline-nvim/feline.nvim",
+        config = function()
+            require("feline-config")
         end
     })
 

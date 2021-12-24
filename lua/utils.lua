@@ -12,10 +12,26 @@ function utils.split(s, sep)
     local fields = {}
 
     sep = sep or " "
+
     local pattern = string.format("([^%s]+)", sep)
     string.gsub(s, pattern, function(c) fields[#fields + 1] = c end)
 
     return fields
+end
+
+function utils.join(s, sep)
+    local result = ""
+
+    sep = sep or " "
+
+    for i, substr in ipairs(s) do
+        if i > 0 then
+            result = result .. sep
+        end
+        result = result .. substr
+    end
+
+    return result
 end
 
 function utils.shallowcopy(orig)
