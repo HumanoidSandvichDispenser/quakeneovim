@@ -10,6 +10,11 @@ local packer = require("packer")
 
 packer.init()
 
+function LoadColorschemePlugin(colorscheme)
+    vim.api.nvim_command("colorscheme " .. colorscheme)
+    require("highlight-overrides").highlight_overrides()
+end
+
 local function plugins(use)
     -- Packer can manage itself
 
@@ -21,32 +26,47 @@ local function plugins(use)
 
     use({
         "ellisonleao/gruvbox.nvim",
-        opt = true,
-        as = "gruvbox"
+        opt = true, -- only load the colorscheme we need
+        as = "gruvbox",
+        config = function()
+            LoadColorschemePlugin("gruvbox")
+        end
     })
 
     use({
         "navarasu/onedark.nvim",
         opt = true,
-        as = "onedark"
+        as = "onedark",
+        config = function()
+            LoadColorschemePlugin("onedark")
+        end
     })
 
     use({
         "ghifarit53/tokyonight-vim",
         opt = true,
-        as = "tokyonight"
+        as = "tokyonight",
+        config = function()
+            LoadColorschemePlugin("tokyonight")
+        end
     })
 
     use({
         "easysid/mod8.vim",
         opt = true,
-        as = "mod8"
+        as = "mod8",
+        config = function()
+            LoadColorschemePlugin("mod8")
+        end
     })
 
     use({
         "franbach/miramare",
         opt = true,
-        as = "miramare"
+        as = "miramare",
+        config = function()
+            LoadColorschemePlugin("miramare")
+        end
     })
 
     -- Templates for new files

@@ -149,8 +149,8 @@ function SetColorscheme(colorscheme)
         return
     end
     colorscheme_loaded = true
-    command(string.format("colorscheme %s", colorscheme))
-    highlight_overrides()
+
+    require("packer").loader(colorscheme)
 end
 
 return {
