@@ -68,20 +68,14 @@ local function highlight_overrides()
     --BaseColors = base_colors
 
     command(string.format("hi Pmenu guibg=%s", base_colors.bg0_alt))
-    command(string.format("hi PmenuSel guifg=%s guibg=%s gui=italic", base_colors.bg0, base_colors.accent))
+    command(string.format("hi PmenuSel guifg=%s guibg=%s gui=italic", base_colors.fg, base_colors.bg2))
+    command(string.format("hi CmpItemAbbrMatch guifg=%s gui=bold", base_colors.accent))
+
     command("hi Comment gui=italic")
 
     command(string.format("hi LineNr guibg=%s", base_colors.bg0))
     command(string.format("hi CursorLineNr guibg=%s", base_colors.bg0_alt))
     command(string.format("hi CursorLine guibg=%s", base_colors.bg0_alt))
-
-    command(string.format("hi semshiParameter guifg=%s", base_colors.blue))
-    command(string.format("hi semshiParameterUnused gui=Underline guifg=%s", base_colors.blue))
-    command(string.format("hi semshiSelected guibg=%s", base_colors.bg2))
-    command(string.format("hi semshiImported guifg=%s", base_colors.yellow))
-    command(string.format("hi semshiBuiltin guifg=%s", base_colors.yellow))
-    command(string.format("hi semshiAttribute guifg=%s", base_colors.blue))
-    command(string.format("hi semshiSelf guifg=%s", base_colors.red))
 
     command(string.format("hi GitGutterAdd guifg=%s guibg=%s", base_colors.green, base_colors.bg0))
     command(string.format("hi GitGutterChange guifg=%s guibg=%s", base_colors.blue, base_colors.bg0))
@@ -91,8 +85,8 @@ local function highlight_overrides()
 
     highlight_link("SignColumn", "Normal")
 
-    command(string.format("hi StartifyHeader guifg=%s", base_colors.green))
-    command(string.format("hi StartifySection guifg=%s", base_colors.blue))
+    --command(string.format("hi StartifyHeader guifg=%s", base_colors.green))
+    --command(string.format("hi StartifySection guifg=%s", base_colors.blue))
 
     command(string.format("hi BufferCurrent guifg=%s guibg=%s", base_colors.fg, base_colors.bg1))
     command(string.format("hi BufferCurrentIndex guifg=%s guibg=%s", base_colors.fg, base_colors.bg1))
@@ -128,13 +122,13 @@ local function highlight_overrides()
     command(string.format("hi BufferTabpages guibg=%s", base_colors.bg0))
     command(string.format("hi BufferTabpageFill guibg=%s", base_colors.bg0))
 
-    command(string.format("hi StartifyBracket guifg=%s", base_colors.bg0))
-    command(string.format("hi StartifyHeader guifg=%s", base_colors.accent))
-    command(string.format("hi StartifySection guifg=%s", base_colors.bg4))
-    command(string.format("hi StartifyNumber guifg=%s", base_colors.bg4))
-    command(string.format("hi StartifyFile guifg=%s gui=italic", base_colors.accent))
-    command(string.format("hi StartifyPath guifg=%s", base_colors.bg4))
-    command(string.format("hi StartifySlash guifg=%s", base_colors.bg4))
+    --command(string.format("hi StartifyBracket guifg=%s", base_colors.bg0))
+    --command(string.format("hi StartifyHeader guifg=%s", base_colors.accent))
+    --command(string.format("hi StartifySection guifg=%s", base_colors.bg4))
+    --command(string.format("hi StartifyNumber guifg=%s", base_colors.bg4))
+    --command(string.format("hi StartifyFile guifg=%s gui=italic", base_colors.accent))
+    --command(string.format("hi StartifyPath guifg=%s", base_colors.bg4))
+    --command(string.format("hi StartifySlash guifg=%s", base_colors.bg4))
 
     command(string.format("hi Accent guifg=%s", base_colors.accent))
     command(string.format("hi Gray guifg=%s", base_colors.gray))
@@ -142,6 +136,14 @@ local function highlight_overrides()
     command(string.format("hi SignifyLineAdd guifg=%s guibg=%s", base_colors.green, base_colors.bg0))
     command(string.format("hi SignifyLineChange guifg=%s guibg=%s", base_colors.blue, base_colors.bg0))
     command(string.format("hi SignifyLineDelete guifg=%s guibg=%s", base_colors.red, base_colors.bg0))
+
+    --vim.api.nvim_set_hl(6, "CmpItemMenu", { guibg = base_colors.red })
+    --vim.highlight.create("CmpItemMenu", { guifg = base_colors.red }, false)
+
+    --highlight_link("CmpItemMenu", "Pmenu")
+    --command(string.format("hi CmpItemAbbr guifg=%s", base_colors.accent))
+
+    command(string.format("hi ScrollView guibg=%s", base_colors.gray))
 end
 
 function SetColorscheme(colorscheme)

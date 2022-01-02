@@ -44,12 +44,12 @@ let g:vimtex_compiler_method = 'latexmk'
 let g:OmniSharp_server_use_mono = 1
 
 " Gutter Configuration
-let g:signify_sign_add = '▐'
-let g:signify_sign_change = '▐'
-let g:gitgutter_sign_removed = '▁'
-let g:gitgutter_sign_removed_first_line = '▔'
-let g:gitgutter_sign_removed_above_and_below = '🮀'
-let g:gitgutter_sign_modified_removed = '▁▐'
+"let g:signify_sign_add = '▐'
+"let g:signify_sign_change = '▐'
+"let g:gitgutter_sign_removed = '▁'
+"let g:gitgutter_sign_removed_first_line = '▔'
+"let g:gitgutter_sign_removed_above_and_below = '🮀'
+"let g:gitgutter_sign_modified_removed = '▁▐'
 
 " Autocomplete configuration
 let g:coc_global_extensions = [
@@ -93,7 +93,7 @@ map <ScrollWheelRight> 3zl
 map <C-s> :w<CR>
 
 nmap <silent> <C-/> :noh<CR>
-noremap <silent> ZW :call CloseBuffer()<CR>
+noremap <silent> ZW <cmd>BD<CR>
 noremap <silent> ZT :enew<CR>
 noremap <silent> <Esc><Esc> :Alpha<CR>
 
@@ -115,42 +115,49 @@ inoremap <C-p> <Up>
 inoremap <C-h> <C-w>
 
 " Plugin Shortcuts
-map <silent> <C-n> :NERDTreeTabsToggle<CR>
 map <silent> <leader>e :CocCommand explorer<CR>
 map <silent> <leader>f :Files<CR>
 map <silent> <leader>t :NvimTreeToggle<CR>
 map <silent> <leader>h :CocCommand clangd.switchSourceHeader<CR>
 
 " ShowDocumentation includes both native nvim and LSP documentation
-nnoremap <silent> K :call ShowDocumentation()<CR>
+"nnoremap <silent> K :call ShowDocumentation()<CR>
+nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
 
 " There is a VS Code extension that runs a hidden instance of neovim for
 " editing, and these keys may mess up the hidden buffers.
-if !exists('g:vscode')
+if !exists("g:vscode")
     nnoremap <silent> <Right> :BufferNext<CR>
     nnoremap <silent> <Left> :BufferPrevious<CR>
     nnoremap <silent> <S-Right> :BufferMoveNext<CR>
     nnoremap <silent> <S-Left> :BufferMovePrevious<CR>
 endif
 
-inoremap <silent><expr> <Tab>
-\   pumvisible() ? "\<C-n>" :
-\   coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-\   <SID>check_back_space() ? "\<TAB>" :
-\   coc#refresh()
-let g:coc_snippet_next = '<tab>'
+"inoremap <silent><expr> <Tab>
+"\   pumvisible() ? "\<C-n>" :
+"\   coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+"\   <SID>check_back_space() ? "\<TAB>" :
+"\   coc#refresh()
+"let g:coc_snippet_next = '<tab>'
 
 " The following keys will be mapped to their normal function unless a pmenu is
 " visible; if so, map it to previous and next items in the pmenu
-inoremap <expr> <Down> pumvisible() ? "\<C-n>" : "\<Down>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <Up> pumvisible() ? "\<C-p>" : "\<Up>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+"inoremap <expr> <Down> pumvisible() ? "\<C-n>" : "\<Down>"
+"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+"inoremap <expr> <Up> pumvisible() ? "\<C-p>" : "\<Up>"
+"inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"inoremap <silent> <Tab> <cmd>lua require("lsp.cmp").next(true, "<Tab>")<CR>
+"inoremap <silent> <S-Tab> <cmd>lua require("lsp.cmp").next(false, "<S-Tab>")<CR>
+"inoremap <silent> <CR> <cmd>lua require("lsp.cmp").complete()<CR>
+"inoremap <expr> <CR> pumvisible() ? "<cmd>call <SID>complete()<CR>" : "\<CR>"
 
 " Autocommands
 autocmd BufWrite *.tex VimtexCompile
 autocmd InsertEnter * set conceallevel=0
 autocmd InsertLeave * set conceallevel=1
+autocmd TextYankPost * lua vim.highlight.on_yank({ higroup = "IncSearch", timeout = 500 })
 
 set mouse=a
 
@@ -158,11 +165,6 @@ set mouse=a
 function! s:check_back_space() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-function! CloseBuffer()
-    BD " Delete buffer, preserve windows
-    call bufferline#update() " Update the bufferline
 endfunction
 
 function! ShowDocumentation()

@@ -9,7 +9,6 @@
 local tree_cb = require("nvim-tree.config").nvim_tree_callback
 
 require("nvim-tree").setup({
-    auto_close = false,
     view = {
         mappings = {
             list = {
@@ -59,6 +58,9 @@ require("nvim-tree").setup({
             warning = "",
             error = "",
         }
+    },
+    git = {
+        enable = true
     }
 })
 
@@ -76,13 +78,13 @@ vim.g.nvim_tree_icons = {
     default = "",
     symlink = "",
     git = {
-        unstaged = "",
-        staged = "",
-        unmerged = "",
-        renamed = "",
-        untracked = "",
-        deleted = "",
-        ignored = "",
+        unstaged = "M ",
+        staged = "S ",
+        unmerged = "G ",
+        renamed = "R ",
+        untracked = "U ",
+        deleted = "D ",
+        ignored = "I ",
     },
     folder = {
         default = " ",

@@ -46,6 +46,7 @@ function alpha_config.bookmarks()
     local bookmarks_table = {
         { "v", "", "neovim config", ":e $DOTFILES/.config/nvim/init.vim" },
         { "p", "", "neovim plugins", ":e $DOTFILES/.config/nvim/lua/plugins.lua" },
+        { "l", "", "language servers", ":e $DOTFILES/.config/nvim/lua/lsp/servers.lua" },
         { "z", "", "zshrc", ":e $DOTFILES/.zshrc" },
         { "b", "", "bspwm config", ":e $DOTFILES/.config/bspwm/bspwmrc" },
         { "s", "", "sxhkd config", ":e $DOTFILES/.config/sxhkd/sxhkdrc" },

@@ -22,10 +22,11 @@ local function plugins(use)
 
     -- themes
 
-    use("rktjmp/lush.nvim")
+    --use("rktjmp/lush.nvim")
 
     use({
-        "ellisonleao/gruvbox.nvim",
+        --"ellisonleao/gruvbox.nvim",
+        "morhetz/gruvbox",
         opt = true, -- only load the colorscheme we need
         as = "gruvbox",
         config = function()
@@ -127,36 +128,60 @@ local function plugins(use)
 
     use("mhinz/vim-signify")
 
-    use("christoomey/vim-conflicted")
+    -- LSP and Autocomplete
 
-    -- Autocomplete
     use({
         "neoclide/coc.nvim",
+        disable = true,
         branch = "release",
         event = "BufRead"
     })
 
-    use("Quramy/tsuquyomi")
+    use({
+        "neovim/nvim-lspconfig",
+        config = function()
+            require("lsp.servers").load_language_servers()
+        end
+    })
 
-    use("williamboman/vim-import-ts")
+    use({
+        "hrsh7th/nvim-cmp",
+        requires = {
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-cmdline",
+            "hrsh7th/cmp-vsnip"
+        },
+        config = function()
+            require("lsp.cmp")
+        end
+    })
+
+    use({
+        "hrsh7th/vim-vsnip",
+        requires = {
+            "hrsh7th/cmp-vsnip"
+        }
+    })
 
     -- Snippets
 
     use("honza/vim-snippets")
 
-    -- Auto tabbing / Alignment
-
-    use("godlygeek/tabular")
+    use("windwp/nvim-autopairs")
 
     -- Language Support
 
-    use("plasticboy/vim-markdown")
+    use({
+        "lervag/vimtex",
+        ft = "tex",
+    })
 
-    use("lervag/vimtex")
-
-    use("rafcamlet/coc-nvim-lua") -- Nvim lua support for CoC
-
-    use("OmniSharp/omnisharp-vim") -- Omnisharp (C#)
+    use({
+        "rafcamlet/coc-nvim-lua",
+        disable = true
+    })
 
     use({
         "vim-pandoc/vim-pandoc",
@@ -190,13 +215,16 @@ local function plugins(use)
         end
     })
 
-    use("superevilmegaco/Screenshot.nvim")
-
     use("justinmk/vim-sneak") -- Sneak mode
 
     use("chrisbra/Colorizer")
 
-    use("jbyuki/instant.nvim")
+    use({
+        "jbyuki/instant.nvim",
+        opt = true
+    })
+
+    use("dstein64/nvim-scrollview")
 end
 
 -- delayed lazy loading

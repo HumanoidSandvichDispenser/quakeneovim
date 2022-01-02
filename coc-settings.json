@@ -53,11 +53,14 @@
     "javascript.suggest.autoImports": true,
     "typescript.suggest.autoImports": true,
 
-    "javascript.referencesCodeLens.enable": true
+    "javascript.referencesCodeLens.enable": true,
 
     "coc.source.OmniSharp.enable": true,
     "coc.source.OmniSharp.triggerCharacters": 2,
 
     "vetur.format.options.tabSize": 4,
-    "vetur.languageFeatures.codeActions": true
+    "vetur.languageFeatures.codeActions": true,
+
+
+    "typescript.tsserver.maxTsServerMemory": 512
 }
