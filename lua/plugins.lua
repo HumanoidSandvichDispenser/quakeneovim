@@ -169,7 +169,12 @@ local function plugins(use)
 
     use("honza/vim-snippets")
 
-    use("windwp/nvim-autopairs")
+    use({
+        "windwp/nvim-autopairs",
+        config = function()
+            require("nvim-autopairs").setup({ })
+        end
+    })
 
     -- Language Support
 

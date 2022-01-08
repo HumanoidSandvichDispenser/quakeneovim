@@ -10,7 +10,10 @@ local configs = {
             "zsh"
         }
     },
-    clangd = { }
+    clangd = { },
+    --pylsp = { },
+    pyright = { },
+    vuels = { }
 }
 
 return {
@@ -20,8 +23,6 @@ return {
 
             if server ~= nil then
                 server.setup(config)
-            else
-                --warn(string.format("Language server %s does not exist in lspconfig.", k))
             end
         end
     end

@@ -53,6 +53,23 @@ local function get_base_colors()
     }
 end
 
+local function get_overrides()
+    return {
+        LspDiagnosticsDefaultHint = {
+            guifg = base_colors.blue
+        },
+        LspDiagnosticsDefaultError = {
+            guifg = base_colors.red
+        },
+        LspDiagnosticsDefaultWarning = {
+            guifg = base_colors.yellow
+        },
+        LspDiagnosticsDefaultInformation = {
+            guifg = base_colors.gray
+        }
+    }
+end
+
 local function get_highlight_info(name)
     local fg = command("synIDattr(synIDtrans(hlID('" + name + "')), 'fg')")
     local bg = command("synIDattr(synIDtrans(hlID('" + name + "')), 'bg')")
@@ -144,6 +161,14 @@ local function highlight_overrides()
     --command(string.format("hi CmpItemAbbr guifg=%s", base_colors.accent))
 
     command(string.format("hi ScrollView guibg=%s", base_colors.gray))
+
+    for group, highlight in pairs(get_overrides()) do
+        local cmd = "hi " .. group .. " "
+        for key, value in pairs(highlight) do
+            cmd = cmd .. key .. "=" .. value .. " "
+        end
+        command(cmd)
+    end
 end
 
 function SetColorscheme(colorscheme)
