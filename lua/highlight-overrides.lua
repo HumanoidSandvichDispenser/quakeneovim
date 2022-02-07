@@ -55,16 +55,16 @@ end
 
 local function get_overrides()
     return {
-        LspDiagnosticsDefaultHint = {
+        DiagnosticHint = {
             guifg = base_colors.blue
         },
-        LspDiagnosticsDefaultError = {
+        DiagnosticError = {
             guifg = base_colors.red
         },
-        LspDiagnosticsDefaultWarning = {
+        DiagnosticWarn = {
             guifg = base_colors.yellow
         },
-        LspDiagnosticsDefaultInformation = {
+        DiagnosticInfo = {
             guifg = base_colors.gray
         }
     }

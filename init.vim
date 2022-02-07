@@ -17,7 +17,7 @@ set shiftwidth=4
 set noshowmode
 set linebreak
 set breakindent
-set timeoutlen=250
+set timeoutlen=500
 set hidden
 set clipboard^=unnamed,unnamedplus
 set termguicolors
@@ -40,6 +40,7 @@ let g:loaded_python_provider = 0
 "let g:cpp_class_decl_highlight = 1
 "let g:cpp_concepts_highlight = 1
 let g:vimtex_compiler_method = 'latexmk'
+let g:vimtex_view_method = 'zathura'
 "let g:semshi#excluded_hl_groups = [ 'local', 'unresolved' ]
 let g:OmniSharp_server_use_mono = 1
 
@@ -102,7 +103,7 @@ nmap ; :
 nnoremap Y yy
 noremap <silent> j gj
 noremap <silent> k gk
-inoremap jj <Esc>
+"inoremap jj <Esc>
 nnoremap Q gqq
 
 " Emacs and standard editors insert bindings
@@ -119,6 +120,8 @@ map <silent> <leader>e :CocCommand explorer<CR>
 map <silent> <leader>f :Files<CR>
 map <silent> <leader>t :NvimTreeToggle<CR>
 map <silent> <leader>h :CocCommand clangd.switchSourceHeader<CR>
+imap <expr> <Tab>   pumvisible() ? '<C-n>' : vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)' : '<Tab>'
+imap <expr> <S-Tab> pumvisible() ? '<C-p>' : vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'
 
 " ShowDocumentation includes both native nvim and LSP documentation
 "nnoremap <silent> K :call ShowDocumentation()<CR>
