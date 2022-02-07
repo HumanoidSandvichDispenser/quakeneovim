@@ -31,14 +31,6 @@ syntax on
 let g:loaded_python_provider = 0
 
 " Language
-"let g:vim_markdown_conceal_code_blocks = 1
-"let g:vim_markdown_folding_disabled = 1
-"let g:vim_markdown_conceal_code_blocks = 0
-"let g:vim_markdown_folding_disabled = 1
-"let g:cpp_member_variable_highlight = 1
-"let g:cpp_class_scope_highlight = 1
-"let g:cpp_class_decl_highlight = 1
-"let g:cpp_concepts_highlight = 1
 let g:vimtex_compiler_method = 'latexmk'
 "let g:semshi#excluded_hl_groups = [ 'local', 'unresolved' ]
 let g:OmniSharp_server_use_mono = 1

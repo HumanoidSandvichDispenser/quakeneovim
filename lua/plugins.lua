@@ -6,6 +6,8 @@
 -- Distributed under terms of the MIT license.
 --
 
+vim.o.runtimepath = vim.o.runtimepath..',~/.local/share/nvim/site/pack/packer/start/himalaya/vim'
+
 local packer = require("packer")
 
 packer.init()
@@ -151,7 +153,8 @@ local function plugins(use)
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-cmdline",
-            "hrsh7th/cmp-vsnip"
+            "hrsh7th/cmp-vsnip",
+            "onsails/lspkind-nvim"
         },
         config = function()
             require("lsp.cmp")
@@ -196,6 +199,9 @@ local function plugins(use)
                 ft = "markdown"
             }
         },
+        config = function()
+            --vim.api.nvim_command("setf pandoc")
+        end,
         ft = "markdown"
     })
 
@@ -230,6 +236,13 @@ local function plugins(use)
     })
 
     use("dstein64/nvim-scrollview")
+
+    use({
+        "soywod/himalaya",
+        config = function()
+            vim.g.himalaya_mailbox_picker = "fzf"
+        end
+    }) -- email
 end
 
 -- delayed lazy loading

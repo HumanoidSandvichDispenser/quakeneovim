@@ -1,6 +1,7 @@
 local cmp = require("cmp")
 -- If you want insert `(` after select function or method item
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+local lspkind = require("lspkind")
 
 -- completes if a completion popup menu is visible, otherwise register a
 -- newline normally.
@@ -62,6 +63,12 @@ cmp.setup({
         {
             name = "path",
         }
+    },
+    formatting = {
+        format = lspkind.cmp_format({
+            with_text = true,
+            maxwidth = 32
+        })
     }
 })
 

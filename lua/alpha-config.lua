@@ -146,6 +146,10 @@ function alpha_config.mru(start, cwd)
     }
 end
 
+function alpha_config.miscellaneous()
+    
+end
+
 alpha_config.menus = {
     startup = {
         layout = {
@@ -179,6 +183,11 @@ alpha_config.menus = {
             menu.padding({ }, 1),
 
             menu.button(utils.deepcopy(default_opts),
+                "", "Mail", "m", "m", ":Himalaya<CR>"),
+
+            menu.padding({ }, 1),
+
+            menu.button(utils.deepcopy(default_opts),
                 "", "Quit", "q", "q", ":qa<CR>"),
         },
         opts = {
@@ -203,6 +212,13 @@ alpha_config.menus = {
         },
         opts = {
             margin = 3
+        }
+    },
+    utils = {
+        layout = {
+            menu.header(utils.deepcopy(default_opts), header_text),
+            menu.padding({ }, 2),
+            alpha_config
         }
     }
 }
