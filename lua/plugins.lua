@@ -174,9 +174,7 @@ use({
     end
 })
 
--- Snippets
-
-use("honza/vim-snippets")
+use("onsails/lspkind-nvim")
 
 use({
     "windwp/nvim-autopairs",
