@@ -89,6 +89,8 @@ nmap <silent> <C-/> :noh<CR>
 noremap <silent> ZW <cmd>BD<CR>
 noremap <silent> ZT :enew<CR>
 noremap <silent> <Esc><Esc> :Alpha<CR>
+nmap <C-l> 22zl
+nmap <C-h> 22zh
 
 " Remappings
 nmap ; :
@@ -112,8 +114,17 @@ map <silent> <leader>e :CocCommand explorer<CR>
 map <silent> <leader>f :Files<CR>
 map <silent> <leader>t :NvimTreeToggle<CR>
 map <silent> <leader>h :CocCommand clangd.switchSourceHeader<CR>
-imap <expr> <Tab>   pumvisible() ? '<C-n>' : vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)' : '<Tab>'
-imap <expr> <S-Tab> pumvisible() ? '<C-p>' : vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'
+
+" Snippets
+imap <expr> <C-b>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-b>'
+smap <expr> <C-b>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-b>'
+
+imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+"imap <expr> <Tab>   pumvisible() ? '<C-n>' : vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)' : '<Tab>'
+"imap <expr> <S-Tab> pumvisible() ? '<C-p>' : vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'
 
 " ShowDocumentation includes both native nvim and LSP documentation
 "nnoremap <silent> K :call ShowDocumentation()<CR>

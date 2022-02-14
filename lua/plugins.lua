@@ -167,7 +167,8 @@ use({
 use({
     "hrsh7th/vim-vsnip",
     requires = {
-        "hrsh7th/cmp-vsnip"
+        "hrsh7th/cmp-vsnip",
+        "kitagry/vs-snippets"
     },
     config = function()
         vim.g.vsnip_snippet_dir = "$HOME/.config/vsnip"
