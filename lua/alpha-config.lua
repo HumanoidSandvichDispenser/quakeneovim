@@ -43,15 +43,7 @@ function alpha_config.start(name, init)
 end
 
 function alpha_config.bookmarks()
-    local bookmarks_table = {
-        { "v", "", "neovim config", ":e $DOTFILES/.config/nvim/init.vim" },
-        { "p", "", "neovim plugins", ":e $DOTFILES/.config/nvim/lua/plugins.lua" },
-        { "l", "", "language servers", ":e $DOTFILES/.config/nvim/lua/lsp/servers.lua" },
-        { "z", "", "zshrc", ":e $DOTFILES/.zshrc" },
-        { "b", "", "bspwm config", ":e $DOTFILES/.config/bspwm/bspwmrc" },
-        { "s", "", "sxhkd config", ":e $DOTFILES/.config/sxhkd/sxhkdrc" },
-        { "x", "", "xresources", ":e $DOTFILES/.Xresources" },
-    }
+    local bookmarks_table = require("bookmarks")
 
     local bookmarks_buttons = { }
 
@@ -59,10 +51,24 @@ function alpha_config.bookmarks()
     -- bookmark[2] = icon
     -- bookmark[3] = title of bookmark
     -- bookmark[4] = command
-    for _, bookmark in pairs(bookmarks_table) do
-        local file_button = menu.button(utils.deepcopy(default_opts),
-            bookmark[2], bookmark[3], bookmark[1], bookmark[1], bookmark[4] .. "<CR>")
-        bookmarks_buttons[#bookmarks_buttons + 1] = file_button
+    for i, bookmark in pairs(bookmarks_table) do
+        -- a string indicates it is a label
+        if type(bookmark) == "string" then
+            if i > 0 then
+                local padding = menu.padding(default_opts, 1)
+                bookmarks_buttons[#bookmarks_buttons + 1] = padding
+            end
+
+            local label = menu.label(utils.deepcopy(default_opts), bookmark)
+            bookmarks_buttons[#bookmarks_buttons + 1] = label
+        -- a table indicates it is a bookmark
+        elseif type(bookmark) == "table" then
+            local file_button = menu.button(utils.deepcopy(default_opts),
+                bookmark[2], bookmark[3], bookmark[1], bookmark[1], bookmark[4]
+                .. "<CR>")
+            bookmarks_buttons[#bookmarks_buttons + 1] = file_button
+        end
+
     end
 
     bookmarks_buttons[#bookmarks_buttons + 1] = menu.padding({ }, 1)
@@ -184,6 +190,11 @@ alpha_config.menus = {
 
             menu.button(utils.deepcopy(default_opts),
                 "", "Mail", "m", "m", ":Himalaya<CR>"),
+
+            menu.padding({ }, 1),
+
+            menu.button(utils.deepcopy(default_opts),
+                "", "Back", "h", "h", ":bd<CR>"),
 
             menu.padding({ }, 1),
 

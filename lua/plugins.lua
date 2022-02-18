@@ -12,6 +12,8 @@ local packer = require("packer")
 local util = require("packer.util")
 local use = packer.use
 
+vim.o.laststatus = 0 -- this will be set to 2 after feline starts
+
 packer.init({
     package_root = "/usr/share/nvim/plugins/pack",
     --compile_path = "/usr/share/nvim/plugins/packer_compiled.lua",
@@ -87,7 +89,12 @@ use({
 
 -- Project drawer
 
-use("junegunn/fzf.vim")
+use({
+    "nvim-telescope/telescope.nvim",
+    requires = {
+        "nvim-lua/plenary.nvim"
+    }
+})
 
 use({
     "kyazdani42/nvim-tree.lua",
@@ -147,6 +154,7 @@ use({
     "neovim/nvim-lspconfig",
     config = function()
         require("lsp.servers").load_language_servers()
+        require("lsp.config")
     end
 })
 
@@ -246,6 +254,12 @@ use({
 }) -- email
 
 use("junegunn/vim-easy-align")
+
+use({
+    "nvim-orgmode/orgmode"
+})
+
+use("svermeulen/vimpeccable")
 
 -- delayed lazy loading
 vim.fn.timer_start(100, function()
