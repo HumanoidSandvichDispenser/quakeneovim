@@ -11,9 +11,9 @@ local configs = {
         }
     },
     clangd = { },
-    --pylsp = { },
     pyright = { },
-    vuels = { }
+    vuels = { },
+    texlab = { }
 }
 
 return {
