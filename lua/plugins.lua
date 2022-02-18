@@ -93,7 +93,10 @@ use({
     "nvim-telescope/telescope.nvim",
     requires = {
         "nvim-lua/plenary.nvim"
-    }
+    },
+    config = function()
+        require("telescope-config").init()
+    end
 })
 
 use({
@@ -256,7 +259,11 @@ use({
 use("junegunn/vim-easy-align")
 
 use({
-    "nvim-orgmode/orgmode"
+    "nvim-orgmode/orgmode",
+    ft = "org",
+    config = function()
+        require("orgmode").setup()
+    end
 })
 
 use("svermeulen/vimpeccable")

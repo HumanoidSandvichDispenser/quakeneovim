@@ -1,3 +1,4 @@
+-- this is required for LSP
 vim = require("vim.shared")
 vim = require("vim.uri")
 vim = require("vim.inspect")

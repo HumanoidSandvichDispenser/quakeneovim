@@ -96,6 +96,7 @@ nnoremap Q gqq
 nnoremap <silent> <leader>rr :source $NVIM/init.vim<CR>
 nnoremap <silent> <leader>pc :lua require('packer').compile() <CR>
 nnoremap <silent> <leader>pu :lua require('packer').sync()<CR>
+nnoremap <silent> <leader>pi :lua require('packer').install()<CR>
 
 " Emacs and standard editors insert bindings
 imap <C-a> <Home>
@@ -111,7 +112,9 @@ map <silent> <leader>e :CocCommand explorer<CR>
 map <silent> <leader>s :Telescope<CR>
 map <silent> <leader>t :NvimTreeToggle<CR>
 map <silent> <leader>h :CocCommand clangd.switchSourceHeader<CR>
-map <silent> <leader>fP :Files $NVIM<CR>
+map <silent> <leader>fP :lua require('telescope-config').search_config_dir()<CR>
+" Emacs Enlightenment
+map <silent> <M-x> :Telescope<CR>
 
 " Snippets
 imap <expr> <C-b>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-b>'
@@ -121,11 +124,7 @@ imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab
 smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
 imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-"imap <expr> <Tab>   pumvisible() ? '<C-n>' : vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)' : '<Tab>'
-"imap <expr> <S-Tab> pumvisible() ? '<C-p>' : vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'
 
-" ShowDocumentation includes both native nvim and LSP documentation
-"nnoremap <silent> K :call ShowDocumentation()<CR>
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
 
@@ -137,25 +136,6 @@ if !exists("g:vscode")
     nnoremap <silent> <S-Right> :BufferMoveNext<CR>
     nnoremap <silent> <S-Left> :BufferMovePrevious<CR>
 endif
-
-"inoremap <silent><expr> <Tab>
-"\   pumvisible() ? "\<C-n>" :
-"\   coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-"\   <SID>check_back_space() ? "\<TAB>" :
-"\   coc#refresh()
-"let g:coc_snippet_next = '<tab>'
-
-" The following keys will be mapped to their normal function unless a pmenu is
-" visible; if so, map it to previous and next items in the pmenu
-"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-"inoremap <expr> <Down> pumvisible() ? "\<C-n>" : "\<Down>"
-"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-"inoremap <expr> <Up> pumvisible() ? "\<C-p>" : "\<Up>"
-"inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-"inoremap <silent> <Tab> <cmd>lua require("lsp.cmp").next(true, "<Tab>")<CR>
-"inoremap <silent> <S-Tab> <cmd>lua require("lsp.cmp").next(false, "<S-Tab>")<CR>
-"inoremap <silent> <CR> <cmd>lua require("lsp.cmp").complete()<CR>
-"inoremap <expr> <CR> pumvisible() ? "<cmd>call <SID>complete()<CR>" : "\<CR>"
 
 " Autocommands
 autocmd BufWrite *.tex VimtexCompile
