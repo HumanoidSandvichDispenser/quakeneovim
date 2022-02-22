@@ -48,34 +48,29 @@ local function ternary(cond, a, b)
     return b
 end
 
-local default_hl = {
-    fg = colors.gray,
-    bg = colors.bg0
-}
+local default_hl = "FelineDefault"
 
 local vi_mode_colors = {
-    NORMAL = colors.fg,
-    INSERT = colors.green,
-    VISUAL = colors.blue,
-    LINES = colors.blue,
-    OP = colors.blue,
-    BLOCK = colors.blue,
-    REPLACE = colors.purple,
-    ["V-REPLACE"] = colors.purple,
-    ENTER = colors.aqua,
-    MORE = colors.aqua,
-    SELECT = colors.aqua,
-    COMMAND = colors.purple,
-    SHELL = colors.green,
-    TERM = colors.green,
-    NONE = colors.yellow
+    NORMAL = "FelineNormalMode",
+    INSERT = "FelineInsertMode",
+    VISUAL = "FelineVisualMode",
+    LINES = "FelineVisualMode",
+    OP = "FelineVisualMode",
+    BLOCK = "FelineVisualMode",
+    REPLACE = "FelineReplaceMode",
+    ["V-REPLACE"] =  "FelineReplaceMode",
+    ENTER = "FelineSelectMode",
+    MORE = "FelineSelectMode",
+    SELECT = "FelineSelectMode",
+    COMMAND = "FelineCommandMode",
+    SHELL = "FelineInsertMode",
+    TERM = "FelineInsertMode",
+    NONE = "FelineNormalMode"
 }
 
+-- This is a function so the highlights are dynamically updated
 local function vi_mode_color_hl()
-    return {
-        bg = vi_mode_colors[vi_mode_utils.get_vim_mode()],
-        fg = colors.bg0
-    }
+    return vi_mode_colors[vi_mode_utils.get_vim_mode()]
 end
 
 local vi_mode = {
@@ -156,23 +151,16 @@ local filename = {
             return vim.fn.fnamemodify(fullname, ":t")
         end
 
-        return ""
+        return "No file"
     end,
     hl = function()
-        return {
-            name = "StatusComponentFilename",
-            fg = ternary(is_valid_file(), colors.fg, colors.gray),
-            bg = colors.bg0
-        }
+        return ternary(is_valid_file(), "Normal", "FelineDefault")
     end
 }
 
 local filename_inactive = utils.deepcopy(filename)
 filename_inactive.hl = function()
-    return {
-        fg = colors.gray,
-        bg = colors.bg0
-    }
+    return default_hl
 end
 
 
@@ -323,7 +311,8 @@ local components = {
             filename_inactive,
             filemod,
             filesize,
-            filetype
+            filetype,
+            space
         }
     }
 }

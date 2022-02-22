@@ -12,7 +12,25 @@ local alpha = require("alpha")
 local menu = require("alpha-menu")
 local utils = require("utils")
 
-local header_text = [[
+local possible_headers = {
+    [[
+
+   .d'     'b.
+  d'         `b
+.$'           `$.                                          .
+dF             9b     9$     $F         $.         9F    .P       9F   `$
+$L             J$     $$     $$        d`$.        $$  .dP        $$
+Y$             $P     $$     $$       d' $$.       $$*'Y$b.       $$*
+`$b    9$F    d$'     $$     $$      d' `"$$.      $$    `$b      $$
+ `$b.  8$8  .d$'      Y$.   .$P     d'     $$.     $$      $      "$  .:$
+   "$$@@$@@$$"         `'" "'`                             '       `"'`"'
+     `"Y$P"'
+       I$I                         N E O V I M
+       `$'
+        $
+        *
+    ]],
+    [[
       ▓▓▓▓  ▓▓▓▓    
     ▓▓▓▓▓▓▓▓▓▓▓▓▓▓   ███████   █████   ██████  ██    ██ ██ ██████████
   ▓▓▓▓██  ████  ▓▓  ░░██░░░██ ██░░░██ ██░░░░██░██   ░██░██░░██░░██░░██
@@ -20,7 +38,27 @@ local header_text = [[
 ▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒     ░██  ░██░██░░░░ ░██   ░██ ░░████  ░██ ░██ ░██ ░██
 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓       ███  ░██░░██████░░██████   ░░██   ░██ ███ ░██ ░██
 ░░░░░░░░░░░░░░      ░░░   ░░  ░░░░░░  ░░░░░░     ░░    ░░ ░░░  ░░  ░░
-]]
+    ]],
+    [[
+      ⠐⢶⣶⣶⣶⣤⣤⡀  ⣠⣀⣀           
+        ⠙⢿⣯⣠⣶⣦⣤⣤⣌⣛⠻⢇⣠⣤⣤       
+          ⠻⣿⣿⣿⡟⢉⡤⢤⣤⣤⡍⠛⢡⢖⣥⣶⣦⣀  
+          ⣠⣿⣿⣿⡏⣭⣶⣿⣿⠟⢿⣦⡡⣿⣿⡇ ⡙⣷⡀
+       ⣀⣴⣿⣿⣿⣿⣿⣿⡞⣿⣿⡟⢀⡀⣿⣿⢻⣿⣿⣀⣁⣿⠏
+   ⢀⣠⣶⣿⣿⣿⣿⣿⣿⣿⣿⣟⢰⢻⣿⣇⣈⣴⣿⠟⢨⣛⠛⠛⠉⠁  
+ ⣠⣶⣿⣿⡟⢋⠤⣤⠘⢿⣿⣧⡙⠻⠌⠒⠙⠛⢛⣫⣥⣿⣦⡈⠉⣡⣴⣾⠇
+⢰⣿⣿⣿⣿ ⡇ ⠙⠷⣤⡙⠻⢿⣿⣶⣶⣶⣿⣿⣿⣿⣿⣿⣿⠿⠟⠋  
+⠘⣿⣿⣿⣿⣆⠻⣄ ⣀⡀⠉⠙⠒⠂⠉⠍⠉⠉⠉⠉⣩⣍⣁⣂⡈⠠⠂  
+ ⠘⢿⣿⣿⣿⣦⡉⠳⢬⣛⠷⢦⡄     ⣀⣼⣿⣿⠿⠛⠋    
+   ⠉⠻⢿⣿⣿⣷⣦⣬⣍⣓⡒⠒⣒⣂⣠⡬⠽⠓⠂      
+         N E O V I M
+    ]]
+}
+
+math.randomseed(os.time())
+local header_text = possible_headers[math.random(1, #possible_headers)]
+
+--
 
 local default_opts = {
     position = "center",
@@ -159,6 +197,8 @@ end
 alpha_config.menus = {
     startup = {
         layout = {
+            menu.padding({ }, 1),
+
             menu.header(utils.deepcopy(default_opts), header_text),
 
             menu.padding({ }, 2),
@@ -175,16 +215,6 @@ alpha_config.menus = {
 
             menu.button(utils.deepcopy(default_opts),
                 "", "Recent Files", "r", "r", ":bd | lua require('alpha-config').start('recentfiles')<CR>"),
-
-            menu.padding({ }, 1),
-
-            menu.button(utils.deepcopy(default_opts),
-                "", "Sessions", "s", "s", ":e $DOTFILES/.config/nvim/init.vim<CR>"),
-
-            menu.padding({ }, 1),
-
-            menu.button(utils.deepcopy(default_opts),
-                "", "Search Files", "f", "f", ":Files<CR>"),
 
             menu.padding({ }, 1),
 
@@ -207,6 +237,7 @@ alpha_config.menus = {
     },
     bookmarks = {
         layout = {
+            menu.padding({ }, 1),
             menu.header(utils.deepcopy(default_opts), header_text),
             menu.padding({ }, 2),
             alpha_config.bookmarks()
@@ -217,6 +248,7 @@ alpha_config.menus = {
     },
     recentfiles = {
         layout = {
+            menu.padding({ }, 1),
             menu.header(utils.deepcopy(default_opts), header_text),
             menu.padding({ }, 2),
             alpha_config.mru()
@@ -227,6 +259,7 @@ alpha_config.menus = {
     },
     utils = {
         layout = {
+            menu.padding({ }, 1),
             menu.header(utils.deepcopy(default_opts), header_text),
             menu.padding({ }, 2),
             alpha_config

@@ -20,8 +20,9 @@ packer.init({
 })
 
 function LoadColorschemePlugin(colorscheme)
-    vim.api.nvim_command("colorscheme " .. colorscheme)
-    require("highlight-overrides").highlight_overrides()
+    -- No. :)
+    --vim.api.nvim_command("colorscheme " .. colorscheme)
+    --require("highlight-overrides").highlight_overrides()
 end
 
 -- Packer can manage itself
@@ -30,12 +31,13 @@ use("wbthomason/packer.nvim")
 
 -- themes
 
---use("rktjmp/lush.nvim")
+use("rktjmp/lush.nvim")
 
 use({
     --"ellisonleao/gruvbox.nvim",
     "morhetz/gruvbox",
     opt = true, -- only load the colorscheme we need
+    disable = true,
     as = "gruvbox",
     config = function()
         LoadColorschemePlugin("gruvbox")
@@ -45,6 +47,7 @@ use({
 use({
     "navarasu/onedark.nvim",
     opt = true,
+    disable = true,
     as = "onedark",
     config = function()
         LoadColorschemePlugin("onedark")
@@ -54,6 +57,7 @@ use({
 use({
     "ghifarit53/tokyonight-vim",
     opt = true,
+    disable = true,
     as = "tokyonight",
     config = function()
         LoadColorschemePlugin("tokyonight")
@@ -63,6 +67,7 @@ use({
 use({
     "easysid/mod8.vim",
     opt = true,
+    disable = true,
     as = "mod8",
     config = function()
         LoadColorschemePlugin("mod8")
@@ -72,6 +77,7 @@ use({
 use({
     "franbach/miramare",
     opt = true,
+    disable = true,
     as = "miramare",
     config = function()
         LoadColorschemePlugin("miramare")
@@ -92,7 +98,8 @@ use({
 use({
     "nvim-telescope/telescope.nvim",
     requires = {
-        "nvim-lua/plenary.nvim"
+        "nvim-lua/plenary.nvim",
+        "nvim-telescope/telescope-file-browser.nvim"
     },
     config = function()
         require("telescope-config").init()
@@ -267,6 +274,8 @@ use({
 })
 
 use("svermeulen/vimpeccable")
+
+use("~/git/lush-themes")
 
 -- delayed lazy loading
 vim.fn.timer_start(100, function()
