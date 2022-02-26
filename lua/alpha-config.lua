@@ -11,6 +11,9 @@ local alpha_config = {}
 local alpha = require("alpha")
 local menu = require("alpha-menu")
 local utils = require("utils")
+local telescope = require("telescope")
+local telescope_themes = require("telescope.themes")
+local telescope_builtin = require("telescope.themes")
 
 local possible_headers = {
     [[
@@ -214,7 +217,7 @@ alpha_config.menus = {
             menu.padding({ }, 1),
 
             menu.button(utils.deepcopy(default_opts),
-                "", "Recent Files", "r", "r", ":bd | lua require('alpha-config').start('recentfiles')<CR>"),
+                "", "Recent Files", "SPC f r"),
 
             menu.padding({ }, 1),
 

@@ -12,7 +12,7 @@ set shiftwidth=4
 set noshowmode
 set linebreak
 set breakindent
-set timeoutlen=800
+set timeoutlen=1500
 set hidden
 set clipboard^=unnamed,unnamedplus
 set termguicolors
@@ -97,6 +97,7 @@ nnoremap <silent> <leader>rr :source $NVIM/init.vim<CR>
 nnoremap <silent> <leader>pc :lua require('packer').compile() <CR>
 nnoremap <silent> <leader>pu :lua require('packer').sync()<CR>
 nnoremap <silent> <leader>pi :lua require('packer').install()<CR>
+nnoremap <silent> <leader>fr :lua require('telescope.builtin').oldfiles()<CR>
 
 " Emacs and standard editors insert bindings
 imap <C-a> <Home>
@@ -113,7 +114,7 @@ map <silent> <leader>s :Telescope<CR>
 map <silent> <leader>t :NvimTreeToggle<CR>
 map <silent> <leader>h :CocCommand clangd.switchSourceHeader<CR>
 map <silent> <leader>H :call SynStack()<CR>
-map <silent> <leader>fP :lua require('telescope-config').search_config_dir()<CR>
+map <silent> <leader>fp :lua require('telescope-config').search_config_dir()<CR>
 " Emacs Enlightenment
 map <silent> <M-x> :Telescope<CR>
 

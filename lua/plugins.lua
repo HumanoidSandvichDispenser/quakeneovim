@@ -19,70 +19,15 @@ packer.init({
     --compile_path = "/usr/share/nvim/plugins/packer_compiled.lua",
 })
 
-function LoadColorschemePlugin(colorscheme)
-    -- No. :)
-    --vim.api.nvim_command("colorscheme " .. colorscheme)
-    --require("highlight-overrides").highlight_overrides()
-end
-
 -- Packer can manage itself
 
 use("wbthomason/packer.nvim")
 
 -- themes
 
+use({ "HumanoidSandvichDispenser/lush-themes" })
+
 use("rktjmp/lush.nvim")
-
-use({
-    --"ellisonleao/gruvbox.nvim",
-    "morhetz/gruvbox",
-    opt = true, -- only load the colorscheme we need
-    disable = true,
-    as = "gruvbox",
-    config = function()
-        LoadColorschemePlugin("gruvbox")
-    end
-})
-
-use({
-    "navarasu/onedark.nvim",
-    opt = true,
-    disable = true,
-    as = "onedark",
-    config = function()
-        LoadColorschemePlugin("onedark")
-    end
-})
-
-use({
-    "ghifarit53/tokyonight-vim",
-    opt = true,
-    disable = true,
-    as = "tokyonight",
-    config = function()
-        LoadColorschemePlugin("tokyonight")
-    end
-})
-
-use({
-    "easysid/mod8.vim",
-    opt = true,
-    disable = true,
-    as = "mod8",
-    config = function()
-        LoadColorschemePlugin("mod8")
-    end
-})
-
-use({
-    "franbach/miramare",
-    opt = true,
-    disable = true,
-    as = "miramare",
-    config = function()
-        LoadColorschemePlugin("miramare")
-    end
-})
 
 -- Templates for new files
 use("aperezdc/vim-template")
@@ -227,7 +172,6 @@ use({
 
 use({
     "nvim-treesitter/nvim-treesitter",
-    event = "BufRead",
     config = function()
         require("treesitter-config")
     end
@@ -267,15 +211,14 @@ use("junegunn/vim-easy-align")
 
 use({
     "nvim-orgmode/orgmode",
-    ft = "org",
     config = function()
-        require("orgmode").setup()
-    end
+    end,
+    requires = {
+        "nvim-treesitter/nvim-treesitter"
+    }
 })
 
 use("svermeulen/vimpeccable")
-
-use("~/git/lush-themes")
 
 -- delayed lazy loading
 vim.fn.timer_start(100, function()

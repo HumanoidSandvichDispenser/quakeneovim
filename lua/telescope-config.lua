@@ -26,7 +26,15 @@ local function init()
             find_files = {
                 hidden = true,
                 theme = "ivy"
-            }
+            },
+            oldfiles = {
+                hidden = true,
+                theme = "ivy"
+            },
+            default = {
+                hidden = true,
+                theme = "ivy"
+            },
         },
         defaults = {
             prompt_prefix = "] ",
