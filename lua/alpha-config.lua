@@ -217,12 +217,12 @@ alpha_config.menus = {
             menu.padding({ }, 1),
 
             menu.button(utils.deepcopy(default_opts),
-                "", "Recent Files", "SPC f r"),
+                "", "Recent Files", nil, "SPC f r"),
 
             menu.padding({ }, 1),
 
             menu.button(utils.deepcopy(default_opts),
-                "", "Mail", "m", "m", ":Himalaya<CR>"),
+                "", "Mail", nil, "SPC o m"),
 
             menu.padding({ }, 1),
 

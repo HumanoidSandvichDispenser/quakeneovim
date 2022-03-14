@@ -41,7 +41,7 @@ function alpha_menu.button(opts, icon, text, keybind, key_appearance, action)
     opts.hl = "Accent"
     opts.hl_shortcut = "Normal"
 
-    if not keybind then
+    if keybind then
         opts.keymap = { "n", keybind, action, { noremap = false, silent = true } }
     end
 

@@ -98,6 +98,7 @@ nnoremap <silent> <leader>pc :lua require('packer').compile() <CR>
 nnoremap <silent> <leader>pu :lua require('packer').sync()<CR>
 nnoremap <silent> <leader>pi :lua require('packer').install()<CR>
 nnoremap <silent> <leader>fr :lua require('telescope.builtin').oldfiles()<CR>
+nnoremap <silent> <leader>e :enew<CR>
 
 " Emacs and standard editors insert bindings
 imap <C-a> <Home>
@@ -109,14 +110,13 @@ inoremap <C-p> <Up>
 inoremap <C-h> <C-w>
 
 " Plugin Shortcuts
-map <silent> <leader>e :CocCommand explorer<CR>
-map <silent> <leader>s :Telescope<CR>
 map <silent> <leader>t :NvimTreeToggle<CR>
 map <silent> <leader>h :CocCommand clangd.switchSourceHeader<CR>
 map <silent> <leader>H :call SynStack()<CR>
 map <silent> <leader>fp :lua require('telescope-config').search_config_dir()<CR>
 " Emacs Enlightenment
 map <silent> <M-x> :Telescope<CR>
+map <silent> <leader>om :Himalaya<CR>
 
 " Snippets
 imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
