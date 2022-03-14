@@ -11,9 +11,6 @@ local alpha_config = {}
 local alpha = require("alpha")
 local menu = require("alpha-menu")
 local utils = require("utils")
-local telescope = require("telescope")
-local telescope_themes = require("telescope.themes")
-local telescope_builtin = require("telescope.themes")
 
 local possible_headers = {
     [[
@@ -33,28 +30,14 @@ Y$             $P     $$     $$       d' $$.       $$*'Y$b.       $$*
         $
         *
     ]],
-    [[
-      ▓▓▓▓  ▓▓▓▓    
+    --[[
+      ▓▓▓▓  ▓▓▓▓
     ▓▓▓▓▓▓▓▓▓▓▓▓▓▓   ███████   █████   ██████  ██    ██ ██ ██████████
   ▓▓▓▓██  ████  ▓▓  ░░██░░░██ ██░░░██ ██░░░░██░██   ░██░██░░██░░██░░██
   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓     ░██  ░██░███████░██   ░██░░██ ░██ ░██ ░██ ░██ ░██
 ▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒     ░██  ░██░██░░░░ ░██   ░██ ░░████  ░██ ░██ ░██ ░██
 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓       ███  ░██░░██████░░██████   ░░██   ░██ ███ ░██ ░██
 ░░░░░░░░░░░░░░      ░░░   ░░  ░░░░░░  ░░░░░░     ░░    ░░ ░░░  ░░  ░░
-    ]],
-    [[
-      ⠐⢶⣶⣶⣶⣤⣤⡀  ⣠⣀⣀           
-        ⠙⢿⣯⣠⣶⣦⣤⣤⣌⣛⠻⢇⣠⣤⣤       
-          ⠻⣿⣿⣿⡟⢉⡤⢤⣤⣤⡍⠛⢡⢖⣥⣶⣦⣀  
-          ⣠⣿⣿⣿⡏⣭⣶⣿⣿⠟⢿⣦⡡⣿⣿⡇ ⡙⣷⡀
-       ⣀⣴⣿⣿⣿⣿⣿⣿⡞⣿⣿⡟⢀⡀⣿⣿⢻⣿⣿⣀⣁⣿⠏
-   ⢀⣠⣶⣿⣿⣿⣿⣿⣿⣿⣿⣟⢰⢻⣿⣇⣈⣴⣿⠟⢨⣛⠛⠛⠉⠁  
- ⣠⣶⣿⣿⡟⢋⠤⣤⠘⢿⣿⣧⡙⠻⠌⠒⠙⠛⢛⣫⣥⣿⣦⡈⠉⣡⣴⣾⠇
-⢰⣿⣿⣿⣿ ⡇ ⠙⠷⣤⡙⠻⢿⣿⣶⣶⣶⣿⣿⣿⣿⣿⣿⣿⠿⠟⠋  
-⠘⣿⣿⣿⣿⣆⠻⣄ ⣀⡀⠉⠙⠒⠂⠉⠍⠉⠉⠉⠉⣩⣍⣁⣂⡈⠠⠂  
- ⠘⢿⣿⣿⣿⣦⡉⠳⢬⣛⠷⢦⡄     ⣀⣼⣿⣿⠿⠛⠋    
-   ⠉⠻⢿⣿⣿⣷⣦⣬⣍⣓⡒⠒⣒⣂⣠⡬⠽⠓⠂      
-         N E O V I M
     ]]
 }
 
@@ -139,7 +122,7 @@ local function icon(fn)
     end
 end
 
-function alpha_config.mru(start, cwd)
+function alpha_config.mru(_, cwd)
     vim.cmd("rshada")
     local oldfiles = {}
     for _,v in pairs(vim.v.oldfiles) do
@@ -157,14 +140,14 @@ function alpha_config.mru(start, cwd)
 
     local tbl = {}
     for i, fn in pairs(oldfiles) do
-        local ico, hl = icon(fn)
+        local ico, _ = icon(fn)
         local short_fn
         if cwd then
             short_fn = vim.fn.fnamemodify(fn, ":.")
         else
             short_fn = vim.fn.fnamemodify(fn, ":~")
         end
-        local fn_length = short_fn:len() 
+        local fn_length = short_fn:len()
         local MAX_LEN = 52
         if fn_length > MAX_LEN then
             local trim_len = fn_length - MAX_LEN
@@ -191,10 +174,6 @@ function alpha_config.mru(start, cwd)
         opts = {
         }
     }
-end
-
-function alpha_config.miscellaneous()
-    
 end
 
 alpha_config.menus = {
