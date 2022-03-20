@@ -12,7 +12,9 @@ local telescope_themes = require("telescope.themes")
 
 local function fd_dir(search_dir)
     local opts = telescope_themes.get_ivy()
-    opts.cwd = search_dir
+    if search_dir then
+        opts.cwd = search_dir
+    end
     telescope_builtin.fd(opts)
 end
 

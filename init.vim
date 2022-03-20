@@ -114,6 +114,7 @@ map <silent> <leader>t :NvimTreeToggle<CR>
 map <silent> <leader>h :CocCommand clangd.switchSourceHeader<CR>
 map <silent> <leader>H :call SynStack()<CR>
 map <silent> <leader>fp :lua require('telescope-config').search_config_dir()<CR>
+map <silent> <leader>f. :lua require('telescope-config').fd_dir()<CR>
 " Emacs Enlightenment
 map <silent> <M-x> :Telescope<CR>
 map <silent> <leader>om :Himalaya<CR>
