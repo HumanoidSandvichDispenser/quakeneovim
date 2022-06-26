@@ -19,7 +19,7 @@ local function fd_dir(search_dir)
 end
 
 local function search_config_dir()
-    fd_dir(vim.env.NVIM)
+    fd_dir(vim.env.NVIMPATH)
 end
 
 local function init()
@@ -44,9 +44,24 @@ local function init()
                 "node_modules",
                 "\\.git/"
             }
+        },
+        extensions = {
+            fzf = {
+                fuzzy = true,
+                override_generic_sorter = true,
+                override_file_sorter = true,
+                case_mode = "smart_case"
+            },
+            file_browser = {
+                theme = "ivy",
+                hijack_netrw = true
+            }
         }
     })
 end
+
+telescope.load_extension("file_browser")
+telescope.load_extension("fzf")
 
 return {
     fd_dir = fd_dir,
