@@ -42,27 +42,48 @@ cmp.setup({
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
         ["<C-n>"] = cmp.mapping.select_next_item(),
-        ["<C-p>"] = cmp.mapping.select_prev_item()
+        ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.confirm({ select = true })
+            else
+                fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+            end
+        end, { "i" }),
+        ["<C-p>"] = cmp.mapping.select_prev_item(),
+        --["<S-Tab>"] = cmp.mapping(function()
+        --    if cmp.visible() then
+        --        cmp.select_prev_item()
+        --    end
+        --end, { "i", "s" }),
     },
     experimental = {
         ghost_text = true,
     },
-    documentation = {
-        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    window = {
+        --border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered()
     },
     sources = {
         {
             name = "nvim_lsp",
+            priority = 3
+        },
+        {
+            name = "nvim_lsp_signature_help"
+        },
+        {
+            name = "orgmode"
         },
         {
             name = "vsnip",
         },
         {
-            name = "buffer",
+            name = "path",
         },
         {
-            name = "path",
-        }
+            name = "buffer",
+        },
     },
     formatting = {
         format = lspkind.cmp_format({

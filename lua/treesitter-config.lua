@@ -29,11 +29,14 @@ configs.setup({
         additional_vim_regex_highlighting = { "org" },
     },
     indent = {
-        enable = false,
+        enable = true,
         disable = { "markdown" }
     },
 })
 
 orgmode.setup({
-    org_agenda_files = { "/home/sandvich/Documents/org" }
+    org_agenda_files = { "/home/sandvich/Documents/org" },
+    org_default_notes_file = "/home/sandvich/Dropbox/Documents/org/notes.org",
+    org_hide_leading_stars = true,
+    org_ellipsis = " "
 })

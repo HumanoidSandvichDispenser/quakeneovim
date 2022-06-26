@@ -1,7 +1,10 @@
 -- put this file somewhere in your nvim config, like: ~/.config/nvim/lua/config/lua-lsp.lua
 -- usage: require'lspconfig'.sumneko_lua.setup(require("config.lua-lsp"))
 
-local library = {}
+local library = {
+    "/usr/share/nvim/runtime/lua",
+    "/usr/share/awesome/lib"
+}
 
 local path = vim.split(package.path, ";")
 
@@ -20,7 +23,7 @@ end
 add("$VIMRUNTIME")
 
 -- add vim path
-add("$NVIM")
+add("$NVIMPATH")
 
 -- this uses too much memory
 -- add plugins

@@ -1,4 +1,4 @@
-#! /usr/bin/env lua
+#! /usr/bin/env luaplug
 --
 -- plugins.lua
 -- Copyright (C) 2021 sandvich <sandvich@manjaro>
@@ -6,7 +6,7 @@
 -- Distributed under terms of the MIT license.
 --
 
-vim.o.runtimepath = vim.o.runtimepath..',~/.local/share/nvim/site/pack/packer/start/himalaya/vim'
+vim.o.runtimepath = vim.o.runtimepath .. ',~/.local/share/nvim/site/pack/packer/start/himalaya/vim'
 
 local packer = require("packer")
 local util = require("packer.util")
@@ -25,7 +25,7 @@ use("wbthomason/packer.nvim")
 
 -- themes
 
-use({ "HumanoidSandvichDispenser/lush-themes" })
+use({ "~/git/lush-themes" })
 
 use("rktjmp/lush.nvim")
 
@@ -52,11 +52,28 @@ use({
 })
 
 use({
+    "nvim-telescope/telescope-fzf-native.nvim",
+    run = "make"
+})
+
+use({
     "kyazdani42/nvim-tree.lua",
     cmd = "NvimTreeToggle",
+    disable = true,
     config = function()
         require("nvim-tree-config")
     end
+})
+
+use({
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    cmd = "Neotree",
+    requires = {
+        "nvim-lua/plenary.nvim",
+        "kyazdani42/nvim-web-devicons",
+        "MunifTanjim/nui.nvim",
+    }
 })
 
 -- Status line
@@ -96,18 +113,28 @@ use("tpope/vim-fugitive")
 
 use("mhinz/vim-signify")
 
+use({
+    "TimUntersberger/neogit",
+    requires = {
+        "nvim-lua/plenary.nvim"
+    }
+})
+
 -- LSP and Autocomplete
 
 use({
     "neoclide/coc.nvim",
-    disable = true,
-    branch = "release",
-    event = "BufRead"
+    opt = true,
+    branch = "release"
 })
 
 use({
     "neovim/nvim-lspconfig",
+    requires = {
+        "williamboman/nvim-lsp-installer"
+    },
     config = function()
+        require("nvim-lsp-installer").setup({})
         require("lsp.servers").load_language_servers()
         require("lsp.config")
     end
@@ -120,7 +147,8 @@ use({
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
-        "hrsh7th/cmp-vsnip"
+        "hrsh7th/cmp-vsnip",
+        "hrsh7th/cmp-nvim-lsp-signature-help"
     },
     config = function()
         require("lsp.cmp")
@@ -147,11 +175,34 @@ use({
     end
 })
 
+use({
+    "ray-x/navigator.lua",
+    requires = {
+        { "ray-x/guihua.lua", run = "cd lua/fzy && make" },
+        { "neovim/nvim-lspconfig" },
+    },
+    disable = true,
+    config = function()
+        require("navigator").setup()
+    end
+})
+
+use({
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+        require("trouble").setup({ })
+    end
+})
+
 -- Language Support
 
 use({
     "lervag/vimtex",
     ft = "tex",
+    setup = function()
+        vim.g.vimtex_compiler_method = "latexrun"
+    end
 })
 
 use({
@@ -171,11 +222,17 @@ use({
 })
 
 use({
+    "kovetskiy/sxhkd-vim",
+    ft = "sxhkdrc"
+})
+
+use({
     "nvim-treesitter/nvim-treesitter",
     config = function()
         require("treesitter-config")
     end
 })
+
 -- Other Utilities
 
 use("ryanoasis/vim-devicons") -- Icons
@@ -212,6 +269,7 @@ use("junegunn/vim-easy-align")
 use({
     "nvim-orgmode/orgmode",
     config = function()
+        require("orgmode").setup({})
     end,
     requires = {
         "nvim-treesitter/nvim-treesitter"

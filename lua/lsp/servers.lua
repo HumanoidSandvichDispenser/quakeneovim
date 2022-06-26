@@ -13,7 +13,29 @@ local configs = {
     clangd = { },
     pyright = { },
     vuels = { },
-    texlab = { }
+    texlab = { },
+    rust_analyzer = { },
+    --omnisharp = {
+    --    use_mono = true
+    --},
+    csharp_ls = {
+
+    },
+    gdscript = {
+        on_attach = function (client)
+            local _notify = client.notify
+            client.notify = function (method, params)
+                if method == "textDocument/didClose" then
+                    -- Godot doesn't implement didClose yet
+                    return
+                end
+                _notify(method, params)
+            end
+        end,
+        flags = {
+            debounce_text_changes = 500,
+        }
+    }
 }
 
 return {

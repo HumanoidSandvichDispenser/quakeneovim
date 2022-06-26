@@ -20,11 +20,13 @@ set cursorline
 set guifont="Iosevka Sandvich:h11"
 set list lcs=tab:▏\ 
 set fillchars+=eob:*,stlnc:─,vert:│
+set smartcase
+set ignorecase
 
 let g:loaded_python_provider = 0
 
 " Language
-let g:vimtex_compiler_method = 'latexmk'
+let g:vimtex_compiler_method = 'latexrun'
 let g:vimtex_view_method = 'zathura'
 "let g:semshi#excluded_hl_groups = [ 'local', 'unresolved' ]
 let g:OmniSharp_server_use_mono = 1
@@ -66,6 +68,8 @@ let g:nvim_tree_indent_markers = 1
 let g:sneak#label = 1
 let g:sneak#s_next = 0
 let g:sneak#prompt = 'sneak>'
+let g:sneak#use_ic_scs = 1
+let g:EasyMotion_smartcase = 1
 
 "let mapleader=" "
 map <space> <leader>
@@ -101,24 +105,27 @@ nnoremap <silent> <leader>fr :lua require('telescope.builtin').oldfiles()<CR>
 nnoremap <silent> <leader>e :enew<CR>
 
 " Emacs and standard editors insert bindings
-imap <C-a> <Home>
-inoremap <C-e> <End>
+inoremap <C-a> <C-o>^
+inoremap <C-e> <C-o>$
 inoremap <C-b> <Left>
 inoremap <C-f> <Right>
 inoremap <C-n> <Down>
 inoremap <C-p> <Up>
 inoremap <C-h> <C-w>
+inoremap <C-k> <C-o>dd
 
 " Plugin Shortcuts
-map <silent> <leader>t :NvimTreeToggle<CR>
+map <silent> <leader>t :Neotree toggle<CR>
 map <silent> <leader>h :CocCommand clangd.switchSourceHeader<CR>
 map <silent> <leader>H :call SynStack()<CR>
 map <silent> <leader>fp :lua require('telescope-config').search_config_dir()<CR>
 map <silent> <leader>ff :lua require('telescope-config').fd_dir()<CR>
 map <silent> <leader>. :Telescope file_browser<CR>
+nmap <silent> <leader>gg :Neogit<CR>
+map <silent> <leader>om :Himalaya<CR>
+
 " Emacs Enlightenment
 map <silent> <M-x> :Telescope<CR>
-map <silent> <leader>om :Himalaya<CR>
 
 " Snippets
 imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'

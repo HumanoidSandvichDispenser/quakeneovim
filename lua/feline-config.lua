@@ -13,6 +13,8 @@ local cursor_utils = require("feline.providers.cursor")
 local web_devicons = require("nvim-web-devicons")
 local utils = require("utils")
 local colors = require("highlight-overrides").BaseColors
+local diagnostic = vim.diagnostic
+local lsp = require("feline.providers.lsp")
 
 -- Determines if the window's width is longer than the specified width
 --
@@ -205,6 +207,51 @@ local filetype = {
     hl = default_hl
 }
 
+local lsp_name = {
+    provider = "lsp_client_names",
+    right_sep = {
+        str = " ",
+        hl = default_hl
+    },
+    icon = "  ",
+    enabled = function ()
+        return is_valid_file() and is_window_longer_than(90)
+    end,
+    hl = default_hl
+}
+
+local function get_diagnostics(severity)
+    return #diagnostic.get(0, { severity = severity })
+end
+
+local lsp_errors = {
+    provider = "diagnostic_errors",
+    icon = "  ",
+    right_sep = {
+        str = " ",
+        hl = default_hl
+    },
+    enabled = function ()
+        return is_valid_file() and is_window_longer_than(80) and
+                lsp.diagnostics_exist()
+    end,
+    hl = "FelineError"
+}
+
+local lsp_warnings = {
+    provider = "diagnostic_warnings",
+    icon = "  ",
+    right_sep = {
+        str = " ",
+        hl = default_hl
+    },
+    enabled = function ()
+        return is_valid_file() and is_window_longer_than(80) and
+                lsp.diagnostics_exist()
+    end,
+    hl = "FelineWarning"
+}
+
 local git_branch = {
     provider = function()
         return vim.fn.FugitiveHead(), ' '
@@ -297,6 +344,9 @@ local components = {
             filetype
         },
         {
+            lsp_name,
+            lsp_errors,
+            lsp_warnings,
             git_branch,
             git_diffs,
             position_row,
