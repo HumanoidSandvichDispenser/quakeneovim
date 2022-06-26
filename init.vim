@@ -64,7 +64,7 @@ let g:nvim_tree_indent_markers = 1
 
 " Sneak Configuration
 let g:sneak#label = 1
-let g:sneak#s_next = 1
+let g:sneak#s_next = 0
 let g:sneak#prompt = 'sneak>'
 
 "let mapleader=" "
@@ -114,7 +114,8 @@ map <silent> <leader>t :NvimTreeToggle<CR>
 map <silent> <leader>h :CocCommand clangd.switchSourceHeader<CR>
 map <silent> <leader>H :call SynStack()<CR>
 map <silent> <leader>fp :lua require('telescope-config').search_config_dir()<CR>
-map <silent> <leader>f. :lua require('telescope-config').fd_dir()<CR>
+map <silent> <leader>ff :lua require('telescope-config').fd_dir()<CR>
+map <silent> <leader>. :Telescope file_browser<CR>
 " Emacs Enlightenment
 map <silent> <M-x> :Telescope<CR>
 map <silent> <leader>om :Himalaya<CR>
