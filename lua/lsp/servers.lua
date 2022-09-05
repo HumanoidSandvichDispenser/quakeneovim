@@ -35,7 +35,10 @@ local configs = {
         flags = {
             debounce_text_changes = 500,
         }
-    }
+    },
+    gopls = { },
+    --tailwindcss = { },
+    cssls = { }
 }
 
 return {
