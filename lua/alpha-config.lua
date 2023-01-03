@@ -200,10 +200,10 @@ alpha_config.menus = {
 
             menu.padding({ }, 1),
 
-            menu.button(utils.deepcopy(default_opts),
-                "", "Mail", nil, "SPC o m"),
+            --menu.button(utils.deepcopy(default_opts),
+            --    "", "Mail", nil, "SPC o m"),
 
-            menu.padding({ }, 1),
+            --menu.padding({ }, 1),
 
             menu.button(utils.deepcopy(default_opts),
                 "", "Back", "h", "h", ":bd<CR>"),

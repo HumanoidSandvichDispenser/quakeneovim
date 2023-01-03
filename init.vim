@@ -17,11 +17,12 @@ set hidden
 set clipboard^=unnamed,unnamedplus
 set termguicolors
 set cursorline
-set guifont="Iosevka Sandvich:h11"
+set guifont=Iosevka\ Sandvich:h12
 set list lcs=tab:▏\ 
 set fillchars+=eob:*,stlnc:─,vert:│
 set smartcase
 set ignorecase
+set showtabline=0
 
 let g:loaded_python_provider = 0
 
@@ -86,7 +87,7 @@ map <C-s> :w<CR>
 nmap <silent> <C-/> :noh<CR>
 noremap <silent> ZW <cmd>BD<CR>
 noremap <silent> ZT :enew<CR>
-noremap <silent> <space><space> :Alpha<CR>
+noremap <silent> <space><space> :Telescope buffers<CR>
 nmap <C-l> 22zl
 nmap <C-h> 22zh
 
@@ -112,7 +113,17 @@ inoremap <C-f> <Right>
 inoremap <C-n> <Down>
 inoremap <C-p> <Up>
 inoremap <C-h> <C-w>
+inoremap <C-BS> <C-w>
 inoremap <C-k> <C-o>dd
+" Window shortctus
+nmap <silent> <leader>wh <C-w>h
+nmap <silent> <leader>wj <C-w>j
+nmap <silent> <leader>wk <C-w>k
+nmap <silent> <leader>wl <C-w>l
+nmap <silent> <leader>wq <C-w>q
+
+" Buffer shortcuts
+map <silent> <leader>bd <cmd>bdelete<CR>
 
 " Plugin Shortcuts
 map <silent> <leader>t :Neotree toggle<CR>

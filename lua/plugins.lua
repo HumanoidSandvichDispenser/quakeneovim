@@ -9,38 +9,62 @@
 vim.o.runtimepath = vim.o.runtimepath .. ',~/.local/share/nvim/site/pack/packer/start/himalaya/vim'
 
 local packer = require("packer")
-local util = require("packer.util")
-local use = packer.use
+
+local function use(spec)
+    packer.use(spec)
+end
 
 vim.o.laststatus = 0 -- this will be set to 2 after feline starts
 
-packer.init({
-    package_root = "/usr/share/nvim/plugins/pack",
-    --compile_path = "/usr/share/nvim/plugins/packer_compiled.lua",
-})
+packer.init()
 
 -- Packer can manage itself
+use {
+    "wbthomason/packer.nvim",
+    config = function()
+        vim.api.nvim_create_autocmd("BufWritePost", {
+            pattern = "plugins.lua",
+            command = "luafile %",
+        })
+    end,
+}
 
-use("wbthomason/packer.nvim")
+-- which-key + keybindings
+
+use {
+    "folke/which-key.nvim",
+    config = function()
+        require("which-key").setup({
+            plugins = {
+                presets = {
+                    motions = false,
+                    operators = false,
+                    text_objects = false,
+                }
+            }
+        })
+        require("keybindings").setup()
+    end
+}
 
 -- themes
 
-use({ "~/git/lush-themes" })
+use { "~/git/lush-themes" }
 
-use("rktjmp/lush.nvim")
+use { "rktjmp/lush.nvim" }
 
 -- Templates for new files
-use("aperezdc/vim-template")
+use { "aperezdc/vim-template" }
 
 -- Show indents
-use({
+use {
     "lukas-reineke/indent-blankline.nvim",
     config = require("indent-line-config").init
-})
+}
 
 -- Project drawer
 
-use({
+use {
     "nvim-telescope/telescope.nvim",
     requires = {
         "nvim-lua/plenary.nvim",
@@ -49,23 +73,23 @@ use({
     config = function()
         require("telescope-config").init()
     end
-})
+}
 
-use({
+use {
     "nvim-telescope/telescope-fzf-native.nvim",
     run = "make"
-})
+}
 
-use({
+use {
     "kyazdani42/nvim-tree.lua",
     cmd = "NvimTreeToggle",
     disable = true,
     config = function()
         require("nvim-tree-config")
     end
-})
+}
 
-use({
+use {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v2.x",
     cmd = "Neotree",
@@ -74,18 +98,18 @@ use({
         "kyazdani42/nvim-web-devicons",
         "MunifTanjim/nui.nvim",
     }
-})
+}
 
 -- Status line
-use({
+use {
     "glepnir/galaxyline.nvim",
     disable = true,
     config = function()
         require("galaxyline-config")
     end
-})
+}
 
-use({
+use {
     "feline-nvim/feline.nvim",
     opt = true,
     setup = function()
@@ -94,53 +118,54 @@ use({
     config = function()
         require("feline-config")
     end
-})
+}
 
-use({
+use {
     "romgrk/barbar.nvim",
+    disable = true, -- use telescope's buffer menu to switch buffers
     opt = true,
     event = "WinEnter",
     -- setup() instead of config() since the bufferline will appear before the config is loaded
     setup = function()
         require("barbar-config")
     end
-})
+}
 
-use("qpkorr/vim-bufkill") -- Kill buffer without removing split
+use "qpkorr/vim-bufkill" -- Kill buffer without removing split
 
 -- Git
-use("tpope/vim-fugitive")
+use "tpope/vim-fugitive"
 
-use("mhinz/vim-signify")
+use "mhinz/vim-signify"
 
-use({
-    "TimUntersberger/neogit",
+use {
+    "TimUntersberger/neogit", -- magit for neovim
     requires = {
         "nvim-lua/plenary.nvim"
     }
-})
+}
 
 -- LSP and Autocomplete
 
-use({
+use {
     "neoclide/coc.nvim",
     opt = true,
     branch = "release"
-})
+}
 
-use({
+use {
     "neovim/nvim-lspconfig",
     requires = {
-        "williamboman/nvim-lsp-installer"
+        "williamboman/mason.nvim"
     },
     config = function()
-        require("nvim-lsp-installer").setup({})
+        require("mason").setup()
         require("lsp.servers").load_language_servers()
         require("lsp.config")
     end
-})
+}
 
-use({
+use {
     "hrsh7th/nvim-cmp",
     requires = {
         "hrsh7th/cmp-nvim-lsp",
@@ -148,14 +173,15 @@ use({
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
         "hrsh7th/cmp-vsnip",
-        "hrsh7th/cmp-nvim-lsp-signature-help"
+        "hrsh7th/cmp-nvim-lsp-signature-help",
+        "hrsh7th/cmp-cmdline",
     },
     config = function()
         require("lsp.cmp")
     end
-})
+}
 
-use({
+use {
     "hrsh7th/vim-vsnip",
     requires = {
         "hrsh7th/cmp-vsnip",
@@ -164,18 +190,32 @@ use({
     config = function()
         vim.g.vsnip_snippet_dir = "$HOME/.config/vsnip"
     end
-})
+}
 
-use("onsails/lspkind-nvim")
+use "onsails/lspkind-nvim"
 
-use({
+use {
     "windwp/nvim-autopairs",
     config = function()
         require("nvim-autopairs").setup()
     end
-})
+}
 
-use({
+use {
+    "windwp/nvim-ts-autotag",
+    requires = {
+        "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+        require("nvim-treesitter.configs").setup({
+            autotag = {
+                enable = true,
+            },
+        })
+    end
+}
+
+use {
     "ray-x/navigator.lua",
     requires = {
         { "ray-x/guihua.lua", run = "cd lua/fzy && make" },
@@ -185,32 +225,32 @@ use({
     config = function()
         require("navigator").setup()
     end
-})
+}
 
-use({
+use {
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
     config = function()
         require("trouble").setup({ })
     end
-})
+}
 
 -- Language Support
 
-use({
+use {
     "lervag/vimtex",
     ft = "tex",
     setup = function()
         vim.g.vimtex_compiler_method = "latexrun"
     end
-})
+}
 
-use({
+use {
     "rafcamlet/coc-nvim-lua",
     disable = true
-})
+}
 
-use({
+use {
     "vim-pandoc/vim-pandoc",
     requires = {
         {
@@ -219,54 +259,77 @@ use({
         }
     },
     ft = "markdown"
-})
+}
 
-use({
+use {
     "kovetskiy/sxhkd-vim",
-    ft = "sxhkdrc"
-})
+    ft = "sxhkd"
+}
 
-use({
+use {
     "nvim-treesitter/nvim-treesitter",
     config = function()
         require("treesitter-config")
     end
-})
+}
+
+use {
+    "nvim-treesitter/playground",
+    config = function()
+        require("nvim-treesitter.configs").setup({
+            playground = {
+                enable = true
+            }
+        })
+    end
+}
 
 -- Other Utilities
 
-use("ryanoasis/vim-devicons") -- Icons
+use "ryanoasis/vim-devicons" -- Icons
 
-use("kyazdani42/nvim-web-devicons") -- Colored icons
+use "kyazdani42/nvim-web-devicons" -- Colored icons
 
-use({
+use {
     "goolord/alpha-nvim",
     config = function()
         require("alpha-config").init()
     end
-})
+}
 
-use("justinmk/vim-sneak") -- Sneak mode
+--use "justinmk/vim-sneak" -- Sneak mode
 
-use("chrisbra/Colorizer")
+use {
+    "ggandor/leap.nvim",
+    config = function()
+        local leap = require("leap")
+        vim.keymap.set("n", "s", function()
+            leap.leap({
+                target_windows = { vim.fn.win_getid() }
+            })
+        end)
+    end
+}
 
-use({
+use "chrisbra/Colorizer"
+
+use {
     "jbyuki/instant.nvim",
     opt = true
-})
+}
 
-use("dstein64/nvim-scrollview")
+use "dstein64/nvim-scrollview"
 
-use({
+use {
     "soywod/himalaya",
     config = function()
         vim.g.himalaya_mailbox_picker = "fzf"
     end
-}) -- email
+} -- email
 
-use("junegunn/vim-easy-align")
+use "junegunn/vim-easy-align"
 
-use({
+use {
     "nvim-orgmode/orgmode",
     config = function()
         require("orgmode").setup({})
@@ -274,15 +337,15 @@ use({
     requires = {
         "nvim-treesitter/nvim-treesitter"
     }
-})
+}
 
-use("svermeulen/vimpeccable")
+use "svermeulen/vimpeccable"
 
 -- delayed lazy loading
 vim.fn.timer_start(100, function()
     vim.o.laststatus = 2
     packer.loader("feline.nvim")
-    require("nvim-autopairs").setup()
+    --require("nvim-autopairs").setup()
 end)
 
 --[[
@@ -296,5 +359,5 @@ return packer.startup({
             threshold = 0
         }
     }
-})
+}
 --]]

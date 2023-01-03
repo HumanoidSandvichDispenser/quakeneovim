@@ -12,7 +12,6 @@ local configs = {
     },
     clangd = { },
     pyright = { },
-    vuels = { },
     texlab = { },
     rust_analyzer = { },
     --omnisharp = {
@@ -38,7 +37,18 @@ local configs = {
     },
     gopls = { },
     --tailwindcss = { },
-    cssls = { }
+    cssls = { },
+    volar = {
+        init_options = {
+            typescript = {
+                tsdk = "/usr/lib/node_modules/typescript/lib",
+            },
+        },
+        filetypes = {
+            "typescript",
+            "vue",
+        },
+    },
 }
 
 return {

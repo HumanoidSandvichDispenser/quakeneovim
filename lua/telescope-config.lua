@@ -33,6 +33,11 @@ local function init()
                 hidden = true,
                 theme = "ivy"
             },
+            buffers = {
+                theme = "ivy",
+                sort_lastused = true,
+                ignore_current_buffer = true
+            },
             default = {
                 hidden = true,
                 theme = "ivy"
