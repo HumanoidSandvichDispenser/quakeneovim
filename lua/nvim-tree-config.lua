@@ -49,7 +49,41 @@ require("nvim-tree").setup({
             }
         }
     },
-    auto_close = false,
+    renderer = {
+        group_empty = true,
+        indent_markers = {
+            enable = true
+        },
+        icons = {
+            show = {
+                git = true,
+                folder = true,
+                file = true,
+                folder_arrow = true,
+            },
+            glyphs = {
+                default = "",
+                symlink = "",
+                git = {
+                    unstaged = "M ",
+                    staged = "S ",
+                    unmerged = "G ",
+                    renamed = "R ",
+                    untracked = "U ",
+                    deleted = "D ",
+                    ignored = "I ",
+                },
+                folder = {
+                    default = " ",
+                    open = " ",
+                    symlink = " ",
+                    empty = " ",
+                    empty_open = " ",
+                    symlink_open = " ",
+                }
+            },
+        },
+    },
     diagnostics = {
         enable = true,
         icons = {
@@ -64,34 +98,4 @@ require("nvim-tree").setup({
     }
 })
 
-vim.g.nvim_tree_indent_markers = 0
-vim.g.nvim_tree_group_empty = 1
 
-vim.g.nvim_tree_show_icons = {
-    git = 0,
-    folders = 1,
-    files = 1,
-    folder_arrows = 1,
-}
-
-vim.g.nvim_tree_icons = {
-    default = "",
-    symlink = "",
-    git = {
-        unstaged = "M ",
-        staged = "S ",
-        unmerged = "G ",
-        renamed = "R ",
-        untracked = "U ",
-        deleted = "D ",
-        ignored = "I ",
-    },
-    folder = {
-        default = " ",
-        open = " ",
-        symlink = " ",
-        empty = " ",
-        empty_open = " ",
-        symlink_open = " ",
-    }
-}
