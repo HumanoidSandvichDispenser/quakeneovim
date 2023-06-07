@@ -21,7 +21,7 @@ function keybindings.map_leaders()
         b = {
             name = "buffer",
             b = { telescope_builtin.buffers, "Switch buffer" },
-            d = { "<cmd>bd<CR>", "Kill buffer" },
+            d = { "<cmd>BD<CR>", "Kill buffer" },
         }
     }, { prefix = "<leader>" })
 
