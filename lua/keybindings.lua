@@ -9,6 +9,7 @@
 local keybindings = {}
 local which_key = require("which-key")
 local telescope_builtin = require("telescope")
+local dap = require("dap")
 
 function keybindings.map_leaders()
     which_key.register({
@@ -76,6 +77,17 @@ function keybindings.map_leaders()
             t = { telescope_builtin.current_buffer_tags, "Tags (current buffer)" },
             T = { telescope_builtin.tags, "Tags" },
         }
+    }, { prefix = "<leader>" })
+
+    -- debug
+    which_key.register({
+        d = {
+            name = "debug",
+            d = { dap.toggle_breakpoint, "Toggle breakpoint" },
+            i = { dap.step_into, "Step into" },
+            o = { dap.step_over, "Step over" },
+            c = { dap.continue, "Continue" },
+        },
     }, { prefix = "<leader>" })
 end
 

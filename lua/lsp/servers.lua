@@ -2,7 +2,7 @@ local lspconfig = require("lspconfig")
 
 local configs = {
     tsserver = { },
-    sumneko_lua = require("lsp.lua-server"),
+    lua_ls = require("lsp.lua-server"),
     bashls = {
         filetypes = {
             "sh",

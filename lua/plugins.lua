@@ -235,6 +235,15 @@ use {
     end
 }
 
+-- Debugger
+
+use {
+    "mfussenegger/nvim-dap",
+    config = function()
+        require("dap-config").setup()
+    end
+}
+
 -- Language Support
 
 use {
@@ -341,27 +350,27 @@ use {
     }
 }
 
-use {
-    "nvim-neorg/neorg",
-    config = function()
-        require('neorg').setup {
-            load = {
-                ["core.defaults"] = {}, -- Loads default behaviour
-                ["core.norg.concealer"] = {}, -- Adds pretty icons to your documents
-                ["core.norg.dirman"] = { -- Manages Neorg workspaces
-                    config = {
-                        workspaces = {
-                            notes = "~/notes",
-                        },
-                    },
-                },
-            },
-        }
-    end,
-    requires = {
-        "nvim-lua/plenary.nvim",
-    },
-}
+--use {
+--    "nvim-neorg/neorg",
+--    config = function()
+--        require('neorg').setup {
+--            load = {
+--                ["core.defaults"] = {}, -- Loads default behaviour
+--                ["core.norg.concealer"] = {}, -- Adds pretty icons to your documents
+--                ["core.norg.dirman"] = { -- Manages Neorg workspaces
+--                    config = {
+--                        workspaces = {
+--                            notes = "~/notes",
+--                        },
+--                    },
+--                },
+--            },
+--        }
+--    end,
+--    requires = {
+--        "nvim-lua/plenary.nvim",
+--    },
+--}
 
 use "svermeulen/vimpeccable"
 
