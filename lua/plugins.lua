@@ -62,6 +62,8 @@ use {
     config = require("indent-line-config").init
 }
 
+use "timakro/vim-yadi"
+
 -- Project drawer
 
 use {
@@ -307,6 +309,25 @@ use {
 }
 
 use "rest-nvim/rest.nvim"
+
+use {
+    "mickael-menu/zk-nvim",
+    config = function()
+        require("zk").setup({
+            picker = "fzf",
+            lsp = {
+                config = {
+                    cmd = { "zk", "lsp" },
+                    name = "zk",
+                },
+                auto_attach = {
+                    enabled = true,
+                    filetypes = { "markdown" },
+                }
+            },
+        })
+    end
+}
 
 --use "justinmk/vim-sneak" -- Sneak mode
 

@@ -12,22 +12,6 @@ orgmode.setup_ts_grammar()
 local parsers = require("nvim-treesitter.parsers")
 local configs = require("nvim-treesitter.configs")
 
-parsers.norg_meta = {
-    install_info = {
-        url = "https://github.com/nvim-neorg/tree-sitter-norg-meta",
-        files = { "src/parser.c" },
-        branch = "main",
-    },
-}
-
-parsers.norg_table = {
-    install_info = {
-        url = "https://github.com/nvim-neorg/tree-sitter-norg-table",
-        files = { "src/parser.c" },
-        branch = "main",
-    },
-}
-
 configs.setup({
     --ensure_installed = { "org" }, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     ignore_install = { }, -- List of parsers to ignore installing

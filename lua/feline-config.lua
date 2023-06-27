@@ -312,7 +312,7 @@ local position_col = {
     },
     hl = function()
         return {
-            fg = ternary(get_cursor_col() > 80, colors.red, colors.gray),
+            fg = ternary(get_cursor_col() > 80, colors.red, default_hl),
             bg = colors.bg0
         }
     end

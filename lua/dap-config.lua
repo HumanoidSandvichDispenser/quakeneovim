@@ -9,12 +9,18 @@
 local dap = require("dap")
 
 local function setup()
+    local mason_pkg_path = vim.fn.stdpath("data") .. "/mason/packages"
     dap.adapters.godot_mono = {
         type = "server",
         host = "127.0.0.1",
         port = 6006,
     }
 
+    dap.adapters.coreclr = {
+        type = "executable",
+        command = mason_pkg_path .. "/netcoredbg/netcoredbg",
+        args = { "--interpreter=vscode" },
+    }
     --dap.adapters.coreclr = {
     --    type = "executable",
     --    executable = {
@@ -30,9 +36,17 @@ local function setup()
         {
             name = "Godot Mono: Play in Editor",
             type = "godot_mono",
-            request = "launch",
+            request = "attach",
             mode = "playInEditor",
-        }
+        },
+        {
+            name = "Launch netcoredbg",
+            type = "coreclr",
+            request = "launch",
+            program = function()
+                return vim.fn.input("Path to dll", vim.fn.getcwd() .. "/.godot/mono/temp/bin/Debug/", "file")
+            end
+        },
     }
 
     print("Set up dap")

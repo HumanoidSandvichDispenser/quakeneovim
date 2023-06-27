@@ -23,6 +23,7 @@ set fillchars+=eob:*,stlnc:─,vert:│
 set smartcase
 set ignorecase
 set showtabline=0
+set exrc
 
 let g:loaded_python_provider = 0
 

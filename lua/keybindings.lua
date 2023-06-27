@@ -89,6 +89,27 @@ function keybindings.map_leaders()
             c = { dap.continue, "Continue" },
         },
     }, { prefix = "<leader>" })
+
+    -- zettelkasten
+    which_key.register({
+        z = {
+            name = "zettelkasten",
+            n = { "<cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>", "New note" },
+            z = { "<cmd>ZkNotes<CR>", "Notes" },
+            t = { "<cmd>ZkTags<CR>", "Tags" },
+            l = { "<cmd>ZkLinks<CR>", "Links" },
+            b = { "<cmd>ZkBacklinks<CR>", "Backlinks" },
+            i = { "<cmd>ZkInsertLink<CR>", "Insert link" },
+        },
+    }, { prefix = "<leader>" })
+
+    which_key.register({
+        z = {
+            name = "zettelkasten",
+            n = { ":'<,'>ZkNewFromTitleSelection { dir = vim.fn.expand('%:p:h') }<CR>", "New note" },
+            t = { ":'<,'>ZkNewFromContentSelection { dir = vim.fn.expand('%:p:h'), title = vim.fn.input('Title: ') }<CR>", "New note with title" },
+        }
+    }, { mode = "v", prefix = "<leader>", noremap = true, silent = false })
 end
 
 function keybindings.map_select()
