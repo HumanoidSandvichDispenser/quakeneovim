@@ -127,7 +127,6 @@ nmap <silent> <leader>wq <C-w>q
 map <silent> <leader>bd <cmd>bdelete<CR>
 
 " Plugin Shortcuts
-map <silent> <leader>t :Neotree toggle<CR>
 map <silent> <leader>h :CocCommand clangd.switchSourceHeader<CR>
 map <silent> <leader>H :call SynStack()<CR>
 map <silent> <leader>fp :lua require('telescope-config').search_config_dir()<CR>
