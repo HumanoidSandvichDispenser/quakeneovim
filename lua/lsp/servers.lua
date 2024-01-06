@@ -49,6 +49,11 @@ local configs = {
             "vue",
         },
     },
+    typst_lsp = {
+        root_dir = function ()
+            return vim.loop.cwd()
+        end
+    },
 }
 
 return {

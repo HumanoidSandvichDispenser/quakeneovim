@@ -84,26 +84,6 @@ use {
     run = "make"
 }
 
-use {
-    "kyazdani42/nvim-tree.lua",
-    cmd = "NvimTreeToggle",
-    disable = true,
-    config = function()
-        require("nvim-tree-config")
-    end
-}
-
-use {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v2.x",
-    cmd = "Neotree",
-    requires = {
-        "nvim-lua/plenary.nvim",
-        "kyazdani42/nvim-web-devicons",
-        "MunifTanjim/nui.nvim",
-    }
-}
-
 -- Status line
 use {
     "glepnir/galaxyline.nvim",
@@ -137,7 +117,12 @@ use {
         "nvim-lua/plenary.nvim"
     },
     config = function()
-        require("neogit").setup({})
+        require("neogit").setup({
+            signs = {
+                item = { "", "" },
+                section = { "", "" },
+            },
+        })
     end
 }
 
@@ -289,6 +274,8 @@ use {
     end
 }
 
+use { "kaarmu/typst.vim", ft = { "typst" } }
+
 -- Other Utilities
 
 use "ryanoasis/vim-devicons" -- Icons
@@ -358,7 +345,9 @@ use "junegunn/vim-easy-align"
 use {
     "nvim-orgmode/orgmode",
     config = function()
-        require("orgmode").setup({})
+        require("orgmode").setup({
+            org_agenda_files = { "~/sync/agenda.org" },
+        })
     end,
     requires = {
         "nvim-treesitter/nvim-treesitter"
