@@ -59,7 +59,9 @@ use { "aperezdc/vim-template" }
 -- Show indents
 use {
     "lukas-reineke/indent-blankline.nvim",
-    config = require("indent-line-config").init
+    config = function()
+        require("ibl").setup()
+    end
 }
 
 use "timakro/vim-yadi"
@@ -122,17 +124,6 @@ use {
     end
 }
 
-use {
-    "romgrk/barbar.nvim",
-    disable = true, -- use telescope's buffer menu to switch buffers
-    opt = true,
-    event = "WinEnter",
-    -- setup() instead of config() since the bufferline will appear before the config is loaded
-    setup = function()
-        require("barbar-config")
-    end
-}
-
 use "qpkorr/vim-bufkill" -- Kill buffer without removing split
 
 -- Git
@@ -141,10 +132,13 @@ use "tpope/vim-fugitive"
 use "mhinz/vim-signify"
 
 use {
-    "TimUntersberger/neogit", -- magit for neovim
+    "NeogitOrg/neogit", -- magit for neovim
     requires = {
         "nvim-lua/plenary.nvim"
-    }
+    },
+    config = function()
+        require("neogit").setup({})
+    end
 }
 
 -- LSP and Autocomplete
@@ -370,6 +364,8 @@ use {
         "nvim-treesitter/nvim-treesitter"
     }
 }
+
+use "danro/rename.vim"
 
 --use {
 --    "nvim-neorg/neorg",

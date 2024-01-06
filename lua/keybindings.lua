@@ -8,7 +8,7 @@
 
 local keybindings = {}
 local which_key = require("which-key")
-local telescope_builtin = require("telescope")
+local telescope_builtin = require("telescope.builtin")
 local dap = require("dap")
 
 function keybindings.map_leaders()
@@ -76,6 +76,8 @@ function keybindings.map_leaders()
             s = { telescope_builtin.current_buffer_fuzzy_find, "Swipe" },
             t = { telescope_builtin.current_buffer_tags, "Tags (current buffer)" },
             T = { telescope_builtin.tags, "Tags" },
+            g = { telescope_builtin.live_grep, "grep" },
+            r = { telescope_builtin.grep_string, "Regex" },
         }
     }, { prefix = "<leader>" })
 
@@ -110,6 +112,8 @@ function keybindings.map_leaders()
             t = { ":'<,'>ZkNewFromContentSelection { dir = vim.fn.expand('%:p:h'), title = vim.fn.input('Title: ') }<CR>", "New note with title" },
         }
     }, { mode = "v", prefix = "<leader>", noremap = true, silent = false })
+
+    print("Keybindings setup")
 end
 
 function keybindings.map_select()
