@@ -153,7 +153,7 @@ local filename = {
             return vim.fn.fnamemodify(fullname, ":t")
         end
 
-        return "No file"
+        return " no file"
     end,
     hl = function()
         return ternary(is_valid_file(), "Normal", "FelineDefault")
