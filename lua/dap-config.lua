@@ -69,8 +69,6 @@ local function setup()
             stopAtEntry = true,
         }
     }
-
-    print("Set up dap")
 end
 
 return {
