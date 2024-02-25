@@ -7,7 +7,6 @@
 --
 
 local utils = require("utils")
-local colorscheme = require("highlight-overrides").BaseColors
 
 local header_text = [[
               ▓▓▓▓  ▓▓▓▓    

@@ -12,7 +12,6 @@ local file_utils = require("feline.providers.file")
 local cursor_utils = require("feline.providers.cursor")
 local web_devicons = require("nvim-web-devicons")
 local utils = require("utils")
-local colors = require("highlight-overrides").BaseColors
 local diagnostic = vim.diagnostic
 local lsp = require("feline.providers.lsp")
 
@@ -311,10 +310,11 @@ local position_col = {
         hl = default_hl
     },
     hl = function()
-        return {
-            fg = ternary(get_cursor_col() > 80, colors.red, default_hl),
-            bg = colors.bg0
-        }
+        --return {
+        --    fg = ternary(get_cursor_col() > 80, colors.red, default_hl),
+        --    bg = colors.bg0
+        --}
+        return ternary(get_cursor_col() > 80, "FelineError", default_hl)
     end
 }
 
