@@ -13,6 +13,20 @@ local lazy = require("lazy")
 vim.o.laststatus = 0 -- this will be set to 2 after feline starts
 
 local plugins = {
+    {
+        "rktjmp/hotpot.nvim",
+        dependencies = {
+            "HumanoidSandvichDispenser/themis.nvim",
+        }
+    },
+
+    {
+        "HumanoidSandvichDispenser/themis.nvim",
+        submodules = false,
+    },
+
+    "udayvir-singh/hibiscus.nvim",
+
     -- which-key + keybindings
     {
         "folke/which-key.nvim",
@@ -26,7 +40,6 @@ local plugins = {
                     }
                 }
             })
-            require("keybindings").setup()
         end
     },
 
@@ -96,6 +109,7 @@ local plugins = {
         dependencies = {
             "nvim-lua/plenary.nvim"
         },
+        keys = { "<leader>" },
         config = function()
             require("neogit").setup({
                 signs = {
@@ -128,6 +142,8 @@ local plugins = {
 
     {
         "hrsh7th/nvim-cmp",
+        lazy = true,
+        event = "VeryLazy",
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-buffer",
@@ -167,6 +183,7 @@ local plugins = {
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
         },
+        ft = { "html", "xml", "php", "vue "},
         config = function()
             require("nvim-treesitter.configs").setup({
                 autotag = {
@@ -178,22 +195,10 @@ local plugins = {
     },
 
     {
-        "ray-x/navigator.lua",
-        dependencies = {
-            { "ray-x/guihua.lua", build = "cd lua/fzy && make" },
-            { "neovim/nvim-lspconfig" },
-        },
-        disable = true,
-        config = function()
-            require("navigator").setup()
-        end
-    },
-
-    {
         "folke/trouble.nvim",
         dependencies = "kyazdani42/nvim-web-devicons",
         config = function()
-            require("trouble").setup({ })
+            require("trouble").setup({})
         end
     },
 
@@ -245,6 +250,7 @@ local plugins = {
 
     {
         "nvim-treesitter/playground",
+        lazy = true,
         config = function()
             require("nvim-treesitter.configs").setup({
                 playground = {
@@ -259,9 +265,14 @@ local plugins = {
         ft = { "typst" }
     },
 
+    {
+        "atweiden/vim-fennel",
+        ft = { "fennel" }
+    },
+
     -- Other Utilities
 
-    "ryanoasis/vim-devicons", -- Icons
+    "ryanoasis/vim-devicons",       -- Icons
 
     "kyazdani42/nvim-web-devicons", -- Colored icons
 
@@ -342,8 +353,6 @@ local plugins = {
     },
 
     "danro/rename.vim",
-
-    "svermeulen/vimpeccable",
 }
 
 lazy.setup(plugins)

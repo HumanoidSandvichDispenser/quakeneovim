@@ -41,10 +41,9 @@ Y$             $P     $$     $$       d' $$.       $$*'Y$b.       $$*
     ]]
 }
 
-math.randomseed(os.time())
-local header_text = possible_headers[math.random(1, #possible_headers)]
-
---
+--math.randomseed(os.time())
+--local header_text = possible_headers[math.random(1, #possible_headers)]
+local header_text = possible_headers[1]
 
 local default_opts = {
     position = "center",
@@ -191,7 +190,7 @@ alpha_config.menus = {
             menu.padding({ }, 1),
 
             menu.button(utils.deepcopy(default_opts),
-                "", "Bookmarks", "b", "b", ":bd | lua require('alpha-config').start('bookmarks')<CR>"),
+                "", "Bookmarks", nil, "b"),
 
             menu.padding({ }, 1),
 
@@ -233,7 +232,6 @@ alpha_config.menus = {
             menu.padding({ }, 1),
             menu.header(utils.deepcopy(default_opts), header_text),
             menu.padding({ }, 2),
-            alpha_config.mru()
         },
         opts = {
             margin = 3

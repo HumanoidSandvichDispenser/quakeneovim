@@ -1,5 +1,3 @@
-set nocompatible              " be iMproved, required
-
 set ruler
 set number
 set showcmd
@@ -98,9 +96,6 @@ noremap <silent> k gk
 "inoremap jj <Esc>
 nnoremap Q gqq
 nnoremap <silent> <leader>rr :source $NVIM/init.vim<CR>
-nnoremap <silent> <leader>pc :lua require('packer').compile() <CR>
-nnoremap <silent> <leader>pu :lua require('packer').sync()<CR>
-nnoremap <silent> <leader>pi :lua require('packer').install()<CR>
 nnoremap <silent> <leader>fr :lua require('telescope.builtin').oldfiles()<CR>
 nnoremap <silent> <leader>e :enew<CR>
 

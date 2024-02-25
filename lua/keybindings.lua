@@ -9,13 +9,14 @@
 local keybindings = {}
 local which_key = require("which-key")
 local telescope_builtin = require("telescope.builtin")
+local telescope_config = require("telescope-config")
 local dap = require("dap")
 local zen_mode = require("zen-mode")
 
 function keybindings.map_leaders()
-    which_key.register({
-        ["<leader>"] = { telescope_builtin.buffers, "Switch buffer" },
-    }, { prefix = "<leader>" })
+    --which_key.register({
+    --    ["<leader>"] = { telescope_builtin.buffers, "Switch buffer" },
+    --}, { prefix = "<leader>" })
 
     -- buffers
     which_key.register({
@@ -30,14 +31,14 @@ function keybindings.map_leaders()
     which_key.register({
         w = {
             name = "window",
-            h = { "<C-w>h" },
-            j = { "<C-w>j" },
-            k = { "<C-w>k" },
-            l = { "<C-w>l" },
-            q = { "<C-w>q" },
-            z = { zen_mode.toggle, "<C-w>z" }
+            h = { "<C-w>h", "Go to the left window" },
+            j = { "<C-w>j", "Go to the down window" },
+            k = { "<C-w>k", "Go to the up window" },
+            l = { "<C-w>l", "Go to the right window" },
+            q = { "<C-w>q", "Quit a window" },
+            z = { zen_mode.toggle, "Zen mode" }
         }
-    }, { prefix = "<leader>" })
+    }, { prefix = "<leader>", mode = "n" })
 
     -- code
     which_key.register({
@@ -68,6 +69,7 @@ function keybindings.map_leaders()
             r = { telescope_builtin.oldfiles, "Recent files" },
             f = { telescope_builtin.git_files, "Find files (git)" },
             F = { telescope_builtin.find_files, "Find files" },
+            p = { telescope_config.search_config_dir, "Config files" },
         }
     }, { prefix = "<leader>" })
 
@@ -114,8 +116,6 @@ function keybindings.map_leaders()
             t = { ":'<,'>ZkNewFromContentSelection { dir = vim.fn.expand('%:p:h'), title = vim.fn.input('Title: ') }<CR>", "New note with title" },
         }
     }, { mode = "v", prefix = "<leader>", noremap = true, silent = false })
-
-    print("Keybindings setup")
 end
 
 function keybindings.map_select()
@@ -187,8 +187,8 @@ function keybindings.map_select()
 end
 
 function keybindings.setup()
-    keybindings.map_leaders()
-    keybindings.map_select()
+    --keybindings.map_leaders()
+    --keybindings.map_select()
 end
 
 return keybindings

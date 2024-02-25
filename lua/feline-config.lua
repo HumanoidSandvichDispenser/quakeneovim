@@ -59,7 +59,7 @@ local vi_mode_colors = {
     OP = "FelineVisualMode",
     BLOCK = "FelineVisualMode",
     REPLACE = "FelineReplaceMode",
-    ["V-REPLACE"] =  "FelineReplaceMode",
+    ["V-REPLACE"] = "FelineReplaceMode",
     ENTER = "FelineSelectMode",
     MORE = "FelineSelectMode",
     SELECT = "FelineSelectMode",
@@ -79,6 +79,7 @@ local vi_mode = {
         local mode = vi_mode_utils.get_vim_mode()
         return " " .. mode .. " "
     end,
+    right_sep = " ",
     hl = vi_mode_color_hl
 }
 
@@ -94,12 +95,8 @@ local cwd = {
         local topdir = levels[#levels]
         return topdir
     end,
-    left_sep = {
-        str = " ",
-        hl = default_hl
-    },
     right_sep = {
-        str = " |",
+        str = " | ",
         hl = default_hl
     },
     icon = "פּ ",
@@ -111,7 +108,7 @@ local cwd = {
 
 local filepath = {
     provider = function()
-        local full_path = vim.fn.expand("%:p:h")
+        local full_path = vim.fn.resolve(vim.fn.expand("%:p:h"))
         if full_path then
             local relative_path = vim.fn.fnamemodify(full_path, ":~:.")
             local short_path = vim.fn.pathshorten(relative_path)
@@ -138,10 +135,10 @@ local filepath = {
     enabled = function()
         return is_window_longer_than(80) and is_valid_file()
     end,
-    left_sep = {
-        str = " ",
-        hl = default_hl
-    },
+    --left_sep = {
+    --    str = " ",
+    --    hl = default_hl
+    --},
     hl = default_hl
 }
 
@@ -152,7 +149,7 @@ local filename = {
             return vim.fn.fnamemodify(fullname, ":t")
         end
 
-        return " no file"
+        return "no file"
     end,
     hl = function()
         return ternary(is_valid_file(), "Normal", "FelineDefault")
@@ -187,7 +184,7 @@ local filesize = {
         hl = default_hl
     },
     enabled = function()
-        return is_valid_file()
+        return is_valid_file() and is_window_longer_than(100)
     end,
     hl = default_hl
 }
@@ -201,7 +198,7 @@ local filetype = {
         hl = default_hl
     },
     enabled = function()
-        return is_valid_file() and is_window_longer_than(80)
+        return is_valid_file() and is_window_longer_than(100)
     end,
     hl = default_hl
 }
@@ -213,8 +210,8 @@ local lsp_name = {
         hl = default_hl
     },
     icon = "  ",
-    enabled = function ()
-        return is_valid_file() and is_window_longer_than(90)
+    enabled = function()
+        return is_valid_file() and is_window_longer_than(100)
     end,
     hl = default_hl
 }
@@ -230,9 +227,9 @@ local lsp_errors = {
         str = " ",
         hl = default_hl
     },
-    enabled = function ()
-        return is_valid_file() and is_window_longer_than(80) and
-                lsp.diagnostics_exist()
+    enabled = function()
+        return is_valid_file() and is_window_longer_than(120) and
+            lsp.diagnostics_exist()
     end,
     hl = "FelineError"
 }
@@ -244,9 +241,9 @@ local lsp_warnings = {
         str = " ",
         hl = default_hl
     },
-    enabled = function ()
-        return is_valid_file() and is_window_longer_than(80) and
-                lsp.diagnostics_exist()
+    enabled = function()
+        return is_valid_file() and is_window_longer_than(120) and
+            lsp.diagnostics_exist()
     end,
     hl = "FelineWarning"
 }
@@ -256,7 +253,7 @@ local git_branch = {
         return vim.fn.FugitiveHead(), ' '
     end,
     enabled = function()
-        return vim.fn.FugitiveIsGitDir() and is_window_longer_than(100)
+        return vim.fn.FugitiveIsGitDir() and is_window_longer_than(120)
     end,
     right_sep = {
         str = " ",
@@ -314,7 +311,7 @@ local position_col = {
         --    fg = ternary(get_cursor_col() > 80, colors.red, default_hl),
         --    bg = colors.bg0
         --}
-        return ternary(get_cursor_col() > 80, "FelineError", default_hl)
+        return ternary(get_cursor_col() > 80, "FelineError", "Normal")
     end
 }
 
