@@ -61,7 +61,7 @@ use {
     "lukas-reineke/indent-blankline.nvim",
     config = function()
         require("ibl").setup()
-    end,
+    end
 }
 
 use "timakro/vim-yadi"
@@ -101,17 +101,6 @@ use {
     end,
     config = function()
         require("feline-config")
-    end
-}
-
-use {
-    "romgrk/barbar.nvim",
-    disable = true, -- use telescope's buffer menu to switch buffers
-    opt = true,
-    event = "WinEnter",
-    -- setup() instead of config() since the bufferline will appear before the config is loaded
-    setup = function()
-        require("barbar-config")
     end
 }
 
@@ -368,6 +357,8 @@ use {
         "nvim-treesitter/nvim-treesitter"
     }
 }
+
+use "danro/rename.vim"
 
 --use {
 --    "nvim-neorg/neorg",
