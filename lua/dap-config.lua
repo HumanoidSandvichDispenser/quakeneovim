@@ -14,12 +14,20 @@ local function setup()
         type = "server",
         host = "127.0.0.1",
         port = 6006,
+        debugServer = 6006,
+        address = "127.0.0.1",
     }
 
     dap.adapters.coreclr = {
         type = "executable",
         command = mason_pkg_path .. "/netcoredbg/netcoredbg",
         args = { "--interpreter=vscode" },
+    }
+
+    dap.adapters.cppdbg = {
+        id = "cppdbg",
+        type = "executable",
+        command = "/home/sandvich/.local/share/nvim/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7",
     }
     --dap.adapters.coreclr = {
     --    type = "executable",
@@ -36,8 +44,8 @@ local function setup()
         {
             name = "Godot Mono: Play in Editor",
             type = "godot_mono",
-            request = "attach",
-            mode = "playInEditor",
+            request = "launch",
+            --mode = "playInEditor",
         },
         {
             name = "Launch netcoredbg",
@@ -47,6 +55,19 @@ local function setup()
                 return vim.fn.input("Path to dll", vim.fn.getcwd() .. "/.godot/mono/temp/bin/Debug/", "file")
             end
         },
+    }
+
+    dap.configurations.cpp = {
+        {
+            name = "Debug",
+            type = "cppdbg",
+            request = "launch",
+            program = function()
+                return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+            end,
+            cwd = "${workspaceFolder}",
+            stopAtEntry = true,
+        }
     }
 
     print("Set up dap")

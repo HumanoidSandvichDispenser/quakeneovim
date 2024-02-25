@@ -12,6 +12,17 @@ orgmode.setup_ts_grammar()
 local parsers = require("nvim-treesitter.parsers")
 local configs = require("nvim-treesitter.configs")
 
+local parser_configs = parsers.get_parser_configs()
+
+--parser_configs.blade = {
+--    install_info = {
+--        url = "https://github.com/EmranMR/tree-sitter-blade",
+--        files = {"src/parser.c"},
+--        branch = "main",
+--    },
+--    filetype = "blade"
+--}
+
 configs.setup({
     --ensure_installed = { "org" }, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     ignore_install = { }, -- List of parsers to ignore installing
@@ -21,7 +32,6 @@ configs.setup({
             "markdown",
             "tex",
             "latex",
-            "org"
         },  -- list of language that will be disabled
         -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
         -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
@@ -36,8 +46,8 @@ configs.setup({
 })
 
 orgmode.setup({
-    org_agenda_files = { "/home/sandvich/Documents/org" },
-    org_default_notes_file = "/home/sandvich/Dropbox/Documents/org/notes.org",
+    org_agenda_files = { "~/sync" },
+    org_default_notes_file = "~/sync/Notes.org",
     org_hide_leading_stars = true,
     org_ellipsis = " "
 })

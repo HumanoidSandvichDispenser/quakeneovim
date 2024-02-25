@@ -59,7 +59,9 @@ use { "aperezdc/vim-template" }
 -- Show indents
 use {
     "lukas-reineke/indent-blankline.nvim",
-    config = require("indent-line-config").init
+    config = function()
+        require("ibl").setup()
+    end,
 }
 
 use "timakro/vim-yadi"
@@ -200,6 +202,7 @@ use {
         require("nvim-treesitter.configs").setup({
             autotag = {
                 enable = true,
+                filetypes = { "html", "xml", "php", "vue" },
             },
         })
     end
@@ -234,6 +237,10 @@ use {
     end
 }
 
+use {
+    "rcarriga/nvim-dap-ui",
+}
+
 -- Language Support
 
 use {
@@ -242,11 +249,6 @@ use {
     setup = function()
         vim.g.vimtex_compiler_method = "latexrun"
     end
-}
-
-use {
-    "rafcamlet/coc-nvim-lua",
-    disable = true
 }
 
 use {
@@ -319,8 +321,6 @@ use {
     end
 }
 
---use "justinmk/vim-sneak" -- Sneak mode
-
 use {
     "ggandor/leap.nvim",
     config = function()
@@ -340,14 +340,18 @@ use {
     opt = true
 }
 
-use "dstein64/nvim-scrollview"
-
 use {
-    "soywod/himalaya",
+    "folke/zen-mode.nvim",
     config = function()
-        vim.g.himalaya_mailbox_picker = "fzf"
+        require("zen-mode").setup({
+            window = {
+                width = 80,
+            }
+        })
     end
-} -- email
+}
+
+use "dstein64/nvim-scrollview"
 
 use "junegunn/vim-easy-align"
 
@@ -356,6 +360,8 @@ use {
     config = function()
         require("orgmode").setup({
             org_agenda_files = { "~/sync/agenda.org" },
+            org_startup_indented = true,
+            org_adapt_indentation = false,
         })
     end,
     requires = {

@@ -161,6 +161,7 @@ autocmd BufWrite *.tex VimtexCompile
 autocmd InsertEnter * set conceallevel=0
 autocmd InsertLeave * set conceallevel=1
 autocmd TextYankPost * lua vim.highlight.on_yank({ higroup = "IncSearch", timeout = 500 })
+autocmd BufNewFile,BufRead *.blade.php set ft=php
 
 set mouse=a
 

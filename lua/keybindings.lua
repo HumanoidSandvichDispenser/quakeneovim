@@ -10,6 +10,7 @@ local keybindings = {}
 local which_key = require("which-key")
 local telescope_builtin = require("telescope")
 local dap = require("dap")
+local zen_mode = require("zen-mode")
 
 function keybindings.map_leaders()
     which_key.register({
@@ -34,6 +35,7 @@ function keybindings.map_leaders()
             k = { "<C-w>k" },
             l = { "<C-w>l" },
             q = { "<C-w>q" },
+            z = { zen_mode.toggle, "<C-w>z" }
         }
     }, { prefix = "<leader>" })
 

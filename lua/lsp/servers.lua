@@ -54,6 +54,14 @@ local configs = {
             return vim.loop.cwd()
         end
     },
+    intelephense = {
+        root_dir = function ()
+            return vim.loop.cwd()
+        end
+    },
+    fennel_language_server = {
+
+    },
 }
 
 return {
