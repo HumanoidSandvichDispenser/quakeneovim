@@ -109,7 +109,7 @@ local plugins = {
         dependencies = {
             "nvim-lua/plenary.nvim"
         },
-        keys = { "<leader>" },
+        cmd = "Neogit",
         config = function()
             require("neogit").setup({
                 signs = {

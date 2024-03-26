@@ -79,7 +79,6 @@ local vi_mode = {
         local mode = vi_mode_utils.get_vim_mode()
         return " " .. mode .. " "
     end,
-    right_sep = " ",
     hl = vi_mode_color_hl
 }
 
@@ -333,6 +332,7 @@ local components = {
     active = {
         {
             vi_mode,
+            space,
             cwd,
             filepath,
             filename,

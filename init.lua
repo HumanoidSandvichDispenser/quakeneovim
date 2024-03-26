@@ -17,7 +17,7 @@ local function bootstrap(name, url, args)
             url,
             path,
             "--filter=blob:none",
-            table.unpack(args),
+            table.unpack(args or {}),
         })
         vim.notify("DONE", vim.log.levels.INFO)
     end
