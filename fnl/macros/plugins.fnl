@@ -6,8 +6,7 @@
     (spread! (tostring name) (to-kv! spec))))
 
 (fn lazy-use [name & spec]
-  (let [name-str (tostring name)]
-    '(table.insert _G.lazy-plugins-table! ,(lazy-spec name (table.unpack spec)))))
+  '(table.insert _G.lazy-plugins-table! ,(lazy-spec name (table.unpack spec))))
 
 (fn lazy-begin []
   '(tset _G :lazy-plugins-table! {}))
