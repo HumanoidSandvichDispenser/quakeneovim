@@ -30,7 +30,7 @@
 (map! [i] "<C-k>" "<C-o>dd")
 
 ;; M-x
-(map! [i] "<M-x>" "<cmd>Telescope<CR>" {:silent true})
+(map! [niv] "<M-x>" "<cmd>Telescope<CR>" {:silent true})
 
 ;; LSP
 (map! [n] "gd" vim.lsp.buf.definition {:silent true})

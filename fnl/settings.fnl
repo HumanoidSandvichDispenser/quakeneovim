@@ -12,7 +12,7 @@
 (set! breakindent)
 (set! timeoutlen 1500)
 (set! hidden)
-(set! clipboard^ "unnamed,unnamedplus")
+(set! clipboard+ "unnamedplus")
 (set! termguicolors)
 (set! cursorline)
 (set! guifont "Iosevka Sandvich:h12")
@@ -26,3 +26,4 @@
 (set! showtabline 0)
 (set! exrc)
 (set! mouse "a")
+(set! scrolloff 3)
