@@ -1,10 +1,14 @@
-(import-macros {: spread!} :macros.macros)
 (import-macros {: lazy-begin!
                 : lazy-use!
                 : lazy-spec!
                 : lazy-end!
                 : setup!
                 : require-call!} :macros.plugins)
+(import-macros {: tset!} :macros.set)
+
+(local {: reverse
+        : car
+        : cdr} (require :lib.common))
 
 (lazy-begin!)
 
@@ -29,7 +33,7 @@
            :dir "~/git/lush-themes"
            :priority 1000
            :config (fn []
-                     (tset (. vim :opt) :termguicolors true)
+                     (tset! vim :opt :termguicolors true)
                      (vim.cmd "source /var/tmp/colorscheme.vim")))
 
 (lazy-use! rktjmp/lush.nvim)
@@ -57,7 +61,7 @@
            :lazy true
            :event :VeryLazy
            :config (fn []
-                     (tset (. vim :o) :laststatus 2)
+                     (tset! vim :o :laststatus 2)
                      (require :feline-config)))
 
 (lazy-use! qpkorr/vim-bufkill)
@@ -77,12 +81,12 @@
            :dependencies [:williamboman/mason.nvim]
            :config (fn []
                      (setup! :mason)
-                     ((. (require :lsp.servers) :load_language_servers))
+                     (require-call! :lsp.servers :load_language_servers)
                      (require :lsp.config)))
 
 (lazy-use! hrsh7th/nvim-cmp
            :dependencies [:hrsh7th/cmp-nvim-lsp
-                          :hrsh7th/cmp-buffer
+                          :hrsh7th/cmp-buffer 
                           :hrsh7th/cmp-path
                           :hrsh7th/cmp-cmdline
                           :hrsh7th/cmp-vsnip
@@ -95,7 +99,7 @@
            :dependencies [:hrsh7th/cmp-vsnip
                           :kitagry/vs-snippets]
            :config (fn []
-                     (tset (. vim :g) :vsnip_snippet_dir "$HOME/.config/vsnip")))
+                     (tset! vim :g :vsnip_snippet_dir "$HOME/.config/vsnip")))
 
 (lazy-use! onsails/lspkind-nvim)
 
@@ -128,7 +132,7 @@
 (lazy-use! lervag/vimtex
            :ft :tex
            :init (fn []
-                   (tset (. vim :g) :vimtex_compiler_method :latexrun)))
+                   (tset! vim :g :vimtex_compiler_method :latexrun)))
 
 (lazy-use! vim-pandoc/vim-pandoc
            :dependencies (lazy-spec! vim-pandoc/vim-pandoc-syntax
@@ -157,7 +161,11 @@
 (lazy-use! HiPhish/rainbow-delimiters.nvim
            :config (fn []
                      (setup! :rainbow-delimiters.setup
-                             {:query {:commonlisp :rainbow-blocks}})))
+                             {:query {:commonlisp :rainbow-blocks}})
+                     (tset! vim :g :rainbow_delimiters
+                            {:highlight [:RainbowDelimiterFirst
+                                         :RainbowDelimiterSecond
+                                         :RainbowDelimiterThird]})))
 
 (lazy-use! ryanoasis/vim-devicons)
 
