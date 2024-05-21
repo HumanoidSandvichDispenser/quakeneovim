@@ -18,8 +18,6 @@
 (lazy-use! HumanoidSandvichDispenser/themis.nvim
            :submodules false)
 
-(lazy-use! udayvir-singh/hibiscus.nvim)
-
 (lazy-use! folke/which-key.nvim
            :config (fn []
                      (setup! :which-key
@@ -46,7 +44,6 @@
            :config (fn []
                      (setup! :ibl)))
 
-(lazy-use! timakro/vim-yadi)
 
 (lazy-use! nvim-telescope/telescope.nvim
            :dependencies [:nvim-lua/plenary.nvim
@@ -147,9 +144,6 @@
 
 (lazy-use! kaarmu/typst.vim
            :ft [:typst])
-
-(lazy-use! atweiden/vim-fennel
-           :ft [:fennel])
 
 ;; lisp stuff
 

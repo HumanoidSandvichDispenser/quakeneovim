@@ -36,6 +36,8 @@
 (map! [n] "gd" vim.lsp.buf.definition {:silent true})
 (map! [n] "K" vim.lsp.buf.hover {:silent true})
 
+(map! [n] "s" "<Plug>(leap)")
+
 ;; which-key bindings
 (let [which-key (require :which-key)
       telescope-builtin (require :telescope.builtin)
