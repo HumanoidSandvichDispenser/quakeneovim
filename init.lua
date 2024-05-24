@@ -54,6 +54,3 @@ require("plugins")
 
 require("settings")
 require("keymaps")
-
--- temporary
---vim.cmd("source ~/.config/nvim/init-old.vim")
