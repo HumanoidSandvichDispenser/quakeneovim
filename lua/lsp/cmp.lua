@@ -61,8 +61,8 @@ cmp.setup({
     },
     window = {
         --border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered()
+        completion = not vim.g.neovide and cmp.config.window.bordered() or nil,
+        documentation = not vim.g.neovide and cmp.config.window.bordered() or nil
     },
     sources = {
         {
@@ -71,9 +71,6 @@ cmp.setup({
         },
         {
             name = "nvim_lsp_signature_help"
-        },
-        {
-            name = "orgmode"
         },
         {
             name = "vsnip",

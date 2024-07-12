@@ -44,6 +44,10 @@
            :config (fn []
                      (setup! :ibl)))
 
+;(lazy-use! timakro/vim-yadi
+;           :event :BufRead
+;           :config (fn []
+;                     (autocmd! :BufRead :* :DetectIndent)))
 
 (lazy-use! nvim-telescope/telescope.nvim
            :dependencies [:nvim-lua/plenary.nvim
@@ -70,6 +74,7 @@
 (lazy-use! NeogitOrg/neogit
            :dependencies [:nvim-lua/plenary.nvim]
            :cmd :Neogit
+           :branch :decouple-global-statusbuffer
            :config (fn []
                      (setup! :neogit {:signs {:item ["" ""]
                                               :section ["" ""]}})))
@@ -148,9 +153,17 @@
 ;; lisp stuff
 
 (lazy-use! dundalek/parpar.nvim
+           :ft [:lisp :fennel]
            :dependencies [:gpanders/nvim-parinfer
                           :julienvincent/nvim-paredit]
            :opts [])
+
+(lazy-use! julienvincent/nvim-paredit-fennel
+           :dependencies :julienvincent/nvim-paredit
+           :ft :fennel
+           :config (fn []
+                     (require-call! :keymaps :map-paredit)
+                     (setup! :nvim-paredit-fennel)))
 
 (lazy-use! HiPhish/rainbow-delimiters.nvim
            :config (fn []
@@ -182,6 +195,10 @@
 
 (lazy-use! junegunn/vim-easy-align)
 
+(lazy-use! danro/rename.vim)
+
+;; orgmode
+
 (lazy-use! nvim-orgmode/orgmode
            :config (fn []
                      (setup! :orgmode
@@ -189,6 +206,11 @@
                               :org_startup_indented true
                               :org_adapt_indentation false})))
 
-(lazy-use! danro/rename.vim)
+(lazy-use! chipsenkbeil/org-roam.nvim
+           :tag :0.1.0
+           :dependencies [(lazy-spec! nvim-orgmode/orgmode
+                                      :tag :0.3.4)]
+           :config (fn []
+                     (setup! :org-roam {:directory "~/sync/org-roam"})))
 
 (lazy-end!)

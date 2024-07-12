@@ -6,13 +6,13 @@
 -- Distributed under terms of the MIT license.
 --
 
-local orgmode = require("orgmode")
-orgmode.setup_ts_grammar()
+--local orgmode = require("orgmode")
+--orgmode.setup_ts_grammar()
 
-local parsers = require("nvim-treesitter.parsers")
+--local parsers = require("nvim-treesitter.parsers")
 local configs = require("nvim-treesitter.configs")
 
-local parser_configs = parsers.get_parser_configs()
+--local parser_configs = parsers.get_parser_configs()
 
 --parser_configs.blade = {
 --    install_info = {
@@ -29,7 +29,6 @@ configs.setup({
     highlight = {
         enable = true,              -- false will disable the whole extension
         disable = {
-            "markdown",
             "tex",
             "latex",
         },  -- list of language that will be disabled
@@ -45,9 +44,9 @@ configs.setup({
     },
 })
 
-orgmode.setup({
-    org_agenda_files = { "~/sync" },
-    org_default_notes_file = "~/sync/Notes.org",
-    org_hide_leading_stars = true,
-    org_ellipsis = " "
-})
+--orgmode.setup({
+--    org_agenda_files = { "~/sync" },
+--    org_default_notes_file = "~/sync/Notes.org",
+--    org_hide_leading_stars = true,
+--    org_ellipsis = " "
+--})

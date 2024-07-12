@@ -98,7 +98,10 @@ local cwd = {
         str = " | ",
         hl = default_hl
     },
-    icon = "פּ ",
+    icon = {
+        str = "󰙅 ",
+        hl = default_hl
+    },
     hl = default_hl,
     enabled = function()
         return is_window_longer_than(100)
@@ -125,9 +128,12 @@ local filepath = {
     icon = function()
         local fullname = vim.api.nvim_buf_get_name(0)
         local extension = vim.fn.fnamemodify(fullname, ":e")
-        local icon, _ = web_devicons.get_icon_color(fullname, extension)
+        local icon, color = web_devicons.get_icon_color(fullname, extension)
         if icon then
-            return icon .. " "
+            return {
+                str = icon .. " ",
+                hl = default_hl,
+            }
         end
         return ""
     end,
@@ -206,9 +212,12 @@ local lsp_name = {
     provider = "lsp_client_names",
     right_sep = {
         str = " ",
-        hl = default_hl
+        hl = default_hl,
     },
-    icon = "  ",
+    icon = {
+        str = "  ",
+        hl = default_hl,
+    },
     enabled = function()
         return is_valid_file() and is_window_longer_than(100)
     end,
@@ -249,11 +258,15 @@ local lsp_warnings = {
 
 local git_branch = {
     provider = function()
-        return vim.fn.FugitiveHead(), ' '
+        return vim.fn.FugitiveHead()
     end,
     enabled = function()
         return vim.fn.FugitiveIsGitDir() and is_window_longer_than(120)
     end,
+    icon = {
+        str = " ",
+        hl = default_hl,
+    },
     right_sep = {
         str = " ",
         hl = default_hl

@@ -1,5 +1,8 @@
+(import-macros {: dot!} :macros.common)
 (import-macros {: let!} :themis.var)
 (import-macros {: map!} :themis.keybind)
+
+(local M {})
 
 ;; set leader
 ;(vim.cmd "map <space> <leader>")
@@ -34,23 +37,40 @@
 
 ;; LSP
 (map! [n] "gd" vim.lsp.buf.definition {:silent true})
-(map! [n] "K" vim.lsp.buf.hover {:silent true})
+;(map! [n] "K" vim.lsp.buf.hover {:silent true})
 
 (map! [n] "s" "<Plug>(leap)")
 
+(fn M.map-paredit []
+  (local paredit (require :nvim-paredit))
+
+  (map! [ni] :<M-S-h> (fn []
+                        ((. paredit :api :slurp_backwards))))
+  (map! [ni] :<M-S-j> (fn []
+                        ((. paredit :api :barf_backwards))))
+  (map! [ni] :<M-S-k> (fn []
+                        ((. paredit :api :barf_forwards))))
+  (map! [ni] :<M-S-l> (fn []
+                        ((. paredit :api :slurp_forwards))))
+  (map! [ni] :<M-k> (fn []
+                      ((. paredit :api :raise_element)))))
+
 ;; which-key bindings
 (let [which-key (require :which-key)
-      telescope-builtin (require :telescope.builtin)
       telescope-config (require :telescope-config)
       dap (require :dap)
-      zen-mode (require :zen-mode)]
+      zen-mode (require :zen-mode)
+      orgmode (require :orgmode)]
+
+  (macro telescope [feature]
+    (.. "<cmd>Telescope " feature "<CR>"))
 
   (which-key.register
-    {:<leader> [telescope-builtin.buffers "Switch buffer"]}
+    {:<leader> ["<cmd>Telescope buffers<CR>" "Switch buffer"]}
     {:prefix :<leader>})
 
   ;; buffer
-  (which-key.register {:b {:b [telescope-builtin.buffers "Switch buffer"]
+  (which-key.register {:b {:b ["<cmd>Telescope buffers<CR>" "Switch buffer"]
                            :d [:<cmd>BD<CR> "Kill buffer"]
                            :name :buffer}}
                       {:prefix :<leader>})
@@ -79,33 +99,33 @@
                            :k [:<C-w>k]
                            :l [:<C-w>l]
                            :q [:<C-w>q]
-                           :r ["<cmd>Telescope lsp_references<CR>"
+                           :r [(telescope :lsp_references)
                                :References]}}
                       {:prefix :<leader>})
 
   ;; files
   (which-key.register {:f {:name :file
-                           :F [telescope-builtin.find_files "Find files"]
-                           :f [telescope-builtin.git_files "Find files (git)"]
-                           :p [telescope-config.search_config_dir
-                               "Config files"]
-                           :r [telescope-builtin.oldfiles "Recent files"]}}
+                           :F [(telescope :find_files) "Find files"]
+                           :f [(telescope :git_files) "Find files (git)"]
+                           ;:p [telescope-config.search_config_dir
+                           ;    "Config files"]
+                           :r [(telescope :oldfiles) "Recent files"]}}
                       {:prefix :<leader>})
 
   ;; search
   (which-key.register {:s {:name :search
-                           :T [telescope-builtin.tags :Tags]
-                           :g [telescope-builtin.live_grep :grep]
-                           :r [telescope-builtin.grep_string :Regex]
-                           :s [telescope-builtin.current_buffer_fuzzy_find
-                               :Swipe]
-                           :t [telescope-builtin.current_buffer_tags
+                           :T [(telescope :tags) :Tags]
+                           :g [(telescope :live_grep) :grep]
+                           :r [(telescope :grep_string) :Regex]
+                           :s [(telescope :current_buffer_fuzzy_find) :Swipe]
+                           :t [(telescope :current_buffer_tags)
                                "Tags (current buffer)"]}}
                       {:prefix :<leader>})
 
   ;; git
   (which-key.register {:g {:name :git
-                           :g [:<cmd>Neogit<CR> "Neogit"]}}
+                           :g [:<cmd>Neogit<CR> "Neogit"]
+                           :c ["<cmd>Neogit commit<CR>" "Commit"]}}
                       {:prefix :<leader>})
 
   ;; debug
@@ -138,3 +158,5 @@
                          :<S-Left> [:<Left> "Select left"]
                          :<S-Right> [:<Right> "Select right"]}
                         {:mode :s})))
+
+M

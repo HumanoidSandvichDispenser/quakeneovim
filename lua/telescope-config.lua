@@ -6,12 +6,12 @@
 -- Distributed under terms of the MIT license.
 --
 
-local telescope = require("telescope")
-local telescope_builtin = require("telescope.builtin")
-local telescope_themes = require("telescope.themes")
 
 local function fd_dir(search_dir)
+    local telescope_builtin = require("telescope.builtin")
+    local telescope_themes = require("telescope.themes")
     local opts = telescope_themes.get_ivy()
+
     if search_dir then
         opts.cwd = search_dir
     end
@@ -23,6 +23,10 @@ local function search_config_dir()
 end
 
 local function init()
+    local telescope = require("telescope")
+    telescope.load_extension("file_browser")
+    telescope.load_extension("fzf")
+
     telescope.setup({
         pickers = {
             find_files = {
@@ -37,6 +41,10 @@ local function init()
                 theme = "ivy",
                 sort_lastused = true,
                 ignore_current_buffer = true
+            },
+            current_buffer_fuzzy_find = {
+                hidden = true,
+                theme = "ivy"
             },
             default = {
                 hidden = true,
@@ -68,9 +76,6 @@ local function init()
         }
     })
 end
-
-telescope.load_extension("file_browser")
-telescope.load_extension("fzf")
 
 return {
     fd_dir = fd_dir,

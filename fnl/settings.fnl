@@ -27,3 +27,5 @@
 (set! exrc)
 (set! mouse "a")
 (set! scrolloff 3)
+
+(set! guicursor "n-v:block,i-ci-ve-c:ver25-Cursor")

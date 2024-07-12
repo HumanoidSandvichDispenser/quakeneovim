@@ -1,5 +1,7 @@
 (fn car [list]
-  (. list 1))
+  "Return the car of the list. If list is nil, return nil."
+  (when (~= list nil)
+    (. list 1)))
 
 (fn cdr [list]
   (fcollect [i 2 (# list) 1]
