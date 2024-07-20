@@ -166,6 +166,7 @@
                      (setup! :nvim-paredit-fennel)))
 
 (lazy-use! HiPhish/rainbow-delimiters.nvim
+           :ft :fennel
            :config (fn []
                      (setup! :rainbow-delimiters.setup
                              {:query {:commonlisp :rainbow-blocks}})
