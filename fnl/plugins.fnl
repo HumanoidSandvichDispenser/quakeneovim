@@ -150,13 +150,17 @@
 (lazy-use! kaarmu/typst.vim
            :ft [:typst])
 
+;; repl
+
+(lazy-use! Olical/conjure
+           :ft :scheme)
+
 ;; lisp stuff
 
 (lazy-use! dundalek/parpar.nvim
-           :ft [:lisp :fennel]
+           :ft [:lisp :fennel :scheme]
            :dependencies [:gpanders/nvim-parinfer
-                          :julienvincent/nvim-paredit]
-           :opts [])
+                          :julienvincent/nvim-paredit])
 
 (lazy-use! julienvincent/nvim-paredit-fennel
            :dependencies :julienvincent/nvim-paredit
