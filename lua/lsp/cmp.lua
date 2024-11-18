@@ -81,6 +81,9 @@ cmp.setup({
         {
             name = "buffer",
         },
+        {
+            name = "copilot",
+        },
     },
     formatting = {
         format = lspkind.cmp_format({

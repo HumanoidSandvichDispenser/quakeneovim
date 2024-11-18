@@ -102,6 +102,20 @@
            :config (fn []
                      (tset! vim :g :vsnip_snippet_dir "$HOME/.config/vsnip")))
 
+(lazy-use! zbirenbaum/copilot.lua
+           :lazy true
+           :cmd :Copilot
+           :config (fn []
+                     (setup! :copilot
+                             {:suggestion {:enabled false}
+                              :panel {:enabled false}})))
+
+(lazy-use! zbirenbaum/copilot-cmp
+           :event :InsertEnter
+           :config (fn []
+                     (setup! :copilot_cmp))
+           :dependencies [:zbirenbaum/copilot.lua])
+
 (lazy-use! onsails/lspkind-nvim)
 
 (lazy-use! windwp/nvim-autopairs
