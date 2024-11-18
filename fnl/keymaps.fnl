@@ -96,9 +96,8 @@
                            :R [(fn [] (vim.lsp.buf.rename)) :Rename]
                            :c [(fn [] (vim.lsp.buf.code_action))
                                "Code actions"]
-                           :k [:<C-w>k]
-                           :l [:<C-w>l]
-                           :q [:<C-w>q]
+                           :s [(telescope :lsp_document_symbols)
+                               "Document symbols"]
                            :r [(telescope :lsp_references)
                                :References]}}
                       {:prefix :<leader>})

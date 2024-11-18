@@ -1,7 +1,19 @@
 local lspconfig = require("lspconfig")
 
 local configs = {
-    tsserver = { },
+    --tsserver = { },
+    ts_ls = {
+        init_options = {
+            plugins = {
+                {
+                    name = "@vue/typescript-plugin",
+                    location = "",
+                    languages = { "vue" },
+                }
+            }
+        },
+        filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+    },
     lua_ls = require("lsp.lua-server"),
     bashls = {
         filetypes = {
@@ -11,7 +23,8 @@ local configs = {
         }
     },
     clangd = { },
-    pyright = { },
+    basedpyright = { },
+    --pyright = { },
     texlab = { },
     rust_analyzer = { },
     --omnisharp = {
@@ -40,20 +53,35 @@ local configs = {
     cssls = { },
     volar = {
         init_options = {
-            typescript = {
-                tsdk = "/usr/lib/node_modules/typescript/lib",
+            vue = {
+                hybridMode = true
             },
+            --typescript = {
+            --    tsdk = "/usr/lib/node_modules/typescript/lib",
+            --},
         },
-        filetypes = {
-            "typescript",
-            "vue",
-        },
+        --filetypes = {
+        --    "typescript",
+        --    "vue",
+        --},
     },
     typst_lsp = {
         root_dir = function ()
             return vim.loop.cwd()
         end
     },
+    --tinymist = {
+    --    --root_dir = function ()
+    --    --    return vim.loop.cwd()
+    --    --end,
+    --    exportPdf = "onType",
+    --    outputPath = "$root/target/$dir/$name",
+    --    settings = {
+    --        exportPdf = "onType",
+    --        outputPath = "$root/target/$dir/$name",
+    --    },
+    --    offset_encoding = "utf-8",
+    --},
     intelephense = {
         root_dir = function ()
             return vim.loop.cwd()
