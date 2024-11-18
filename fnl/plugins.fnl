@@ -44,10 +44,9 @@
            :config (fn []
                      (setup! :ibl)))
 
-;(lazy-use! timakro/vim-yadi
-;           :event :BufRead
-;           :config (fn []
-;                     (autocmd! :BufRead :* :DetectIndent)))
+(lazy-use! NMAC427/guess-indent.nvim
+           :config (fn []
+                     (setup! :guess-indent)))
 
 (lazy-use! nvim-telescope/telescope.nvim
            :dependencies [:nvim-lua/plenary.nvim
