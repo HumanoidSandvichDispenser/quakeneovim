@@ -1,11 +1,11 @@
 #! /usr/bin/env lua
 
+-- set leader before loading any plugins
+vim.g.mapleader = " "
+
 local plugin_path = vim.fn.stdpath("data") .. "/lazy"
 
 local lazypath = plugin_path .. "/lazy.nvim"
-local hotpotpath = plugin_path .. "/hotpot.nvim"
-
-table.unpack = table.unpack or unpack -- 5.1 compatibility
 
 local function bootstrap(name, url, args)
     local path = plugin_path .. "/" .. name
@@ -23,34 +23,34 @@ local function bootstrap(name, url, args)
     end
 end
 
-bootstrap(
-    "lazy.nvim",
-    "https://github.com/folke/lazy.nvim.git",
-    {
-        "--branch=stable",
-    }
-)
+-- try vim.pack.add() first (available in nightly), fall back to bootstrap for stable
+if vim.pack ~= nil then
+    vim.pack.add({
+        {
+            src = "https://github.com/folke/lazy.nvim",
+        },
+    })
+else
+    bootstrap(
+        "lazy.nvim",
+        "https://github.com/folke/lazy.nvim.git",
+        {
+            "--branch=stable",
+        }
+    )
+    vim.opt.rtp:prepend({ lazypath })
+end
 
-bootstrap(
-    "hotpot.nvim",
-    "https://github.com/rktjmp/hotpot.nvim.git",
-    {
-        "--branch=v0.11.0",
-    }
-)
-
-bootstrap(
-    "themis.nvim",
-    "https://github.com/HumanoidSandvichDispenser/themis.nvim.git"
-)
-
-vim.opt.rtp:prepend({ hotpotpath, lazypath })
-
-require("hotpot").setup({
-    provide_require_fennel = true,
+-- now hand off control to lazy
+require("lazy").setup({
+  spec = {
+    { import = "plugins" },
+  },
+  defaults = {
+    lazy = true, -- everything lazy by default
+  },
 })
 
-require("plugins")
-
-require("settings")
 require("keymaps")
+require("configuration")
+require("highlights")

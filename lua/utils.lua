@@ -1,9 +1,6 @@
 #! /usr/bin/env lua
 --
 -- utils.lua
--- Copyright (C) 2021 sandvich <sandvich@manjaro>
---
--- Distributed under terms of the MIT license.
 --
 
 local utils = {}

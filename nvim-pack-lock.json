@@ -1,0 +1,52 @@
+{
+  "plugins": {
+    "dracula.nvim": {
+      "rev": "ae752c13e95fb7c5f58da4b5123cb804ea7568ee",
+      "src": "https://github.com/Mofiqul/dracula.nvim"
+    },
+    "fzf-lua": {
+      "rev": "b1d2b0dc146cb9260209da4d7ab754adb0a2653d",
+      "src": "https://github.com/ibhagwan/fzf-lua"
+    },
+    "gitlinker.nvim": {
+      "rev": "cc59f732f3d043b626c8702cb725c82e54d35c25",
+      "src": "https://github.com/ruifm/gitlinker.nvim"
+    },
+    "lazy.nvim": {
+      "rev": "306a05526ada86a7b30af95c5cc81ffba93fef97",
+      "src": "https://github.com/folke/lazy.nvim"
+    },
+    "mini.nvim": {
+      "rev": "e7a8e5a0920df1435172d42fb32e474bbb30d021",
+      "src": "https://github.com/nvim-mini/mini.nvim"
+    },
+    "neoscroll.nvim": {
+      "rev": "f957373912e88579e26fdaea4735450ff2ef5c9c",
+      "src": "https://github.com/karb94/neoscroll.nvim"
+    },
+    "nvim-lspconfig": {
+      "rev": "d696e36d5792daf828f8c8e8d4b9aa90c1a10c2a",
+      "src": "https://github.com/neovim/nvim-lspconfig"
+    },
+    "nvim-treesitter": {
+      "rev": "36fcb4a4238928f0b627e1ab84ade0acc1facc2c",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter"
+    },
+    "nvim-treesitter-context": {
+      "rev": "64dd4cf3f6fd0ab17622c5ce15c91fc539c3f24a",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
+    },
+    "plenary.nvim": {
+      "rev": "b9fd5226c2f76c951fc8ed5923d85e4de065e509",
+      "src": "https://github.com/nvim-lua/plenary.nvim"
+    },
+    "snacks.nvim": {
+      "rev": "fe7cfe9800a182274d0f868a74b7263b8c0c020b",
+      "src": "https://github.com/folke/snacks.nvim"
+    },
+    "vim-fugitive": {
+      "rev": "61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4",
+      "src": "https://github.com/tpope/vim-fugitive"
+    }
+  }
+}
