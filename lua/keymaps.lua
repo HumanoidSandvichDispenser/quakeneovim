@@ -5,7 +5,7 @@
 vim.keymap.set("n", "Y", "yy")
 vim.keymap.set("n", "j", "gj", { silent = true })
 vim.keymap.set("n", "k", "gk", { silent = true })
-vim.keymap.set({ "n", "v", "o" }, ";", ":", { silent = true, noremap = true })
+vim.keymap.set({ "n", "v", "o" }, ";", ":", { noremap = true })
 
 -- insert mode keymaps
 vim.keymap.set("i", "<C-a>", "<C-o>^")
@@ -28,3 +28,7 @@ vim.keymap.set("n", "<leader>wq", "<C-w>q")
 
 -- buffer keymaps
 vim.keymap.set("n", "<leader>bd", "<Cmd>bd<CR>")
+
+-- LSP keymaps
+vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
