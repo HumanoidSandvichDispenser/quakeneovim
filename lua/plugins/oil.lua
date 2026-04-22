@@ -5,6 +5,9 @@ return {
     { "<Leader>fo", "<cmd>Oil<CR>" },
   },
   config = function()
-    require("oil").setup()
-  end
+    require("oil").setup({
+      default_file_explorer = true,
+      delete_to_trash = true,
+    })
+  end,
 }

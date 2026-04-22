@@ -5,6 +5,7 @@ return {
     local which_key = require("which-key")
     which_key.add({
       { "<leader>b", group = "buffers" },
+      { "<leader>c", group = "code" },
       { "<leader>f", group = "files" },
       { "<leader>w", group = "window" },
       { "<leader>g", group = "git" },
